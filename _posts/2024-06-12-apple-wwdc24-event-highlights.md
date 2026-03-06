@@ -72,7 +72,7 @@ iOS 18 is packed with features that enhance customization, privacy, and function
 
 ## Audio & Home Innovations
 
-![](https://mukulkadel.com/wp-content/uploads/2024/06/audio-and-home-1024x572.jpg)
+![Audio and Home innovations](/assets/images/audio-and-home-1024x572.jpg)
 
 ### AirPods
 
@@ -90,7 +90,7 @@ iOS 18 is packed with features that enhance customization, privacy, and function
 
 ## watchOS 11: Elevating Your Wrist
 
-![](https://mukulkadel.com/wp-content/uploads/2024/06/watchos-1024x573.jpg)
+![watchOS 11 features](/assets/images/watchos-1024x573.jpg)
 
 watchOS 11 brings new features to keep you informed and healthy:
 
@@ -104,7 +104,7 @@ watchOS 11 brings new features to keep you informed and healthy:
 
 ## iPadOS 18: Enhancing Productivity
 
-![](https://mukulkadel.com/wp-content/uploads/2024/06/ipados-1024x575.jpg)
+![iPadOS 18 features](/assets/images/ipados-1024x575.jpg)
 
 iPadOS 18 introduces features that make the iPad even more versatile:
 
@@ -118,7 +118,7 @@ iPadOS 18 introduces features that make the iPad even more versatile:
 
 ## macOS Sequoia: A Giant Leap Forward
 
-![](https://mukulkadel.com/wp-content/uploads/2024/06/macos-1024x576.jpg)
+![macOS Sequoia](/assets/images/macos-1024x576.jpg)
 
 The new macOS, named Sequoia, integrates many iOS and iPadOS features:
 

@@ -3,15 +3,17 @@
 title: Mukul Kadel
 tagline: Developer, Writer, Creator
 description: >
-  Personal website of Mukul Kadel featuring blog posts, projects, and portfolio.
+  Personal website of Mukul Kadel featuring blog posts, tutorials, and technical articles.
 baseurl: ""
 url: "https://mukulkadel.github.io"
 author:
   name: Mukul Kadel
-  email: your-email@example.com
-  twitter: your_twitter_handle
+  email: mukulkadel@example.com
+  twitter: mukul_kadel
   github: mukulkadel
-  linkedin: your-linkedin
+  linkedin: mukulkadel
+  instagram: mukulkadel
+  youtube: UCEbJa5z6aMnLUdvt_nnvpQA
 
 # Build settings
 markdown: kramdown

@@ -10,13 +10,19 @@
         </div>
         <div class="footer-social">
             {% if site.author.twitter %}
-            <a href="https://twitter.com/{{ site.author.twitter }}" class="social-link">Twitter</a>
+            <a href="https://twitter.com/{{ site.author.twitter }}" class="social-link" title="Twitter">Twitter</a>
             {% endif %}
             {% if site.author.github %}
-            <a href="https://github.com/{{ site.author.github }}" class="social-link">GitHub</a>
+            <a href="https://github.com/{{ site.author.github }}" class="social-link" title="GitHub">GitHub</a>
+            {% endif %}
+            {% if site.author.instagram %}
+            <a href="https://instagram.com/{{ site.author.instagram }}" class="social-link" title="Instagram">Instagram</a>
             {% endif %}
             {% if site.author.linkedin %}
-            <a href="https://linkedin.com/in/{{ site.author.linkedin }}" class="social-link">LinkedIn</a>
+            <a href="https://linkedin.com/in/{{ site.author.linkedin }}" class="social-link" title="LinkedIn">LinkedIn</a>
+            {% endif %}
+            {% if site.author.youtube %}
+            <a href="https://youtube.com/channel/{{ site.author.youtube }}" class="social-link" title="YouTube">YouTube</a>
             {% endif %}
         </div>
     </div>

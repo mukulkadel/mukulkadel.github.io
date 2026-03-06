@@ -1,0 +1,23 @@
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-content">
+            <p>&copy; {{ site.time | date: "%Y" }} {{ site.author.name }}. All rights reserved.</p>
+            <nav class="footer-nav">
+                <a href="{{ '/privacy/' | relative_url }}">Privacy</a>
+                <a href="{{ '/terms/' | relative_url }}">Terms</a>
+                <a href="{{ '/sitemap.xml' | relative_url }}">Sitemap</a>
+            </nav>
+        </div>
+        <div class="footer-social">
+            {% if site.author.twitter %}
+            <a href="https://twitter.com/{{ site.author.twitter }}" class="social-link">Twitter</a>
+            {% endif %}
+            {% if site.author.github %}
+            <a href="https://github.com/{{ site.author.github }}" class="social-link">GitHub</a>
+            {% endif %}
+            {% if site.author.linkedin %}
+            <a href="https://linkedin.com/in/{{ site.author.linkedin }}" class="social-link">LinkedIn</a>
+            {% endif %}
+        </div>
+    </div>
+</footer>

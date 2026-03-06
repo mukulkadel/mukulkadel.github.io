@@ -1,0 +1,76 @@
+# Jekyll Configuration for mukulkadel.github.io
+# Site settings
+title: Mukul Kadel
+tagline: Developer, Writer, Creator
+description: >
+  Personal website of Mukul Kadel featuring blog posts, projects, and portfolio.
+baseurl: ""
+url: "https://mukulkadel.github.io"
+author:
+  name: Mukul Kadel
+  email: your-email@example.com
+  twitter: your_twitter_handle
+  github: mukulkadel
+  linkedin: your-linkedin
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: null  # Using custom theme
+
+# Pagination
+paginate: 10
+paginate_path: "/blog/page/:num/"
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-paginate-v2
+  - jekyll-redirect-from
+
+# SEO Plugin settings
+social:
+  name: Mukul Kadel
+  links:
+    - https://twitter.com/your_handle
+    - https://github.com/mukulkadel
+    - https://linkedin.com/in/your-profile
+
+# Timezone
+timezone: Asia/Kathmandu
+
+# Exclude items from build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - .sass-cache
+  - .jekyll-cache
+  - vendor/
+  - .git
+  - .gitignore
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /blog/:year/:month/:day/:slug/
+  pages:
+    output: true
+    permalink: /:slug/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      author: Mukul Kadel
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: page

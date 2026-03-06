@@ -1,6 +1,6 @@
 ---
 layout: post
-title: UNIX: init command
+title: "UNIX: init command"
 date: 2024-02-04 15:50:09 
 categories: ['uncategorized']
 excerpt: "**Introduction:** Unix-like operating systems provide a robust set of tools for managing processes, "

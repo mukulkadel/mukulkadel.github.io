@@ -11,7 +11,7 @@ Welcome to my personal blog and technical portfolio. Here you'll find articles a
 
 {% assign posts = site.posts | where_exp: "item", "item.path contains '_posts'" | sort: "date" | reverse %}
 <ul class="post-list">
-{% for post in posts | limit: 10 %}
+{% for post in posts limit: 10 %}
   <li class="post-list-item">
     <h3 class="post-list-title">
       <a href="{{ post.url | relative_url }}">{{ post.title }}</a>

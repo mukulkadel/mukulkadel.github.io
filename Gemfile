@@ -1,10 +1,13 @@
 source "https://rubygems.org"
 
-gem "jekyll", "~> 3.9"
-gem "github-pages", group: :jekyll_plugins
+gem "jekyll", "~> 4.3.0"
+gem "csv"
+gem "base64"
+gem "openssl"
+gem "stringio"
 
 group :jekyll_plugins do
-  gem "jekyll-feed", "~> 0.12"
+  gem "jekyll-feed"
   gem "jekyll-seo-tag"
   gem "jekyll-sitemap"
   gem "jekyll-paginate-v2"

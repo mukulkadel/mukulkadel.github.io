@@ -1,6 +1,6 @@
 ---
 layout: post
-title: The Apple Event 2024: A Glimpse into the Future of Technology
+title: "The Apple Event 2024: A Glimpse into the Future of Technology"
 date: 2024-06-12 11:19:19 
 categories: ['product announcements', 'software updates', 'tech reviews', 'technology news']
 excerpt: "Apple’s WWDC24 event on June 10th was nothing short of spectacular, showcasing a plethora of platfor"

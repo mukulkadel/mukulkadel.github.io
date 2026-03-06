@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Mastering the nginx.conf File: A Guide with Cheat Sheet
+title: "Mastering the nginx.conf File: A Guide with Cheat Sheet"
 date: 2024-02-10 18:55:48 
 categories: ['wiki']
 excerpt: "## Introduction  The nginx.conf file is the cornerstone of configuring NGINX, a versatile and powerf"

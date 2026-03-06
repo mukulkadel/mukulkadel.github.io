@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Understanding CPU Throttling: What It Is and How to Manage It
+title: "Understanding CPU Throttling: What It Is and How to Manage It"
 date: 2024-02-07 02:55:39 
 categories: ['wiki']
 excerpt: "CPU throttling, a term that might sound daunting at first, is actually a protective measure for your"

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Master SQL: A Comprehensive Guide to DDL, DML, DCL, and TCL
+title: "Master SQL: A Comprehensive Guide to DDL, DML, DCL, and TCL"
 date: 2024-06-10 00:31:33 
 categories: ['sql', 'wiki']
 excerpt: "Structured Query Language (SQL) is the backbone of managing and manipulating relational databases. W"

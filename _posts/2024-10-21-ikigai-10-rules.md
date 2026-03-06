@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Ikigai: 10 Rules to a Fulfilling Life
+title: "Ikigai: 10 Rules to a Fulfilling Life"
 date: 2024-10-21 16:42:37 
 categories: ['book', 'review']
 excerpt: "## Introduction  Ikigai is a Japanese concept that translates to “reason for being.” It is the idea "

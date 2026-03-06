@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Understanding Istio Proxy: Enhancing Microservices Communication
+title: "Understanding Istio Proxy: Enhancing Microservices Communication"
 date: 2024-02-04 16:14:29 
 categories: ['uncategorized']
 excerpt: "In the evolving landscape of microservices architecture, managing communication and security between"

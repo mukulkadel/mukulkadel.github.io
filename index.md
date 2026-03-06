@@ -3,15 +3,15 @@ layout: default
 title: Home
 ---
 
-# Welcome to My Portfolio
+# Mukul Kadel
 
-Hello! I'm Mukul Kadel, a passionate developer and creator. This is my personal space where I share my thoughts, projects, and experiences.
+Welcome to my personal blog and technical portfolio. Here you'll find articles about software development, technology, and my thoughts on various topics.
 
-## Featured Blog Posts
+## Latest Articles
 
-{% assign featured_posts = site.posts | first: 3 %}
+{% assign posts = site.posts | where_exp: "item", "item.path contains '_posts'" | sort: "date" | reverse %}
 <ul class="post-list">
-{% for post in featured_posts %}
+{% for post in posts | limit: 10 %}
   <li class="post-list-item">
     <h3 class="post-list-title">
       <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
@@ -19,17 +19,16 @@ Hello! I'm Mukul Kadel, a passionate developer and creator. This is my personal 
     <div class="post-list-meta">
       <span class="post-date">{{ post.date | date: "%B %d, %Y" }}</span>
     </div>
-    <p class="post-list-excerpt">{{ post.excerpt | strip_html }}</p>
+    {% if post.excerpt %}
+    <p class="post-list-excerpt">{{ post.excerpt | strip_html | truncate: 150 }}</p>
+    {% endif %}
   </li>
 {% endfor %}
 </ul>
 
-[View all blog posts →](/blog/)
-
-## About Me
-
-I'm a software developer with a passion for creating elegant solutions to complex problems. Welcome to my corner of the internet!
+[View all articles →](/blog/)
 
 ---
 
-**Latest Updates:** Check back soon for migrated content from my WordPress site!
+**Tech Stack:** Jekyll • GitHub Pages • Markdown  
+**Social:** [GitHub](https://github.com/mukulkadel) • [Twitter](https://twitter.com/mukul_kadel) • [LinkedIn](https://linkedin.com/in/mukulkadel)

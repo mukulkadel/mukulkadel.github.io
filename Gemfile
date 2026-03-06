@@ -1,7 +1,6 @@
 source "https://rubygems.org"
-ruby "3.2.0"
 
-gem "jekyll", "~> 4.3.0"
+gem "jekyll", "~> 3.9"
 gem "github-pages", group: :jekyll_plugins
 
 group :jekyll_plugins do
@@ -12,7 +11,7 @@ group :jekyll_plugins do
   gem "jekyll-redirect-from"
 end
 
-platforms :mingw, :x64_mingw, :mswin, :jemalloc do
+platforms :mingw, :x64_mingw, :mswin do
   gem "tzinfo", "~> 1.2"
   gem "tzinfo-data"
 end

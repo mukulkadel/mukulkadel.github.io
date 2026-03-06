@@ -6,27 +6,20 @@ permalink: /blog/
 
 # Blog
 
-Welcome to my blog where I write about technology, development, and various other topics.
+All articles organized by date. Most recent first.
 
+{% assign posts = site.posts | where_exp: "item", "item.path contains '_posts'" | sort: "date" | reverse %}
 <ul class="post-list">
-{% for post in site.posts %}
+{% for post in posts %}
   <li class="post-list-item">
     <h3 class="post-list-title">
       <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
     </h3>
     <div class="post-list-meta">
       <span class="post-date">{{ post.date | date: "%B %d, %Y" }}</span>
-      {% if post.author %}
-      <span class="post-author">by {{ post.author }}</span>
-      {% endif %}
     </div>
-    <p class="post-list-excerpt">{{ post.excerpt | strip_html }}</p>
-    {% if post.categories %}
-    <div class="post-categories">
-      {% for category in post.categories %}
-      <a href="{{ '/categories/#' | append: category | relative_url }}" class="category-tag">{{ category }}</a>
-      {% endfor %}
-    </div>
+    {% if post.excerpt %}
+    <p class="post-list-excerpt">{{ post.excerpt | strip_html | truncate: 150 }}</p>
     {% endif %}
   </li>
 {% endfor %}

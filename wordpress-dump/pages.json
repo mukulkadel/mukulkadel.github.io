@@ -1,0 +1,649 @@
+[
+    {
+        "id": 224,
+        "date": "2025-09-22T23:46:46",
+        "date_gmt": "2025-09-22T18:16:46",
+        "guid": {
+            "rendered": "https://mukulkadel.com/?page_id=224"
+        },
+        "modified": "2025-09-23T00:54:52",
+        "modified_gmt": "2025-09-22T19:24:52",
+        "slug": "image-to-base64-converter",
+        "status": "publish",
+        "type": "page",
+        "link": "https://mukulkadel.com/image-to-base64-converter/",
+        "title": {
+            "rendered": "Image to Base64 Converter"
+        },
+        "content": {
+            "rendered": "\n\n\n<!-- Please don't change. Block is needed for React app. -->\n<noscript>You need to enable JavaScript to run this app.</noscript>\n<div id=\"root\"></div>\n",
+            "protected": false
+        },
+        "excerpt": {
+            "rendered": "<p>You need to enable JavaScript to run this app.</p>\n",
+            "protected": false
+        },
+        "author": 1,
+        "featured_media": 0,
+        "parent": 0,
+        "menu_order": 0,
+        "comment_status": "closed",
+        "ping_status": "closed",
+        "template": "",
+        "meta": {
+            "footnotes": ""
+        },
+        "class_list": [
+            "post-224",
+            "page",
+            "type-page",
+            "status-publish",
+            "hentry"
+        ],
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v27.1.1 - https://yoast.com/product/yoast-seo-wordpress/ -->\n<title>Image to Base64 Converter - Mukul Kadel</title>\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"https://mukulkadel.com/image-to-base64-converter/\" />\n<meta property=\"og:locale\" content=\"en_US\" />\n<meta property=\"og:type\" content=\"article\" />\n<meta property=\"og:title\" content=\"Image to Base64 Converter - Mukul Kadel\" />\n<meta property=\"og:description\" content=\"You need to enable JavaScript to run this app.\" />\n<meta property=\"og:url\" content=\"https://mukulkadel.com/image-to-base64-converter/\" />\n<meta property=\"og:site_name\" content=\"Mukul Kadel\" />\n<meta property=\"article:modified_time\" content=\"2025-09-22T19:24:52+00:00\" />\n<meta name=\"twitter:card\" content=\"summary_large_image\" />\n<meta name=\"twitter:site\" content=\"@mukul_kadel\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"WebPage\",\"@id\":\"https://mukulkadel.com/image-to-base64-converter/\",\"url\":\"https://mukulkadel.com/image-to-base64-converter/\",\"name\":\"Image to Base64 Converter - Mukul Kadel\",\"isPartOf\":{\"@id\":\"https://mukulkadel.com/#website\"},\"datePublished\":\"2025-09-22T18:16:46+00:00\",\"dateModified\":\"2025-09-22T19:24:52+00:00\",\"breadcrumb\":{\"@id\":\"https://mukulkadel.com/image-to-base64-converter/#breadcrumb\"},\"inLanguage\":\"en-US\",\"potentialAction\":[{\"@type\":\"ReadAction\",\"target\":[\"https://mukulkadel.com/image-to-base64-converter/\"]}]},{\"@type\":\"BreadcrumbList\",\"@id\":\"https://mukulkadel.com/image-to-base64-converter/#breadcrumb\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":\"https://mukulkadel.com/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Image to Base64 Converter\"}]},{\"@type\":\"WebSite\",\"@id\":\"https://mukulkadel.com/#website\",\"url\":\"https://mukulkadel.com/\",\"name\":\"Mukul Kadel\",\"description\":\"\",\"publisher\":{\"@id\":\"https://mukulkadel.com/#/schema/person/e7c62bacccd7db54ecbcd68d94263339\"},\"potentialAction\":[{\"@type\":\"SearchAction\",\"target\":{\"@type\":\"EntryPoint\",\"urlTemplate\":\"https://mukulkadel.com/?s={search_term_string}\"},\"query-input\":{\"@type\":\"PropertyValueSpecification\",\"valueRequired\":true,\"valueName\":\"search_term_string\"}}],\"inLanguage\":\"en-US\"},{\"@type\":[\"Person\",\"Organization\"],\"@id\":\"https://mukulkadel.com/#/schema/person/e7c62bacccd7db54ecbcd68d94263339\",\"name\":\"mukulkadel\",\"image\":{\"@type\":\"ImageObject\",\"inLanguage\":\"en-US\",\"@id\":\"https://mukulkadel.com/#/schema/person/image/\",\"url\":\"https://secure.gravatar.com/avatar/82d75162f12c706a4b2979f086a3194990b2391816fdcbaa7456af1cc84debab?s=96&d=mm&r=g\",\"contentUrl\":\"https://secure.gravatar.com/avatar/82d75162f12c706a4b2979f086a3194990b2391816fdcbaa7456af1cc84debab?s=96&d=mm&r=g\",\"caption\":\"mukulkadel\"},\"logo\":{\"@id\":\"https://mukulkadel.com/#/schema/person/image/\"},\"sameAs\":[\"https://mukulkadel.com\",\"https://www.instagram.com/mukulkadel/\",\"https://www.linkedin.com/in/mukulkadel/\",\"https://x.com/mukul_kadel\",\"https://www.youtube.com/channel/UCEbJa5z6aMnLUdvt_nnvpQA\"]}]}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "Image to Base64 Converter - Mukul Kadel",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "https://mukulkadel.com/image-to-base64-converter/",
+            "og_locale": "en_US",
+            "og_type": "article",
+            "og_title": "Image to Base64 Converter - Mukul Kadel",
+            "og_description": "You need to enable JavaScript to run this app.",
+            "og_url": "https://mukulkadel.com/image-to-base64-converter/",
+            "og_site_name": "Mukul Kadel",
+            "article_modified_time": "2025-09-22T19:24:52+00:00",
+            "twitter_card": "summary_large_image",
+            "twitter_site": "@mukul_kadel",
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "WebPage",
+                        "@id": "https://mukulkadel.com/image-to-base64-converter/",
+                        "url": "https://mukulkadel.com/image-to-base64-converter/",
+                        "name": "Image to Base64 Converter - Mukul Kadel",
+                        "isPartOf": {
+                            "@id": "https://mukulkadel.com/#website"
+                        },
+                        "datePublished": "2025-09-22T18:16:46+00:00",
+                        "dateModified": "2025-09-22T19:24:52+00:00",
+                        "breadcrumb": {
+                            "@id": "https://mukulkadel.com/image-to-base64-converter/#breadcrumb"
+                        },
+                        "inLanguage": "en-US",
+                        "potentialAction": [
+                            {
+                                "@type": "ReadAction",
+                                "target": [
+                                    "https://mukulkadel.com/image-to-base64-converter/"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "https://mukulkadel.com/image-to-base64-converter/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home",
+                                "item": "https://mukulkadel.com/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Image to Base64 Converter"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://mukulkadel.com/#website",
+                        "url": "https://mukulkadel.com/",
+                        "name": "Mukul Kadel",
+                        "description": "",
+                        "publisher": {
+                            "@id": "https://mukulkadel.com/#/schema/person/e7c62bacccd7db54ecbcd68d94263339"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "https://mukulkadel.com/?s={search_term_string}"
+                                },
+                                "query-input": {
+                                    "@type": "PropertyValueSpecification",
+                                    "valueRequired": true,
+                                    "valueName": "search_term_string"
+                                }
+                            }
+                        ],
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": [
+                            "Person",
+                            "Organization"
+                        ],
+                        "@id": "https://mukulkadel.com/#/schema/person/e7c62bacccd7db54ecbcd68d94263339",
+                        "name": "mukulkadel",
+                        "image": {
+                            "@type": "ImageObject",
+                            "inLanguage": "en-US",
+                            "@id": "https://mukulkadel.com/#/schema/person/image/",
+                            "url": "https://secure.gravatar.com/avatar/82d75162f12c706a4b2979f086a3194990b2391816fdcbaa7456af1cc84debab?s=96&d=mm&r=g",
+                            "contentUrl": "https://secure.gravatar.com/avatar/82d75162f12c706a4b2979f086a3194990b2391816fdcbaa7456af1cc84debab?s=96&d=mm&r=g",
+                            "caption": "mukulkadel"
+                        },
+                        "logo": {
+                            "@id": "https://mukulkadel.com/#/schema/person/image/"
+                        },
+                        "sameAs": [
+                            "https://mukulkadel.com",
+                            "https://www.instagram.com/mukulkadel/",
+                            "https://www.linkedin.com/in/mukulkadel/",
+                            "https://x.com/mukul_kadel",
+                            "https://www.youtube.com/channel/UCEbJa5z6aMnLUdvt_nnvpQA"
+                        ]
+                    }
+                ]
+            }
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/pages/224",
+                    "targetHints": {
+                        "allow": [
+                            "GET"
+                        ]
+                    }
+                }
+            ],
+            "collection": [
+                {
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/pages"
+                }
+            ],
+            "about": [
+                {
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/types/page"
+                }
+            ],
+            "author": [
+                {
+                    "embeddable": true,
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/users/1"
+                }
+            ],
+            "replies": [
+                {
+                    "embeddable": true,
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/comments?post=224"
+                }
+            ],
+            "version-history": [
+                {
+                    "count": 4,
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/pages/224/revisions"
+                }
+            ],
+            "predecessor-version": [
+                {
+                    "id": 228,
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/pages/224/revisions/228"
+                }
+            ],
+            "wp:attachment": [
+                {
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/media?parent=224"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    },
+    {
+        "id": 117,
+        "date": "2023-09-04T01:18:48",
+        "date_gmt": "2023-09-03T19:48:48",
+        "guid": {
+            "rendered": "https://mukulkadel.com/?page_id=117"
+        },
+        "modified": "2023-09-04T01:18:48",
+        "modified_gmt": "2023-09-03T19:48:48",
+        "slug": "blogs",
+        "status": "publish",
+        "type": "page",
+        "link": "https://mukulkadel.com/blogs/",
+        "title": {
+            "rendered": "Blogs"
+        },
+        "content": {
+            "rendered": "\n<div class=\"wp-block-query is-layout-flow wp-block-query-is-layout-flow\"><ul class=\"wp-block-post-template is-layout-flow wp-block-post-template-is-layout-flow\"><li class=\"wp-block-post post-213 post type-post status-publish format-standard hentry category-book category-review\">\n<h2 class=\"wp-block-post-title\">Ikigai: 10 Rules to a Fulfilling Life</h2>\n\n<div class=\"wp-block-post-date\"><time datetime=\"2024-10-21T16:42:37+05:30\">October 21, 2024</time></div>\n\n<div class=\"wp-block-post-excerpt\"><p class=\"wp-block-post-excerpt__excerpt\">Introduction Ikigai is a Japanese concept that translates to &#8220;reason for being.&#8221; It is the idea of finding a purpose in life that brings you joy, fulfilment, and satisfaction. The 10 rules&#8230; </p></div>\n</li><li class=\"wp-block-post post-208 post type-post status-publish format-standard hentry category-programming category-software-development category-tutorials tag-go-environment-variables tag-go-language-tutorial tag-go-programming-basics tag-go-setup tag-golang-installation tag-hello-world-program tag-homebrew-go-installation tag-install-go-on-mac tag-mac-programming tag-simple-go-program\">\n<h2 class=\"wp-block-post-title\">Getting started with Go (Mac)</h2>\n\n<div class=\"wp-block-post-date\"><time datetime=\"2024-06-14T13:53:59+05:30\">June 14, 2024</time></div>\n\n<div class=\"wp-block-post-excerpt\"><p class=\"wp-block-post-excerpt__excerpt\">Welcome to my blog! In this post, I&#8217;ll guide you on how to set up Go (Golang) on a Mac and run a basic &#8220;Hello, world!&#8221; program. Go is an open-source, statically&#8230; </p></div>\n</li><li class=\"wp-block-post post-201 post type-post status-publish format-standard hentry category-product-announcements category-software-updates category-tech-reviews category-technology-news tag-airpods tag-apple-innovations tag-apple-tv tag-apple-updates tag-apple-vision-pro tag-ios-18 tag-ipados-18 tag-macos-sequoia tag-product-launch tag-siri tag-software-features tag-tech-highlights tag-visionos-2 tag-watchos-11 tag-wwdc24\">\n<h2 class=\"wp-block-post-title\">The Apple Event 2024: A Glimpse into the Future of Technology</h2>\n\n<div class=\"wp-block-post-date\"><time datetime=\"2024-06-12T11:19:19+05:30\">June 12, 2024</time></div>\n\n<div class=\"wp-block-post-excerpt\"><p class=\"wp-block-post-excerpt__excerpt\">Apple&#8217;s WWDC24 event on June 10th was nothing short of spectacular, showcasing a plethora of platform updates, new features, and innovative technologies. From celebrating the 5th anniversary of Apple TV+ to introducing&#8230; </p></div>\n</li></ul>\n\n<nav class=\"wp-block-query-pagination is-layout-flex wp-block-query-pagination-is-layout-flex\" aria-label=\"Pagination\">\n\n\n<div class=\"wp-block-query-pagination-numbers\"><span aria-current=\"page\" class=\"page-numbers current\">1</span>\n<a class=\"page-numbers\" href=\"?query-0-page=2&#038;per_page=100&#038;page=1\">2</a>\n<a class=\"page-numbers\" href=\"?query-0-page=3&#038;per_page=100&#038;page=1\">3</a>\n<span class=\"page-numbers dots\">&hellip;</span>\n<a class=\"page-numbers\" href=\"?query-0-page=6&#038;per_page=100&#038;page=1\">6</a></div>\n\n<a href=\"/wp-json/wp/v2/pages?per_page=100&#038;page=1&#038;query-0-page=2\" class=\"wp-block-query-pagination-next\">Next Page</a>\n</nav>\n\n</div>\n",
+            "protected": false
+        },
+        "excerpt": {
+            "rendered": "",
+            "protected": false
+        },
+        "author": 1,
+        "featured_media": 0,
+        "parent": 0,
+        "menu_order": 0,
+        "comment_status": "closed",
+        "ping_status": "closed",
+        "template": "",
+        "meta": {
+            "footnotes": ""
+        },
+        "class_list": [
+            "post-117",
+            "page",
+            "type-page",
+            "status-publish",
+            "hentry"
+        ],
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v27.1.1 - https://yoast.com/product/yoast-seo-wordpress/ -->\n<title>Blogs - Mukul Kadel</title>\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"https://mukulkadel.com/blogs/\" />\n<link rel=\"next\" href=\"https://mukulkadel.com/blogs/pages?per_page=100&page=1&query-0-page=2\" />\n<meta property=\"og:locale\" content=\"en_US\" />\n<meta property=\"og:type\" content=\"article\" />\n<meta property=\"og:title\" content=\"Blogs - Mukul Kadel\" />\n<meta property=\"og:url\" content=\"https://mukulkadel.com/blogs/\" />\n<meta property=\"og:site_name\" content=\"Mukul Kadel\" />\n<meta name=\"twitter:card\" content=\"summary_large_image\" />\n<meta name=\"twitter:site\" content=\"@mukul_kadel\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"WebPage\",\"@id\":\"https://mukulkadel.com/blogs/\",\"url\":\"https://mukulkadel.com/blogs/\",\"name\":\"Blogs - Mukul Kadel\",\"isPartOf\":{\"@id\":\"https://mukulkadel.com/#website\"},\"datePublished\":\"2023-09-03T19:48:48+00:00\",\"breadcrumb\":{\"@id\":\"https://mukulkadel.com/blogs/#breadcrumb\"},\"inLanguage\":\"en-US\",\"potentialAction\":[{\"@type\":\"ReadAction\",\"target\":[\"https://mukulkadel.com/blogs/\"]}]},{\"@type\":\"BreadcrumbList\",\"@id\":\"https://mukulkadel.com/blogs/#breadcrumb\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":\"https://mukulkadel.com/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Blogs\"}]},{\"@type\":\"WebSite\",\"@id\":\"https://mukulkadel.com/#website\",\"url\":\"https://mukulkadel.com/\",\"name\":\"Mukul Kadel\",\"description\":\"\",\"publisher\":{\"@id\":\"https://mukulkadel.com/#/schema/person/e7c62bacccd7db54ecbcd68d94263339\"},\"potentialAction\":[{\"@type\":\"SearchAction\",\"target\":{\"@type\":\"EntryPoint\",\"urlTemplate\":\"https://mukulkadel.com/?s={search_term_string}\"},\"query-input\":{\"@type\":\"PropertyValueSpecification\",\"valueRequired\":true,\"valueName\":\"search_term_string\"}}],\"inLanguage\":\"en-US\"},{\"@type\":[\"Person\",\"Organization\"],\"@id\":\"https://mukulkadel.com/#/schema/person/e7c62bacccd7db54ecbcd68d94263339\",\"name\":\"mukulkadel\",\"image\":{\"@type\":\"ImageObject\",\"inLanguage\":\"en-US\",\"@id\":\"https://mukulkadel.com/#/schema/person/image/\",\"url\":\"https://secure.gravatar.com/avatar/82d75162f12c706a4b2979f086a3194990b2391816fdcbaa7456af1cc84debab?s=96&d=mm&r=g\",\"contentUrl\":\"https://secure.gravatar.com/avatar/82d75162f12c706a4b2979f086a3194990b2391816fdcbaa7456af1cc84debab?s=96&d=mm&r=g\",\"caption\":\"mukulkadel\"},\"logo\":{\"@id\":\"https://mukulkadel.com/#/schema/person/image/\"},\"sameAs\":[\"https://mukulkadel.com\",\"https://www.instagram.com/mukulkadel/\",\"https://www.linkedin.com/in/mukulkadel/\",\"https://x.com/mukul_kadel\",\"https://www.youtube.com/channel/UCEbJa5z6aMnLUdvt_nnvpQA\"]}]}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "Blogs - Mukul Kadel",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "https://mukulkadel.com/blogs/",
+            "next": "https://mukulkadel.com/blogs/pages?per_page=100&page=1&query-0-page=2",
+            "og_locale": "en_US",
+            "og_type": "article",
+            "og_title": "Blogs - Mukul Kadel",
+            "og_url": "https://mukulkadel.com/blogs/",
+            "og_site_name": "Mukul Kadel",
+            "twitter_card": "summary_large_image",
+            "twitter_site": "@mukul_kadel",
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "WebPage",
+                        "@id": "https://mukulkadel.com/blogs/",
+                        "url": "https://mukulkadel.com/blogs/",
+                        "name": "Blogs - Mukul Kadel",
+                        "isPartOf": {
+                            "@id": "https://mukulkadel.com/#website"
+                        },
+                        "datePublished": "2023-09-03T19:48:48+00:00",
+                        "breadcrumb": {
+                            "@id": "https://mukulkadel.com/blogs/#breadcrumb"
+                        },
+                        "inLanguage": "en-US",
+                        "potentialAction": [
+                            {
+                                "@type": "ReadAction",
+                                "target": [
+                                    "https://mukulkadel.com/blogs/"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "https://mukulkadel.com/blogs/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home",
+                                "item": "https://mukulkadel.com/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Blogs"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://mukulkadel.com/#website",
+                        "url": "https://mukulkadel.com/",
+                        "name": "Mukul Kadel",
+                        "description": "",
+                        "publisher": {
+                            "@id": "https://mukulkadel.com/#/schema/person/e7c62bacccd7db54ecbcd68d94263339"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "https://mukulkadel.com/?s={search_term_string}"
+                                },
+                                "query-input": {
+                                    "@type": "PropertyValueSpecification",
+                                    "valueRequired": true,
+                                    "valueName": "search_term_string"
+                                }
+                            }
+                        ],
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": [
+                            "Person",
+                            "Organization"
+                        ],
+                        "@id": "https://mukulkadel.com/#/schema/person/e7c62bacccd7db54ecbcd68d94263339",
+                        "name": "mukulkadel",
+                        "image": {
+                            "@type": "ImageObject",
+                            "inLanguage": "en-US",
+                            "@id": "https://mukulkadel.com/#/schema/person/image/",
+                            "url": "https://secure.gravatar.com/avatar/82d75162f12c706a4b2979f086a3194990b2391816fdcbaa7456af1cc84debab?s=96&d=mm&r=g",
+                            "contentUrl": "https://secure.gravatar.com/avatar/82d75162f12c706a4b2979f086a3194990b2391816fdcbaa7456af1cc84debab?s=96&d=mm&r=g",
+                            "caption": "mukulkadel"
+                        },
+                        "logo": {
+                            "@id": "https://mukulkadel.com/#/schema/person/image/"
+                        },
+                        "sameAs": [
+                            "https://mukulkadel.com",
+                            "https://www.instagram.com/mukulkadel/",
+                            "https://www.linkedin.com/in/mukulkadel/",
+                            "https://x.com/mukul_kadel",
+                            "https://www.youtube.com/channel/UCEbJa5z6aMnLUdvt_nnvpQA"
+                        ]
+                    }
+                ]
+            }
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/pages/117",
+                    "targetHints": {
+                        "allow": [
+                            "GET"
+                        ]
+                    }
+                }
+            ],
+            "collection": [
+                {
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/pages"
+                }
+            ],
+            "about": [
+                {
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/types/page"
+                }
+            ],
+            "author": [
+                {
+                    "embeddable": true,
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/users/1"
+                }
+            ],
+            "replies": [
+                {
+                    "embeddable": true,
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/comments?post=117"
+                }
+            ],
+            "version-history": [
+                {
+                    "count": 2,
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/pages/117/revisions"
+                }
+            ],
+            "predecessor-version": [
+                {
+                    "id": 122,
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/pages/117/revisions/122"
+                }
+            ],
+            "wp:attachment": [
+                {
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/media?parent=117"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    },
+    {
+        "id": 119,
+        "date": "2023-09-04T01:16:19",
+        "date_gmt": "2023-09-03T19:46:19",
+        "guid": {
+            "rendered": "https://mukulkadel.com/?page_id=119"
+        },
+        "modified": "2023-09-04T01:16:19",
+        "modified_gmt": "2023-09-03T19:46:19",
+        "slug": "categories",
+        "status": "publish",
+        "type": "page",
+        "link": "https://mukulkadel.com/categories/",
+        "title": {
+            "rendered": "Categories"
+        },
+        "content": {
+            "rendered": "<ul class=\"wp-block-categories-list wp-block-categories\">\t<li class=\"cat-item cat-item-38\"><a href=\"https://mukulkadel.com/category/book/\">Book</a> (2)\n</li>\n\t<li class=\"cat-item cat-item-6\"><a href=\"https://mukulkadel.com/category/git/\">git</a> (1)\n</li>\n\t<li class=\"cat-item cat-item-75\"><a href=\"https://mukulkadel.com/category/product-announcements/\">Product Announcements</a> (1)\n</li>\n\t<li class=\"cat-item cat-item-87\"><a href=\"https://mukulkadel.com/category/programming/\">Programming</a> (1)\n</li>\n\t<li class=\"cat-item cat-item-37\"><a href=\"https://mukulkadel.com/category/review/\">Review</a> (2)\n</li>\n\t<li class=\"cat-item cat-item-89\"><a href=\"https://mukulkadel.com/category/software-development/\">Software Development</a> (1)\n</li>\n\t<li class=\"cat-item cat-item-74\"><a href=\"https://mukulkadel.com/category/software-updates/\">Software Updates</a> (1)\n</li>\n\t<li class=\"cat-item cat-item-57\"><a href=\"https://mukulkadel.com/category/database/sql/\">SQL</a> (1)\n</li>\n\t<li class=\"cat-item cat-item-76\"><a href=\"https://mukulkadel.com/category/tech-reviews/\">Tech Reviews</a> (1)\n</li>\n\t<li class=\"cat-item cat-item-73\"><a href=\"https://mukulkadel.com/category/technology-news/\">Technology News</a> (1)\n</li>\n\t<li class=\"cat-item cat-item-88\"><a href=\"https://mukulkadel.com/category/tutorials/\">Tutorials</a> (1)\n</li>\n\t<li class=\"cat-item cat-item-1\"><a href=\"https://mukulkadel.com/category/uncategorized/\">Uncategorized</a> (6)\n</li>\n\t<li class=\"cat-item cat-item-8\"><a href=\"https://mukulkadel.com/category/unix/\">unix</a> (2)\n</li>\n\t<li class=\"cat-item cat-item-29\"><a href=\"https://mukulkadel.com/category/wiki/\">wiki</a> (3)\n</li>\n</ul>",
+            "protected": false
+        },
+        "excerpt": {
+            "rendered": "",
+            "protected": false
+        },
+        "author": 1,
+        "featured_media": 0,
+        "parent": 0,
+        "menu_order": 0,
+        "comment_status": "closed",
+        "ping_status": "closed",
+        "template": "",
+        "meta": {
+            "footnotes": ""
+        },
+        "class_list": [
+            "post-119",
+            "page",
+            "type-page",
+            "status-publish",
+            "hentry"
+        ],
+        "yoast_head": "<!-- This site is optimized with the Yoast SEO plugin v27.1.1 - https://yoast.com/product/yoast-seo-wordpress/ -->\n<title>Categories - Mukul Kadel</title>\n<meta name=\"robots\" content=\"index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1\" />\n<link rel=\"canonical\" href=\"https://mukulkadel.com/categories/\" />\n<link rel=\"next\" href=\"https://mukulkadel.com/categories/pages?per_page=100&page=1&query-0-page=2\" />\n<meta property=\"og:locale\" content=\"en_US\" />\n<meta property=\"og:type\" content=\"article\" />\n<meta property=\"og:title\" content=\"Categories - Mukul Kadel\" />\n<meta property=\"og:url\" content=\"https://mukulkadel.com/categories/\" />\n<meta property=\"og:site_name\" content=\"Mukul Kadel\" />\n<meta name=\"twitter:card\" content=\"summary_large_image\" />\n<meta name=\"twitter:site\" content=\"@mukul_kadel\" />\n<script type=\"application/ld+json\" class=\"yoast-schema-graph\">{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"WebPage\",\"@id\":\"https://mukulkadel.com/categories/\",\"url\":\"https://mukulkadel.com/categories/\",\"name\":\"Categories - Mukul Kadel\",\"isPartOf\":{\"@id\":\"https://mukulkadel.com/#website\"},\"datePublished\":\"2023-09-03T19:46:19+00:00\",\"breadcrumb\":{\"@id\":\"https://mukulkadel.com/categories/#breadcrumb\"},\"inLanguage\":\"en-US\",\"potentialAction\":[{\"@type\":\"ReadAction\",\"target\":[\"https://mukulkadel.com/categories/\"]}]},{\"@type\":\"BreadcrumbList\",\"@id\":\"https://mukulkadel.com/categories/#breadcrumb\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":\"https://mukulkadel.com/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Categories\"}]},{\"@type\":\"WebSite\",\"@id\":\"https://mukulkadel.com/#website\",\"url\":\"https://mukulkadel.com/\",\"name\":\"Mukul Kadel\",\"description\":\"\",\"publisher\":{\"@id\":\"https://mukulkadel.com/#/schema/person/e7c62bacccd7db54ecbcd68d94263339\"},\"potentialAction\":[{\"@type\":\"SearchAction\",\"target\":{\"@type\":\"EntryPoint\",\"urlTemplate\":\"https://mukulkadel.com/?s={search_term_string}\"},\"query-input\":{\"@type\":\"PropertyValueSpecification\",\"valueRequired\":true,\"valueName\":\"search_term_string\"}}],\"inLanguage\":\"en-US\"},{\"@type\":[\"Person\",\"Organization\"],\"@id\":\"https://mukulkadel.com/#/schema/person/e7c62bacccd7db54ecbcd68d94263339\",\"name\":\"mukulkadel\",\"image\":{\"@type\":\"ImageObject\",\"inLanguage\":\"en-US\",\"@id\":\"https://mukulkadel.com/#/schema/person/image/\",\"url\":\"https://secure.gravatar.com/avatar/82d75162f12c706a4b2979f086a3194990b2391816fdcbaa7456af1cc84debab?s=96&d=mm&r=g\",\"contentUrl\":\"https://secure.gravatar.com/avatar/82d75162f12c706a4b2979f086a3194990b2391816fdcbaa7456af1cc84debab?s=96&d=mm&r=g\",\"caption\":\"mukulkadel\"},\"logo\":{\"@id\":\"https://mukulkadel.com/#/schema/person/image/\"},\"sameAs\":[\"https://mukulkadel.com\",\"https://www.instagram.com/mukulkadel/\",\"https://www.linkedin.com/in/mukulkadel/\",\"https://x.com/mukul_kadel\",\"https://www.youtube.com/channel/UCEbJa5z6aMnLUdvt_nnvpQA\"]}]}</script>\n<!-- / Yoast SEO plugin. -->",
+        "yoast_head_json": {
+            "title": "Categories - Mukul Kadel",
+            "robots": {
+                "index": "index",
+                "follow": "follow",
+                "max-snippet": "max-snippet:-1",
+                "max-image-preview": "max-image-preview:large",
+                "max-video-preview": "max-video-preview:-1"
+            },
+            "canonical": "https://mukulkadel.com/categories/",
+            "next": "https://mukulkadel.com/categories/pages?per_page=100&page=1&query-0-page=2",
+            "og_locale": "en_US",
+            "og_type": "article",
+            "og_title": "Categories - Mukul Kadel",
+            "og_url": "https://mukulkadel.com/categories/",
+            "og_site_name": "Mukul Kadel",
+            "twitter_card": "summary_large_image",
+            "twitter_site": "@mukul_kadel",
+            "schema": {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "WebPage",
+                        "@id": "https://mukulkadel.com/categories/",
+                        "url": "https://mukulkadel.com/categories/",
+                        "name": "Categories - Mukul Kadel",
+                        "isPartOf": {
+                            "@id": "https://mukulkadel.com/#website"
+                        },
+                        "datePublished": "2023-09-03T19:46:19+00:00",
+                        "breadcrumb": {
+                            "@id": "https://mukulkadel.com/categories/#breadcrumb"
+                        },
+                        "inLanguage": "en-US",
+                        "potentialAction": [
+                            {
+                                "@type": "ReadAction",
+                                "target": [
+                                    "https://mukulkadel.com/categories/"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "https://mukulkadel.com/categories/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home",
+                                "item": "https://mukulkadel.com/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Categories"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://mukulkadel.com/#website",
+                        "url": "https://mukulkadel.com/",
+                        "name": "Mukul Kadel",
+                        "description": "",
+                        "publisher": {
+                            "@id": "https://mukulkadel.com/#/schema/person/e7c62bacccd7db54ecbcd68d94263339"
+                        },
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "https://mukulkadel.com/?s={search_term_string}"
+                                },
+                                "query-input": {
+                                    "@type": "PropertyValueSpecification",
+                                    "valueRequired": true,
+                                    "valueName": "search_term_string"
+                                }
+                            }
+                        ],
+                        "inLanguage": "en-US"
+                    },
+                    {
+                        "@type": [
+                            "Person",
+                            "Organization"
+                        ],
+                        "@id": "https://mukulkadel.com/#/schema/person/e7c62bacccd7db54ecbcd68d94263339",
+                        "name": "mukulkadel",
+                        "image": {
+                            "@type": "ImageObject",
+                            "inLanguage": "en-US",
+                            "@id": "https://mukulkadel.com/#/schema/person/image/",
+                            "url": "https://secure.gravatar.com/avatar/82d75162f12c706a4b2979f086a3194990b2391816fdcbaa7456af1cc84debab?s=96&d=mm&r=g",
+                            "contentUrl": "https://secure.gravatar.com/avatar/82d75162f12c706a4b2979f086a3194990b2391816fdcbaa7456af1cc84debab?s=96&d=mm&r=g",
+                            "caption": "mukulkadel"
+                        },
+                        "logo": {
+                            "@id": "https://mukulkadel.com/#/schema/person/image/"
+                        },
+                        "sameAs": [
+                            "https://mukulkadel.com",
+                            "https://www.instagram.com/mukulkadel/",
+                            "https://www.linkedin.com/in/mukulkadel/",
+                            "https://x.com/mukul_kadel",
+                            "https://www.youtube.com/channel/UCEbJa5z6aMnLUdvt_nnvpQA"
+                        ]
+                    }
+                ]
+            }
+        },
+        "_links": {
+            "self": [
+                {
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/pages/119",
+                    "targetHints": {
+                        "allow": [
+                            "GET"
+                        ]
+                    }
+                }
+            ],
+            "collection": [
+                {
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/pages"
+                }
+            ],
+            "about": [
+                {
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/types/page"
+                }
+            ],
+            "author": [
+                {
+                    "embeddable": true,
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/users/1"
+                }
+            ],
+            "replies": [
+                {
+                    "embeddable": true,
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/comments?post=119"
+                }
+            ],
+            "version-history": [
+                {
+                    "count": 1,
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/pages/119/revisions"
+                }
+            ],
+            "predecessor-version": [
+                {
+                    "id": 120,
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/pages/119/revisions/120"
+                }
+            ],
+            "wp:attachment": [
+                {
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/media?parent=119"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    }
+]

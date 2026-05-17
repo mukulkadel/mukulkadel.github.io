@@ -1,0 +1,7 @@
+Plugins installed in wordpress site.
+- Code Block Pro
+- ReactPress
+- Site Kit by Google
+- Superb Addons: Blocks, Patterns & Theme Designer for the Block Editor & FSE
+- Superb Social Media Share Buttons and Follow Buttons
+- Yoast SEO

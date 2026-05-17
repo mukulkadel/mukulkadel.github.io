@@ -1,0 +1,802 @@
+[
+    {
+        "id": 205,
+        "date": "2024-06-12T11:12:23",
+        "date_gmt": "2024-06-12T05:42:23",
+        "guid": {
+            "rendered": "https://mukulkadel.com/wp-content/uploads/2024/06/macos.jpg"
+        },
+        "modified": "2024-06-12T11:12:23",
+        "modified_gmt": "2024-06-12T05:42:23",
+        "slug": "screenshot-4",
+        "status": "inherit",
+        "type": "attachment",
+        "link": "https://mukulkadel.com/apple-wwdc24-event-highlights/screenshot-4/",
+        "title": {
+            "rendered": "Screenshot"
+        },
+        "author": 1,
+        "featured_media": 0,
+        "comment_status": "",
+        "ping_status": "closed",
+        "template": "",
+        "meta": [],
+        "class_list": [
+            "post-205",
+            "attachment",
+            "type-attachment",
+            "status-inherit",
+            "hentry"
+        ],
+        "description": {
+            "rendered": "<p class=\"attachment\"><a href='https://mukulkadel.com/wp-content/uploads/2024/06/macos-scaled.jpg'><img loading=\"lazy\" decoding=\"async\" width=\"300\" height=\"169\" src=\"https://mukulkadel.com/wp-content/uploads/2024/06/macos-300x169.jpg\" class=\"attachment-medium size-medium\" alt=\"\" srcset=\"https://mukulkadel.com/wp-content/uploads/2024/06/macos-300x169.jpg 300w, https://mukulkadel.com/wp-content/uploads/2024/06/macos-1024x576.jpg 1024w, https://mukulkadel.com/wp-content/uploads/2024/06/macos-768x432.jpg 768w, https://mukulkadel.com/wp-content/uploads/2024/06/macos-1536x864.jpg 1536w, https://mukulkadel.com/wp-content/uploads/2024/06/macos-2048x1152.jpg 2048w, https://mukulkadel.com/wp-content/uploads/2024/06/macos-850x478.jpg 850w\" sizes=\"auto, (max-width: 300px) 100vw, 300px\" /></a></p>\n"
+        },
+        "caption": {
+            "rendered": "<p>Screenshot</p>\n"
+        },
+        "alt_text": "",
+        "media_type": "image",
+        "mime_type": "image/jpeg",
+        "media_details": {
+            "width": 2560,
+            "height": 1440,
+            "file": "2024/06/macos-scaled.jpg",
+            "filesize": 304731,
+            "sizes": {
+                "medium": {
+                    "file": "macos-300x169.jpg",
+                    "width": 300,
+                    "height": 169,
+                    "filesize": 17669,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/macos-300x169.jpg"
+                },
+                "large": {
+                    "file": "macos-1024x576.jpg",
+                    "width": 1024,
+                    "height": 576,
+                    "filesize": 90066,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/macos-1024x576.jpg"
+                },
+                "thumbnail": {
+                    "file": "macos-150x150.jpg",
+                    "width": 150,
+                    "height": 150,
+                    "filesize": 10582,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/macos-150x150.jpg"
+                },
+                "medium_large": {
+                    "file": "macos-768x432.jpg",
+                    "width": 768,
+                    "height": 432,
+                    "filesize": 59827,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/macos-768x432.jpg"
+                },
+                "1536x1536": {
+                    "file": "macos-1536x864.jpg",
+                    "width": 1536,
+                    "height": 864,
+                    "filesize": 153499,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/macos-1536x864.jpg"
+                },
+                "2048x2048": {
+                    "file": "macos-2048x1152.jpg",
+                    "width": 2048,
+                    "height": 1152,
+                    "filesize": 227298,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/macos-2048x1152.jpg"
+                },
+                "post-thumbnail": {
+                    "file": "macos-300x169.jpg",
+                    "width": 300,
+                    "height": 169,
+                    "filesize": 17669,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/macos-300x169.jpg"
+                },
+                "newspaperly-grid": {
+                    "file": "macos-350x230.jpg",
+                    "width": 350,
+                    "height": 230,
+                    "filesize": 22608,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/macos-350x230.jpg"
+                },
+                "newspaperly-slider": {
+                    "file": "macos-850x478.jpg",
+                    "width": 850,
+                    "height": 478,
+                    "filesize": 70282,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/macos-850x478.jpg"
+                },
+                "newspaperly-small": {
+                    "file": "macos-300x180.jpg",
+                    "width": 300,
+                    "height": 180,
+                    "filesize": 18679,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/macos-300x180.jpg"
+                },
+                "full": {
+                    "file": "macos-scaled.jpg",
+                    "width": 2560,
+                    "height": 1440,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/macos-scaled.jpg"
+                }
+            },
+            "image_meta": {
+                "aperture": "0",
+                "credit": "",
+                "camera": "",
+                "caption": "Screenshot",
+                "created_timestamp": "0",
+                "copyright": "",
+                "focal_length": "0",
+                "iso": "0",
+                "shutter_speed": "0",
+                "title": "Screenshot",
+                "orientation": "1",
+                "keywords": []
+            },
+            "original_image": "macos.jpg"
+        },
+        "post": 201,
+        "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/macos-scaled.jpg",
+        "_links": {
+            "self": [
+                {
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/media/205",
+                    "targetHints": {
+                        "allow": [
+                            "GET"
+                        ]
+                    }
+                }
+            ],
+            "collection": [
+                {
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/media"
+                }
+            ],
+            "about": [
+                {
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/types/attachment"
+                }
+            ],
+            "author": [
+                {
+                    "embeddable": true,
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/users/1"
+                }
+            ],
+            "replies": [
+                {
+                    "embeddable": true,
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/comments?post=205"
+                }
+            ],
+            "wp:attached-to": [
+                {
+                    "embeddable": true,
+                    "post_type": "post",
+                    "id": 201,
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/posts/201"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    },
+    {
+        "id": 204,
+        "date": "2024-06-12T11:12:14",
+        "date_gmt": "2024-06-12T05:42:14",
+        "guid": {
+            "rendered": "https://mukulkadel.com/wp-content/uploads/2024/06/ipados.jpg"
+        },
+        "modified": "2024-06-12T11:12:14",
+        "modified_gmt": "2024-06-12T05:42:14",
+        "slug": "screenshot-3",
+        "status": "inherit",
+        "type": "attachment",
+        "link": "https://mukulkadel.com/apple-wwdc24-event-highlights/screenshot-3/",
+        "title": {
+            "rendered": "Screenshot"
+        },
+        "author": 1,
+        "featured_media": 0,
+        "comment_status": "",
+        "ping_status": "closed",
+        "template": "",
+        "meta": [],
+        "class_list": [
+            "post-204",
+            "attachment",
+            "type-attachment",
+            "status-inherit",
+            "hentry"
+        ],
+        "description": {
+            "rendered": "<p class=\"attachment\"><a href='https://mukulkadel.com/wp-content/uploads/2024/06/ipados-scaled.jpg'><img loading=\"lazy\" decoding=\"async\" width=\"300\" height=\"169\" src=\"https://mukulkadel.com/wp-content/uploads/2024/06/ipados-300x169.jpg\" class=\"attachment-medium size-medium\" alt=\"\" srcset=\"https://mukulkadel.com/wp-content/uploads/2024/06/ipados-300x169.jpg 300w, https://mukulkadel.com/wp-content/uploads/2024/06/ipados-1024x575.jpg 1024w, https://mukulkadel.com/wp-content/uploads/2024/06/ipados-768x432.jpg 768w, https://mukulkadel.com/wp-content/uploads/2024/06/ipados-1536x863.jpg 1536w, https://mukulkadel.com/wp-content/uploads/2024/06/ipados-2048x1151.jpg 2048w, https://mukulkadel.com/wp-content/uploads/2024/06/ipados-850x478.jpg 850w\" sizes=\"auto, (max-width: 300px) 100vw, 300px\" /></a></p>\n"
+        },
+        "caption": {
+            "rendered": "<p>Screenshot</p>\n"
+        },
+        "alt_text": "",
+        "media_type": "image",
+        "mime_type": "image/jpeg",
+        "media_details": {
+            "width": 2560,
+            "height": 1438,
+            "file": "2024/06/ipados-scaled.jpg",
+            "filesize": 329222,
+            "sizes": {
+                "medium": {
+                    "file": "ipados-300x169.jpg",
+                    "width": 300,
+                    "height": 169,
+                    "filesize": 15276,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/ipados-300x169.jpg"
+                },
+                "large": {
+                    "file": "ipados-1024x575.jpg",
+                    "width": 1024,
+                    "height": 575,
+                    "filesize": 95288,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/ipados-1024x575.jpg"
+                },
+                "thumbnail": {
+                    "file": "ipados-150x150.jpg",
+                    "width": 150,
+                    "height": 150,
+                    "filesize": 6970,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/ipados-150x150.jpg"
+                },
+                "medium_large": {
+                    "file": "ipados-768x432.jpg",
+                    "width": 768,
+                    "height": 432,
+                    "filesize": 62602,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/ipados-768x432.jpg"
+                },
+                "1536x1536": {
+                    "file": "ipados-1536x863.jpg",
+                    "width": 1536,
+                    "height": 863,
+                    "filesize": 165903,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/ipados-1536x863.jpg"
+                },
+                "2048x2048": {
+                    "file": "ipados-2048x1151.jpg",
+                    "width": 2048,
+                    "height": 1151,
+                    "filesize": 244543,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/ipados-2048x1151.jpg"
+                },
+                "post-thumbnail": {
+                    "file": "ipados-300x169.jpg",
+                    "width": 300,
+                    "height": 169,
+                    "filesize": 15276,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/ipados-300x169.jpg"
+                },
+                "newspaperly-grid": {
+                    "file": "ipados-350x230.jpg",
+                    "width": 350,
+                    "height": 230,
+                    "filesize": 20911,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/ipados-350x230.jpg"
+                },
+                "newspaperly-slider": {
+                    "file": "ipados-850x478.jpg",
+                    "width": 850,
+                    "height": 478,
+                    "filesize": 73640,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/ipados-850x478.jpg"
+                },
+                "newspaperly-small": {
+                    "file": "ipados-300x180.jpg",
+                    "width": 300,
+                    "height": 180,
+                    "filesize": 16078,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/ipados-300x180.jpg"
+                },
+                "full": {
+                    "file": "ipados-scaled.jpg",
+                    "width": 2560,
+                    "height": 1438,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/ipados-scaled.jpg"
+                }
+            },
+            "image_meta": {
+                "aperture": "0",
+                "credit": "",
+                "camera": "",
+                "caption": "Screenshot",
+                "created_timestamp": "0",
+                "copyright": "",
+                "focal_length": "0",
+                "iso": "0",
+                "shutter_speed": "0",
+                "title": "Screenshot",
+                "orientation": "1",
+                "keywords": []
+            },
+            "original_image": "ipados.jpg"
+        },
+        "post": 201,
+        "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/ipados-scaled.jpg",
+        "_links": {
+            "self": [
+                {
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/media/204",
+                    "targetHints": {
+                        "allow": [
+                            "GET"
+                        ]
+                    }
+                }
+            ],
+            "collection": [
+                {
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/media"
+                }
+            ],
+            "about": [
+                {
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/types/attachment"
+                }
+            ],
+            "author": [
+                {
+                    "embeddable": true,
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/users/1"
+                }
+            ],
+            "replies": [
+                {
+                    "embeddable": true,
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/comments?post=204"
+                }
+            ],
+            "wp:attached-to": [
+                {
+                    "embeddable": true,
+                    "post_type": "post",
+                    "id": 201,
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/posts/201"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    },
+    {
+        "id": 203,
+        "date": "2024-06-12T11:11:03",
+        "date_gmt": "2024-06-12T05:41:03",
+        "guid": {
+            "rendered": "https://mukulkadel.com/wp-content/uploads/2024/06/watchos.jpg"
+        },
+        "modified": "2024-06-12T11:11:03",
+        "modified_gmt": "2024-06-12T05:41:03",
+        "slug": "screenshot-2",
+        "status": "inherit",
+        "type": "attachment",
+        "link": "https://mukulkadel.com/apple-wwdc24-event-highlights/screenshot-2/",
+        "title": {
+            "rendered": "Screenshot"
+        },
+        "author": 1,
+        "featured_media": 0,
+        "comment_status": "",
+        "ping_status": "closed",
+        "template": "",
+        "meta": [],
+        "class_list": [
+            "post-203",
+            "attachment",
+            "type-attachment",
+            "status-inherit",
+            "hentry"
+        ],
+        "description": {
+            "rendered": "<p class=\"attachment\"><a href='https://mukulkadel.com/wp-content/uploads/2024/06/watchos-scaled.jpg'><img loading=\"lazy\" decoding=\"async\" width=\"300\" height=\"168\" src=\"https://mukulkadel.com/wp-content/uploads/2024/06/watchos-300x168.jpg\" class=\"attachment-medium size-medium\" alt=\"\" srcset=\"https://mukulkadel.com/wp-content/uploads/2024/06/watchos-300x168.jpg 300w, https://mukulkadel.com/wp-content/uploads/2024/06/watchos-1024x573.jpg 1024w, https://mukulkadel.com/wp-content/uploads/2024/06/watchos-768x430.jpg 768w, https://mukulkadel.com/wp-content/uploads/2024/06/watchos-1536x860.jpg 1536w, https://mukulkadel.com/wp-content/uploads/2024/06/watchos-2048x1147.jpg 2048w, https://mukulkadel.com/wp-content/uploads/2024/06/watchos-850x476.jpg 850w\" sizes=\"auto, (max-width: 300px) 100vw, 300px\" /></a></p>\n"
+        },
+        "caption": {
+            "rendered": "<p>Screenshot</p>\n"
+        },
+        "alt_text": "",
+        "media_type": "image",
+        "mime_type": "image/jpeg",
+        "media_details": {
+            "width": 2560,
+            "height": 1434,
+            "file": "2024/06/watchos-scaled.jpg",
+            "filesize": 343912,
+            "sizes": {
+                "medium": {
+                    "file": "watchos-300x168.jpg",
+                    "width": 300,
+                    "height": 168,
+                    "filesize": 19235,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/watchos-300x168.jpg"
+                },
+                "large": {
+                    "file": "watchos-1024x573.jpg",
+                    "width": 1024,
+                    "height": 573,
+                    "filesize": 98291,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/watchos-1024x573.jpg"
+                },
+                "thumbnail": {
+                    "file": "watchos-150x150.jpg",
+                    "width": 150,
+                    "height": 150,
+                    "filesize": 11715,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/watchos-150x150.jpg"
+                },
+                "medium_large": {
+                    "file": "watchos-768x430.jpg",
+                    "width": 768,
+                    "height": 430,
+                    "filesize": 65947,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/watchos-768x430.jpg"
+                },
+                "1536x1536": {
+                    "file": "watchos-1536x860.jpg",
+                    "width": 1536,
+                    "height": 860,
+                    "filesize": 173969,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/watchos-1536x860.jpg"
+                },
+                "2048x2048": {
+                    "file": "watchos-2048x1147.jpg",
+                    "width": 2048,
+                    "height": 1147,
+                    "filesize": 254426,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/watchos-2048x1147.jpg"
+                },
+                "post-thumbnail": {
+                    "file": "watchos-300x168.jpg",
+                    "width": 300,
+                    "height": 168,
+                    "filesize": 19235,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/watchos-300x168.jpg"
+                },
+                "newspaperly-grid": {
+                    "file": "watchos-350x230.jpg",
+                    "width": 350,
+                    "height": 230,
+                    "filesize": 25187,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/watchos-350x230.jpg"
+                },
+                "newspaperly-slider": {
+                    "file": "watchos-850x476.jpg",
+                    "width": 850,
+                    "height": 476,
+                    "filesize": 76795,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/watchos-850x476.jpg"
+                },
+                "newspaperly-small": {
+                    "file": "watchos-300x180.jpg",
+                    "width": 300,
+                    "height": 180,
+                    "filesize": 19749,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/watchos-300x180.jpg"
+                },
+                "full": {
+                    "file": "watchos-scaled.jpg",
+                    "width": 2560,
+                    "height": 1434,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/watchos-scaled.jpg"
+                }
+            },
+            "image_meta": {
+                "aperture": "0",
+                "credit": "",
+                "camera": "",
+                "caption": "Screenshot",
+                "created_timestamp": "0",
+                "copyright": "",
+                "focal_length": "0",
+                "iso": "0",
+                "shutter_speed": "0",
+                "title": "Screenshot",
+                "orientation": "1",
+                "keywords": []
+            },
+            "original_image": "watchos.jpg"
+        },
+        "post": 201,
+        "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/watchos-scaled.jpg",
+        "_links": {
+            "self": [
+                {
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/media/203",
+                    "targetHints": {
+                        "allow": [
+                            "GET"
+                        ]
+                    }
+                }
+            ],
+            "collection": [
+                {
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/media"
+                }
+            ],
+            "about": [
+                {
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/types/attachment"
+                }
+            ],
+            "author": [
+                {
+                    "embeddable": true,
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/users/1"
+                }
+            ],
+            "replies": [
+                {
+                    "embeddable": true,
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/comments?post=203"
+                }
+            ],
+            "wp:attached-to": [
+                {
+                    "embeddable": true,
+                    "post_type": "post",
+                    "id": 201,
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/posts/201"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    },
+    {
+        "id": 202,
+        "date": "2024-06-12T11:10:20",
+        "date_gmt": "2024-06-12T05:40:20",
+        "guid": {
+            "rendered": "https://mukulkadel.com/wp-content/uploads/2024/06/audio-and-home.jpg"
+        },
+        "modified": "2024-06-12T11:10:20",
+        "modified_gmt": "2024-06-12T05:40:20",
+        "slug": "screenshot",
+        "status": "inherit",
+        "type": "attachment",
+        "link": "https://mukulkadel.com/apple-wwdc24-event-highlights/screenshot/",
+        "title": {
+            "rendered": "Screenshot"
+        },
+        "author": 1,
+        "featured_media": 0,
+        "comment_status": "",
+        "ping_status": "closed",
+        "template": "",
+        "meta": [],
+        "class_list": [
+            "post-202",
+            "attachment",
+            "type-attachment",
+            "status-inherit",
+            "hentry"
+        ],
+        "description": {
+            "rendered": "<p class=\"attachment\"><a href='https://mukulkadel.com/wp-content/uploads/2024/06/audio-and-home-scaled.jpg'><img loading=\"lazy\" decoding=\"async\" width=\"300\" height=\"168\" src=\"https://mukulkadel.com/wp-content/uploads/2024/06/audio-and-home-300x168.jpg\" class=\"attachment-medium size-medium\" alt=\"\" srcset=\"https://mukulkadel.com/wp-content/uploads/2024/06/audio-and-home-300x168.jpg 300w, https://mukulkadel.com/wp-content/uploads/2024/06/audio-and-home-1024x572.jpg 1024w, https://mukulkadel.com/wp-content/uploads/2024/06/audio-and-home-768x429.jpg 768w, https://mukulkadel.com/wp-content/uploads/2024/06/audio-and-home-1536x859.jpg 1536w, https://mukulkadel.com/wp-content/uploads/2024/06/audio-and-home-2048x1145.jpg 2048w, https://mukulkadel.com/wp-content/uploads/2024/06/audio-and-home-850x475.jpg 850w\" sizes=\"auto, (max-width: 300px) 100vw, 300px\" /></a></p>\n"
+        },
+        "caption": {
+            "rendered": "<p>Screenshot</p>\n"
+        },
+        "alt_text": "",
+        "media_type": "image",
+        "mime_type": "image/jpeg",
+        "media_details": {
+            "width": 2560,
+            "height": 1431,
+            "file": "2024/06/audio-and-home-scaled.jpg",
+            "filesize": 334745,
+            "sizes": {
+                "medium": {
+                    "file": "audio-and-home-300x168.jpg",
+                    "width": 300,
+                    "height": 168,
+                    "filesize": 14758,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/audio-and-home-300x168.jpg"
+                },
+                "large": {
+                    "file": "audio-and-home-1024x572.jpg",
+                    "width": 1024,
+                    "height": 572,
+                    "filesize": 95858,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/audio-and-home-1024x572.jpg"
+                },
+                "thumbnail": {
+                    "file": "audio-and-home-150x150.jpg",
+                    "width": 150,
+                    "height": 150,
+                    "filesize": 7571,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/audio-and-home-150x150.jpg"
+                },
+                "medium_large": {
+                    "file": "audio-and-home-768x429.jpg",
+                    "width": 768,
+                    "height": 429,
+                    "filesize": 63421,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/audio-and-home-768x429.jpg"
+                },
+                "1536x1536": {
+                    "file": "audio-and-home-1536x859.jpg",
+                    "width": 1536,
+                    "height": 859,
+                    "filesize": 167263,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/audio-and-home-1536x859.jpg"
+                },
+                "2048x2048": {
+                    "file": "audio-and-home-2048x1145.jpg",
+                    "width": 2048,
+                    "height": 1145,
+                    "filesize": 247542,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/audio-and-home-2048x1145.jpg"
+                },
+                "post-thumbnail": {
+                    "file": "audio-and-home-300x168.jpg",
+                    "width": 300,
+                    "height": 168,
+                    "filesize": 14758,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/audio-and-home-300x168.jpg"
+                },
+                "newspaperly-grid": {
+                    "file": "audio-and-home-350x230.jpg",
+                    "width": 350,
+                    "height": 230,
+                    "filesize": 20897,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/audio-and-home-350x230.jpg"
+                },
+                "newspaperly-slider": {
+                    "file": "audio-and-home-850x475.jpg",
+                    "width": 850,
+                    "height": 475,
+                    "filesize": 73468,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/audio-and-home-850x475.jpg"
+                },
+                "newspaperly-small": {
+                    "file": "audio-and-home-300x180.jpg",
+                    "width": 300,
+                    "height": 180,
+                    "filesize": 16158,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/audio-and-home-300x180.jpg"
+                },
+                "full": {
+                    "file": "audio-and-home-scaled.jpg",
+                    "width": 2560,
+                    "height": 1431,
+                    "mime_type": "image/jpeg",
+                    "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/audio-and-home-scaled.jpg"
+                }
+            },
+            "image_meta": {
+                "aperture": "0",
+                "credit": "",
+                "camera": "",
+                "caption": "Screenshot",
+                "created_timestamp": "0",
+                "copyright": "",
+                "focal_length": "0",
+                "iso": "0",
+                "shutter_speed": "0",
+                "title": "Screenshot",
+                "orientation": "1",
+                "keywords": []
+            },
+            "original_image": "audio-and-home.jpg"
+        },
+        "post": 201,
+        "source_url": "https://mukulkadel.com/wp-content/uploads/2024/06/audio-and-home-scaled.jpg",
+        "_links": {
+            "self": [
+                {
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/media/202",
+                    "targetHints": {
+                        "allow": [
+                            "GET"
+                        ]
+                    }
+                }
+            ],
+            "collection": [
+                {
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/media"
+                }
+            ],
+            "about": [
+                {
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/types/attachment"
+                }
+            ],
+            "author": [
+                {
+                    "embeddable": true,
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/users/1"
+                }
+            ],
+            "replies": [
+                {
+                    "embeddable": true,
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/comments?post=202"
+                }
+            ],
+            "wp:attached-to": [
+                {
+                    "embeddable": true,
+                    "post_type": "post",
+                    "id": 201,
+                    "href": "https://mukulkadel.com/wp-json/wp/v2/posts/201"
+                }
+            ],
+            "curies": [
+                {
+                    "name": "wp",
+                    "href": "https://api.w.org/{rel}",
+                    "templated": true
+                }
+            ]
+        }
+    }
+]

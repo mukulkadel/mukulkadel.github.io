@@ -1,22 +1,2 @@
-# Jekyll
-_site/
-.jekyll-cache/
-.sass-cache/
-*.gem
-Gemfile.lock
-
-# Dependencies
-node_modules/
-vendor/
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-.DS_Store
-
-# Environment
-.env
-.env.local
+bkp
+.venv

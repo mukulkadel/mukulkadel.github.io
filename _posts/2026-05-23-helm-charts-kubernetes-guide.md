@@ -6,6 +6,7 @@ slug: helm-charts-kubernetes-guide
 description: "Learn how Helm charts work, how to install community charts, and how to write your own chart to package a Kubernetes application for repeatable deploys."
 categories: ["wiki", "Programming"]
 tags: ["helm", "kubernetes", "k8s", "charts", "devops", "cloud native", "deployment", "packaging", "yaml"]
+render_with_liquid: false
 ---
 
 Once you have more than one Kubernetes application to manage, raw YAML manifests start to show their limits. Every environment needs slightly different values — different image tags, replica counts, resource limits, ingress hostnames — and maintaining separate copies of near-identical files is error-prone. Helm is the package manager for Kubernetes that solves this with **charts**: reusable, parameterized application packages.

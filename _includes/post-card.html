@@ -1,5 +1,7 @@
 {% assign post = include.post %}
-<li class="post-card">
+{% capture _fcats %}{% for c in post.categories %}{{ c | slugify }} {% endfor %}{% endcapture %}
+{% capture _ftags %}{% for t in post.tags %}{{ t | slugify }} {% endfor %}{% endcapture %}
+<li class="post-card" data-filter-cats="{{ _fcats | strip }}" data-filter-tags="{{ _ftags | strip }}">
   <div class="post-card-meta">
     <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
     {% if post.categories.size > 0 %}
@@ -27,7 +29,7 @@
   {% if post.tags.size > 0 %}
   <div class="post-card-footer">
     {% for tag in post.tags limit:4 %}
-      <a class="tag" href="{{ '/categories/' | relative_url }}#{{ tag | slugify }}">{{ tag }}</a>
+      <a class="tag" href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}">{{ tag }}</a>
     {% endfor %}
   </div>
   {% endif %}

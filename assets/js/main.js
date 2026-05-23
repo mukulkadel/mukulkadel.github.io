@@ -119,6 +119,60 @@
     });
   }
 
+  // ── Browse filter (categories & tags pages) ───────────────────────────────
+  function initBrowseFilter() {
+    var allBtn = document.querySelector('.browse-all-btn');
+    if (!allBtn) return;
+
+    var chips = document.querySelectorAll('.browse-chip');
+    var cards = document.querySelectorAll('.post-list .post-card');
+    var countEl = document.querySelector('.browse-count');
+    var emptyEl = document.querySelector('.browse-empty');
+    var activeVal = null;
+
+    function applyFilter() {
+      var visible = 0;
+      cards.forEach(function (card) {
+        var cats = ' ' + (card.dataset.filterCats || '') + ' ';
+        var tags = ' ' + (card.dataset.filterTags || '') + ' ';
+        var show = !activeVal
+          || cats.indexOf(' ' + activeVal + ' ') !== -1
+          || tags.indexOf(' ' + activeVal + ' ') !== -1;
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      if (countEl) {
+        countEl.textContent = activeVal
+          ? 'Showing ' + visible + ' of ' + cards.length + ' posts'
+          : cards.length + ' posts';
+      }
+      if (emptyEl) emptyEl.classList.toggle('visible', visible === 0);
+    }
+
+    function activate(val) {
+      activeVal = val;
+      chips.forEach(function (c) {
+        var on = val && c.dataset.filter === val;
+        c.classList.toggle('active', on);
+        c.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      allBtn.classList.toggle('active', !val);
+      allBtn.setAttribute('aria-pressed', val ? 'false' : 'true');
+      applyFilter();
+    }
+
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        activate(activeVal === chip.dataset.filter ? null : chip.dataset.filter);
+      });
+    });
+
+    allBtn.addEventListener('click', function () { activate(null); });
+
+    var hash = window.location.hash.slice(1);
+    activate(hash || null);
+  }
+
   // ── Boot ──────────────────────────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded', function () {
     addCodeLabels();
@@ -128,5 +182,6 @@
     initShareCopyButton();
     initReadingProgress();
     initNavToggle();
+    initBrowseFilter();
   });
 })();

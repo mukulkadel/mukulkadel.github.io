@@ -6,6 +6,7 @@ slug: github-actions-cicd-guide
 description: "Set up a complete CI/CD pipeline with GitHub Actions that builds, tests, and deploys your app automatically on every push to main."
 categories: ["Tutorials", "Programming"]
 tags: ["github actions", "ci/cd", "devops", "automation", "yaml", "github", "deployment", "testing", "pipeline"]
+render_with_liquid: false
 ---
 
 Every time you push code and spend the next ten minutes manually running tests and deploying by hand, you're doing work a machine could do for you. GitHub Actions lets you define exactly that automation in YAML files that live in your repository — no external CI service required. This guide walks through building a real pipeline that tests on every pull request and deploys on every merge to `main`.

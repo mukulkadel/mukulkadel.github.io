@@ -688,35 +688,86 @@ pre[data-lang]::before {
 .pagination .disabled { opacity: 0.4; pointer-events: none; }
 
 /* ============================================================
-   Categories page
+   Browse filter (categories & tags pages)
    ============================================================ */
-.category-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 1rem;
-}
-
-.category-card {
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 1.25rem 1.5rem;
-  background: var(--bg);
-  text-decoration: none;
+.browse-toolbar {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  transition: box-shadow 0.15s, border-color 0.15s;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
 }
-.category-card:hover { box-shadow: var(--shadow); border-color: var(--accent); text-decoration: none; }
 
-.category-card-name { font-weight: 600; color: var(--text); }
-.category-card-count {
+.browse-all-btn,
+.browse-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1.5px solid var(--border);
+  border-radius: 2em;
+  padding: 0.3em 0.9em;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
   background: var(--surface);
   color: var(--text-muted);
-  border-radius: 2em;
-  padding: 0.1em 0.6em;
-  font-size: 0.8rem;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+  font-family: inherit;
+  line-height: 1.5;
 }
+
+.browse-all-btn {
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.browse-all-btn:hover,
+.browse-chip:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.browse-all-btn.active,
+.browse-chip.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.chip-count {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 2em;
+  padding: 0 0.4em;
+  font-size: 0.7rem;
+  font-weight: 600;
+  min-width: 1.3em;
+  text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+  .chip-count { background: rgba(255, 255, 255, 0.12); }
+}
+
+.browse-all-btn.active .chip-count,
+.browse-chip.active .chip-count {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.browse-count {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  min-height: 1.2em;
+}
+
+.browse-empty {
+  display: none;
+  text-align: center;
+  padding: 3rem 0;
+  color: var(--text-muted);
+}
+
+.browse-empty.visible { display: block; }
 
 /* ============================================================
    Apps page

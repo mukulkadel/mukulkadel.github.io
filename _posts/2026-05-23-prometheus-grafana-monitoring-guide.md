@@ -6,6 +6,7 @@ slug: prometheus-grafana-monitoring-guide
 description: "Set up Prometheus and Grafana to collect, store, and visualize metrics for your application, with alerting rules and a working Docker Compose stack."
 categories: ["Tutorials", "Programming"]
 tags: ["prometheus", "grafana", "monitoring", "observability", "devops", "metrics", "alerting", "kubernetes", "dashboard"]
+render_with_liquid: false
 ---
 
 Flying blind in production — no metrics, no dashboards, no alerts — means you find out about problems when users report them. Prometheus and Grafana fix this. Prometheus scrapes and stores time-series metrics; Grafana turns those metrics into dashboards you can actually read. Together they're the de facto open-source monitoring stack for everything from a single server to a Kubernetes cluster.

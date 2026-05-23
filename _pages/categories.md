@@ -2,29 +2,27 @@
 layout: page
 title: Categories
 permalink: /categories/
-description: Browse posts by category or tag.
-excerpt_separator: "<!--more-->"
+description: Browse all posts by category.
 ---
 
-{% assign categories_sorted = site.categories | sort %}
-{% if categories_sorted.size > 0 %}
-<div class="category-grid" style="margin-bottom:3rem;">
+<div class="browse-toolbar" role="group" aria-label="Filter by category">
+  <button class="browse-all-btn active" type="button" aria-pressed="true">
+    All <span class="chip-count">{{ site.posts | size }}</span>
+  </button>
+  {% assign categories_sorted = site.categories | sort %}
   {% for category in categories_sorted %}
-  <a class="category-card" href="#{{ category[0] | slugify }}" id="{{ category[0] | slugify }}-link">
-    <span class="category-card-name">{{ category[0] }}</span>
-    <span class="category-card-count">{{ category[1].size }}</span>
-  </a>
+  <button class="browse-chip" type="button" data-filter="{{ category[0] | slugify }}" aria-pressed="false">
+    {{ category[0] }} <span class="chip-count">{{ category[1].size }}</span>
+  </button>
   {% endfor %}
 </div>
 
-{% for category in categories_sorted %}
-<section id="{{ category[0] | slugify }}" style="margin-bottom:2.5rem;">
-  <h2 style="border-bottom:1px solid var(--border);padding-bottom:0.4rem;">{{ category[0] }}</h2>
-  <ul class="post-list" style="margin-top:1rem;">
-    {% for post in category[1] %}
-      {% include post-card.html post=post %}
-    {% endfor %}
-  </ul>
-</section>
-{% endfor %}
-{% endif %}
+<p class="browse-count"></p>
+
+<ul class="post-list">
+  {% for post in site.posts %}
+    {% include post-card.html post=post %}
+  {% endfor %}
+</ul>
+
+<p class="browse-empty">No posts in this category.</p>

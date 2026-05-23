@@ -1,84 +1,80 @@
-# Jekyll Configuration for mukulkadel.github.io
-# Site settings
 title: Mukul Kadel
-tagline: Developer, Writer, Creator
-description: >
-  Personal website of Mukul Kadel featuring blog posts, tutorials, and technical articles.
+email: mukulkadel@gmail.com
+description: "Software developer's blog — technology, programming, book reviews, and more."
 baseurl: ""
-url: "https://mukulkadel.github.io"
-author:
-  name: Mukul Kadel
-  email: mukulkadel@example.com
-  twitter: mukul_kadel
-  github: mukulkadel
-  linkedin: mukulkadel
-  instagram: mukulkadel
-  youtube: UCEbJa5z6aMnLUdvt_nnvpQA
+url: "https://mukulkadel.com"
+twitter_username: mukul_kadel
+github_username: mukulkadel
 
-# Build settings
 markdown: kramdown
-highlighter: rouge
-theme: null  # Using custom theme
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: none
 
-# Plugins
+highlighter: none
+
 plugins:
-  - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-feed
   - jekyll-paginate-v2
-  - jekyll-redirect-from
 
-# Pagination v2 settings
 pagination:
   enabled: true
   per_page: 10
-  permalink: '/page/:num/'
-  title: ' - Page :num'
-  limit: 0
-  sort_field: 'date'
+  permalink: "/page/:num/"
+  title: "Blog — Page :num"
+  sort_field: "date"
   sort_reverse: true
+  trail:
+    before: 2
+    after: 2
 
-# SEO Plugin settings
-social:
-  name: Mukul Kadel
-  links:
-    - https://twitter.com/your_handle
-    - https://github.com/mukulkadel
-    - https://linkedin.com/in/your-profile
+permalink: "/:slug/"
 
-# Timezone
-timezone: Asia/Kathmandu
-
-# Exclude items from build
-exclude:
-  - Gemfile
-  - Gemfile.lock
-  - node_modules
-  - .sass-cache
-  - .jekyll-cache
-  - vendor/
-  - .git
-  - .gitignore
-
-# Collections
 collections:
-  posts:
-    output: true
-    permalink: /blog/:year/:month/:day/:slug/
   pages:
     output: true
-    permalink: /:slug/
+    permalink: "/:slug/"
 
-# Defaults
 defaults:
   - scope:
       path: ""
-      type: posts
+      type: "posts"
     values:
-      layout: post
-      author: Mukul Kadel
+      layout: "post"
   - scope:
       path: ""
-      type: pages
+      type: "pages"
     values:
-      layout: page
+      layout: "page"
+
+author:
+  name: Mukul Kadel
+  twitter: mukul_kadel
+
+social:
+  twitter: "https://x.com/mukul_kadel"
+  linkedin: "https://www.linkedin.com/in/mukulkadel/"
+  github: "https://github.com/mukulkadel"
+  youtube: "https://www.youtube.com/channel/UCEbJa5z6aMnLUdvt_nnvpQA"
+  instagram: "https://www.instagram.com/mukulkadel/"
+
+# Google Analytics 4 Measurement ID (e.g. G-XXXXXXXXXX)
+google_analytics: ""
+
+# Google AdSense publisher ID (e.g. ca-pub-XXXXXXXXXX)
+google_adsense_client: ""
+
+exclude:
+  - wordpress-dump/
+  - wordpress-json-dumper.py
+  - convert-wp.py
+  - Gemfile
+  - Gemfile.lock
+  - .github/
+  - vendor/
+  - .bundle/
+  - node_modules/
+  - "*.py"

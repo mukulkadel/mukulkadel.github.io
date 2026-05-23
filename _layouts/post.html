@@ -1,50 +1,83 @@
 ---
 layout: default
 ---
-
-<article class="post">
-    <header class="post-header">
-        <h1 class="post-title">{{ page.title }}</h1>
-        <div class="post-meta">
-            <span class="post-date">{{ page.date | date: "%B %d, %Y" }}</span>
-            {% if page.author %}
-            <span class="post-author">by {{ page.author }}</span>
-            {% endif %}
-        </div>
-        {% if page.categories %}
-        <div class="post-categories">
-            {% for category in page.categories %}
-            <a href="{{ '/categories/#' | append: category | relative_url }}" class="category-tag">{{ category }}</a>
-            {% endfor %}
-        </div>
-        {% endif %}
-    </header>
-
-    <div class="post-content">
-        {{ content }}
+<article class="post" itemscope itemtype="https://schema.org/BlogPosting">
+  <header class="post-header">
+    {% if page.categories.size > 0 %}
+    <div style="display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:0.75rem;">
+      {% for cat in page.categories %}
+        <a class="category" href="{{ '/categories/' | relative_url }}#{{ cat | slugify }}">{{ cat }}</a>
+      {% endfor %}
     </div>
-
-    {% if page.tags %}
-    <footer class="post-footer">
-        <div class="post-tags">
-            <strong>Tags:</strong>
-            {% for tag in page.tags %}
-            <a href="{{ '/tags/#' | append: tag | relative_url }}" class="tag">{{ tag }}</a>
-            {% endfor %}
-        </div>
-    </footer>
     {% endif %}
-</article>
 
-<nav class="post-nav">
+    <h1 class="post-title" itemprop="headline">{{ page.title }}</h1>
+
+    <div class="post-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+        {{ page.date | date: "%B %-d, %Y" }}
+      </time>
+      {% assign words = page.content | number_of_words %}
+      {% assign reading_time = words | divided_by: 200 | plus: 1 %}
+      <span class="post-meta-sep">·</span>
+      <span>{{ reading_time }} min read</span>
+      <span class="post-meta-sep">·</span>
+      <span>{{ words }} words</span>
+    </div>
+  </header>
+
+  {% if site.google_adsense_client and site.google_adsense_client != "" %}
+  <div class="ad-unit">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="{{ site.google_adsense_client }}"
+         data-ad-slot="auto"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  {% endif %}
+
+  <div class="post-content" itemprop="articleBody">
+    {{ content }}
+  </div>
+
+  {% if page.tags.size > 0 %}
+  <div class="post-tags">
+    <p class="post-tags-label">Tags</p>
+    <div class="post-tags-list">
+      {% for tag in page.tags %}
+        <a class="tag" href="{{ '/categories/' | relative_url }}#{{ tag | slugify }}">{{ tag }}</a>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  {% if site.google_adsense_client and site.google_adsense_client != "" %}
+  <div class="ad-unit" style="margin-top:2rem;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="{{ site.google_adsense_client }}"
+         data-ad-slot="auto"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  {% endif %}
+
+  <nav class="post-nav" aria-label="Post navigation">
     {% if page.previous %}
-    <a href="{{ page.previous.url | relative_url }}" class="post-nav-prev">
-        ← {{ page.previous.title }}
+    <a class="post-nav-item" href="{{ page.previous.url | relative_url }}">
+      <span class="post-nav-label">&larr; Previous</span>
+      <span class="post-nav-title">{{ page.previous.title }}</span>
     </a>
-    {% endif %}
+    {% else %}<div></div>{% endif %}
+
     {% if page.next %}
-    <a href="{{ page.next.url | relative_url }}" class="post-nav-next">
-        {{ page.next.title }} →
+    <a class="post-nav-item" href="{{ page.next.url | relative_url }}">
+      <span class="post-nav-label">Next &rarr;</span>
+      <span class="post-nav-title">{{ page.next.title }}</span>
     </a>
-    {% endif %}
-</nav>
+    {% else %}<div></div>{% endif %}
+  </nav>
+</article>

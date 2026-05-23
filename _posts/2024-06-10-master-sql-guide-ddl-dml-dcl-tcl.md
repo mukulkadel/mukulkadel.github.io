@@ -1,9 +1,11 @@
 ---
 layout: post
 title: "Master SQL: A Comprehensive Guide to DDL, DML, DCL, and TCL"
-date: 2024-06-10 00:31:33 
-categories: ['sql', 'wiki']
-excerpt: "Structured Query Language (SQL) is the backbone of managing and manipulating relational databases. W"
+date: "2024-06-10 00:00:00 +0530"
+slug: master-sql-guide-ddl-dml-dcl-tcl
+description: Structured Query Language (SQL) is the backbone of managing and manipulating relational databases. Whether you’re working with MySQL, PostgreSQL, SQLite, or any other SQL-based database, knowing the different facets of SQL is…
+categories: ["SQL", "wiki"]
+tags: ["database management", "DCL", "DDL", "DML", "MySQL", "Oracle Database", "PostgreSQL", "SQL", "SQL commands", "SQL Server", "SQLite", "TCL"]
 ---
 
 Structured Query Language (SQL) is the backbone of managing and manipulating relational databases. Whether you’re working with MySQL, PostgreSQL, SQLite, or any other SQL-based database, knowing the different facets of SQL is crucial. Let’s delve into the main sub-languages of SQL: DDL, DML, DCL, and TCL.
@@ -14,25 +16,33 @@ DDL commands help define and manage database structures such as tables, schemas,
 
 - **CREATE**: Use this command to create a new table.
 
-SQLCREATE TABLE Employees (
+```sql
+CREATE TABLE Employees (
     EmployeeID int,
     Name varchar(100),
     Position varchar(50),
     Salary decimal(10, 2)
 );
+```
 
 - **ALTER**: Modify an existing table.
 
-SQLALTER TABLE Employees
+```sql
+ALTER TABLE Employees
 ADD COLUMN Department varchar(50);
+```
 
 - **DROP**: Delete a table.
 
-SQLDROP TABLE Employees;
+```sql
+DROP TABLE Employees;
+```
 
 - **TRUNCATE**: Remove all records from a table without deleting the table.
 
-SQLTRUNCATE TABLE Employees;
+```sql
+TRUNCATE TABLE Employees;
+```
 
 ## Data Manipulation Language (DML)
 
@@ -40,23 +50,31 @@ DML commands handle data within the database. Here are the primary DML commands:
 
 - **SELECT**: Retrieve data from a table.
 
-SQLSELECT * FROM Employees;
+```sql
+SELECT * FROM Employees;
+```
 
 - **INSERT**: Add new records to a table.
 
-SQLINSERT INTO Employees (EmployeeID, Name, Position, Salary)
+```sql
+INSERT INTO Employees (EmployeeID, Name, Position, Salary)
 VALUES (1, 'John Doe', 'Software Engineer', 70000.00);
+```
 
 - **UPDATE**: Modify existing records.
 
-SQLUPDATE Employees
+```sql
+UPDATE Employees
 SET Salary = 75000.00
 WHERE EmployeeID = 1;
+```
 
 - **DELETE**: Remove records from a table.
 
-SQLDELETE FROM Employees
+```sql
+DELETE FROM Employees
 WHERE EmployeeID = 1;
+```
 
 ## Data Control Language (DCL)
 
@@ -64,11 +82,15 @@ DCL commands manage access permissions. Here are the key DCL commands:
 
 - **GRANT**: Give users specific permissions.
 
-SQLGRANT SELECT, INSERT ON Employees TO User1;
+```sql
+GRANT SELECT, INSERT ON Employees TO User1;
+```
 
 - **REVOKE**: Remove permissions from users.
 
-SQLREVOKE INSERT ON Employees FROM User1;
+```sql
+REVOKE INSERT ON Employees FROM User1;
+```
 
 ## Transaction Control Language (TCL)
 
@@ -76,37 +98,41 @@ TCL commands manage transactions within the database. Here are the essential TCL
 
 - **COMMIT**: Save all changes made during the current transaction.
 
-SQLCOMMIT;
+```sql
+COMMIT;
+```
 
 - **ROLLBACK**: Undo changes made during the current transaction.
 
-SQLROLLBACK;
+```sql
+ROLLBACK;
+```
 
 - **SAVEPOINT**: Set a savepoint within a transaction.
 
-SQLSAVEPOINT Savepoint1;
+```sql
+SAVEPOINT Savepoint1;
+```
 
 - **RELEASE SAVEPOINT**: Remove a previously defined savepoint.
 
-SQLRELEASE SAVEPOINT Savepoint1;
+```sql
+RELEASE SAVEPOINT Savepoint1;
+```
 
 ## Popular SQL Databases
 
 - **[MySQL](https://www.mysql.com/)**: One of the most popular open-source databases used widely in web applications.
-
 - **[PostgreSQL](https://www.postgresql.org/)**: Known for its advanced features and standards compliance, suitable for large-scale applications.
-
 - **[SQLite](https://www.sqlite.org/)**: A lightweight, self-contained database engine commonly used in mobile applications and small-scale projects.
-
 - **[Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server)**: A comprehensive database management system developed by Microsoft for enterprise environments.
-
 - **[Oracle Database](https://www.oracle.com/database/)**: A robust database solution designed for complex applications requiring high performance and security.
 
 Understanding and utilising these commands effectively will enhance your ability to manage and manipulate your databases, ensuring your applications run smoothly and efficiently. Happy querying!
 
 **If you are looking for SQL resources:**
 
-Youtube: [https://www.youtube.com/watch?v=HXV3zeQKqGY](https://www.youtube.com/watch?v=HXV3zeQKqGY)
-Amazon (India): [https://amzn.to/3RhVa1q](https://amzn.to/3RhVa1q)
-Amazon: [https://amzn.to/3VBKu0t](https://amzn.to/3VBKu0t)
+Youtube: [https://www.youtube.com/watch?v=HXV3zeQKqGY](https://www.youtube.com/watch?v=HXV3zeQKqGY)  
+Amazon (India): [https://amzn.to/3RhVa1q](https://amzn.to/3RhVa1q)  
+Amazon: [https://amzn.to/3VBKu0t](https://amzn.to/3VBKu0t)  
 Online: [https://www.tutorialspoint.com/sql/index.htm](https://www.tutorialspoint.com/sql/index.htm), [https://www.javatpoint.com/sql-tutorial](https://www.javatpoint.com/sql-tutorial)

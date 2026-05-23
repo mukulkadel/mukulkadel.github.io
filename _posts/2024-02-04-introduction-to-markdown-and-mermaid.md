@@ -42,7 +42,7 @@ Here are some basic examples of Markdown syntax:
 
 To include Mermaid diagrams in your Markdown, you’ll typically need a platform that supports Mermaid rendering, such as GitHub or GitLab, or a Markdown editor that supports it. Here’s how you can include a Mermaid diagram:
 
-````markdown
+```markdown
 ```mermaid
 graph LR;
     A[Square Rect] -- Link text --> B((Circle));
@@ -50,14 +50,14 @@ graph LR;
     B --> D{Rhombus};
     C --> D;
 
-````
-
-````markdown
+```
+```
 
 ### Mermaid Diagram Examples
 
 1. **Flowchart Example**
 
+```markdown
 ```mermaid
 graph TD;
     A[Start] --> B{Is it working?};
@@ -65,10 +65,12 @@ graph TD;
     B -->|No| D[Fix it];
     D --> B;
 
-````
+```
+```
 
 **Sequence Diagram**
 
+```markdown
 ```mermaid
 sequenceDiagram;
     Alice->>+John: Hello John, how are you?;
@@ -77,9 +79,11 @@ sequenceDiagram;
     John-->>-Alice: Yes, see you there!;
 
 ```
+```
 
 **Gantt Chart**
 
+```markdown
 ```mermaid
 gantt
     title A Gantt Diagram
@@ -89,9 +93,11 @@ gantt
     Another task     :after a1  , 20d
 
 ```
+```
 
 **Class Diagram**
 
+```markdown
 ```mermaid
 classDiagram
 Class01 <|-- AveryLongClass : Cool
@@ -108,6 +114,7 @@ Class01 : int chimp
 Class01 : int gorilla
 Class08 <--> C2: Cool label
 
+```
 ```
 
 ## Tips for Effective Use

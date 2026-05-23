@@ -76,6 +76,20 @@
     });
   }
 
+  // ── Share: copy link button ───────────────────────────────────────────────
+  function initShareCopyButton() {
+    var btn = document.querySelector('.share-btn--copy');
+    if (!btn) return;
+    var url = btn.getAttribute('data-url');
+    btn.addEventListener('click', function () {
+      navigator.clipboard.writeText(url).then(function () {
+        var label = btn.querySelector('.share-btn-label');
+        label.textContent = 'Copied!';
+        setTimeout(function () { label.textContent = 'Copy link'; }, 2000);
+      });
+    });
+  }
+
   // ── Reading progress bar ──────────────────────────────────────────────────
   function initReadingProgress() {
     var bar = document.querySelector('.reading-progress');
@@ -111,6 +125,7 @@
     initMermaid();
     initHighlight();
     addCopyButtons();
+    initShareCopyButton();
     initReadingProgress();
     initNavToggle();
   });

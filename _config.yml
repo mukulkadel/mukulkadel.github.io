@@ -62,10 +62,10 @@ social:
   instagram: "https://www.instagram.com/mukulkadel/"
 
 # Google Analytics 4 Measurement ID (e.g. G-XXXXXXXXXX)
-google_analytics: ""
+google_analytics: "G-ZSXEWJ7XHB"
 
 # Google AdSense publisher ID (e.g. ca-pub-XXXXXXXXXX)
-google_adsense_client: ""
+google_adsense_client: "ca-pub-9316498323700538"
 
 exclude:
   - wordpress-dump/

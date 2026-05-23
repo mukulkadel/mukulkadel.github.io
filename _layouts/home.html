@@ -40,7 +40,8 @@ layout: default
     {% elsif i == 1 %}
       <a href="{{ '/' | relative_url }}">{{ i }}</a>
     {% else %}
-      <a href="{{ site.paginate_path | replace: ':num', i | relative_url }}">{{ i }}</a>
+      {% assign page_url = '/page/' | append: i | append: '/' %}
+      <a href="{{ page_url | relative_url }}">{{ i }}</a>
     {% endif %}
   {% endfor %}
 

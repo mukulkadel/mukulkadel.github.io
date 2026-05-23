@@ -4,8 +4,8 @@ title: Mastering Subprocess Management in Python with subprocess.run()
 date: "2024-02-05 00:00:00 +0530"
 slug: mastering-subprocess-management-in-python-with-subprocess-run
 description: In the world of Python, executing external commands or scripts from within your Python application is a common task. Whether it’s for automating system tasks, using shell commands, or running other programs,…
-categories: ["Uncategorized"]
-tags: ["python", "scripting", "tutorial"]
+categories: ["Programming", "Tutorials"]
+tags: ["python", "scripting", "tutorial", "subprocess", "automation", "command line", "shell", "python3", "subprocess.run"]
 ---
 
 In the world of Python, executing external commands or scripts from within your Python application is a common task. Whether it’s for automating system tasks, using shell commands, or running other programs, Python’s `subprocess` module is an indispensable tool in the developer’s toolkit. Introduced in Python 3.5, the `subprocess.run()` function is the recommended interface for invoking subprocesses. It offers a significant improvement over older functions like `subprocess.call()` and `subprocess.check_output()` by providing more flexibility and control over command execution. This blog post dives deep into how to use `subprocess.run()`, showcasing its versatility through examples.

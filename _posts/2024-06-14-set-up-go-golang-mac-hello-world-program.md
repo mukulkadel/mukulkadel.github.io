@@ -4,8 +4,8 @@ title: Getting started with Go (Mac)
 date: "2024-06-14 00:00:00 +0530"
 slug: set-up-go-golang-mac-hello-world-program
 description: "Learn how to set up Go (Golang) on a Mac and run a basic \"Hello, world!\" program. This step-by-step guide includes prerequisites, installation commands, and a simple program example."
-categories: ["Programming", "Software Development", "Tutorials"]
-tags: ["Go environment variables", "Go language tutorial", "Go programming basics", "Go setup", "Golang installation", "Hello World program", "Homebrew Go installation", "Install Go on Mac", "Mac programming", "Simple Go program"]
+categories: ["Programming", "Tutorials"]
+tags: ["golang", "go", "tutorial", "homebrew", "macOS", "hello world", "installation", "getting started", "programming"]
 ---
 
 Welcome to my blog! In this post, I’ll guide you on how to set up Go (Golang) on a Mac and run a basic “Hello, world!” program.

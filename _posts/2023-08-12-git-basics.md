@@ -4,8 +4,8 @@ title: Git Basics
 date: "2023-08-12 00:00:00 +0530"
 slug: git-basics
 description: Git is a tool that helps people work on projects together. It’s like a super organized way to keep track of changes in projects, whether they’re small or really big. It’s not…
-categories: ["git"]
-tags: ["cheatsheet", "git", "tutorial"]
+categories: ["Programming", "Tutorials", "git"]
+tags: ["cheatsheet", "git", "tutorial", "version control", "git commands", "branching", "merging", "github", "command line"]
 ---
 
 Git is a tool that helps people work on projects together. It’s like a super organized way to keep track of changes in projects, whether they’re small or really big.

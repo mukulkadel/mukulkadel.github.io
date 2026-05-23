@@ -5,7 +5,7 @@ date: "2024-06-04 00:00:00 +0530"
 slug: atomic-habits-book-review
 description: "Discover how \"Atomic Habits\" by James Clear can transform your life with small, consistent changes. Read my personal review and key takeaways from the book."
 categories: ["Book", "Review"]
-tags: ["amazon", "atomic habit", "bestseller", "book review", "self help"]
+tags: ["amazon", "atomic habits", "bestseller", "book review", "self help", "james clear", "habits", "productivity", "personal development"]
 ---
 
 I started reading *Atomic Habits* by James Clear in March 2024, and so far, I’ve completed about 70% of the book. I don’t usually get much time to read, but I try to squeeze in a few pages before sleep for about half an hour. Even though I haven’t finished it yet, I can confidently say that this book is an incredible read. The tagline, “Tiny Changes, Remarkable Results,” perfectly sums up its core message.

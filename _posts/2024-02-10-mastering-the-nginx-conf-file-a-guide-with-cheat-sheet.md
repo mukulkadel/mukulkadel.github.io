@@ -4,8 +4,8 @@ title: "Mastering the nginx.conf File: A Guide with Cheat Sheet"
 date: "2024-02-10 00:00:00 +0530"
 slug: mastering-the-nginx-conf-file-a-guide-with-cheat-sheet
 description: Introduction The nginx.conf file is the cornerstone of configuring NGINX, a versatile and powerful web server that excels in serving static content, acting as a reverse proxy, and handling load balancing with…
-categories: ["wiki"]
-tags: ["cheatsheet", "nginx", "proxy", "tutorial"]
+categories: ["wiki", "Programming"]
+tags: ["nginx", "cheatsheet", "proxy", "tutorial", "web server", "reverse proxy", "load balancing", "configuration", "linux", "devops", "http", "ssl"]
 ---
 
 ## Introduction

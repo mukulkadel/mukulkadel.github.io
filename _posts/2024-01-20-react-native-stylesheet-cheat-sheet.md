@@ -4,8 +4,8 @@ title: React Native Stylesheet Cheat Sheet
 date: "2024-01-20 00:00:00 +0530"
 slug: react-native-stylesheet-cheat-sheet
 description: "Creating a cheat sheet for React Native’s StyleSheet can be very useful for quick reference. Here’s a concise overview of some of the most commonly used style properties in React Native: Layout…"
-categories: ["Uncategorized"]
-tags: ["react", "tutorial"]
+categories: ["Programming", "wiki"]
+tags: ["react native", "stylesheet", "cheatsheet", "mobile development", "javascript", "flex", "layout", "styling", "tutorial", "react"]
 ---
 
 Creating a cheat sheet for React Native’s StyleSheet can be very useful for quick reference. Here’s a concise overview of some of the most commonly used style properties in React Native:

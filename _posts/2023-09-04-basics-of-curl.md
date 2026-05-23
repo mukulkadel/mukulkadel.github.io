@@ -4,8 +4,8 @@ title: Basics of Curl
 date: "2023-09-04 00:00:00 +0530"
 slug: basics-of-curl
 description: "In the vast landscape of command-line tools, one gem stands out for its versatility and power: the curl command. Whether you’re a seasoned sysadmin, a developer, or just someone curious about the…"
-categories: ["unix"]
-tags: ["tutorial", "unix"]
+categories: ["Programming", "Tutorials", "unix"]
+tags: ["curl", "tutorial", "unix", "http", "command line", "API", "networking", "linux", "web requests", "REST"]
 ---
 
 In the vast landscape of command-line tools, one gem stands out for its versatility and power: the `curl` command. Whether you’re a seasoned sysadmin, a developer, or just someone curious about the command line, `curl` is a tool you’ll want to get to know. In this blog post, we’ll explore what `curl` is, how it works, and some practical use cases to demonstrate its capabilities.

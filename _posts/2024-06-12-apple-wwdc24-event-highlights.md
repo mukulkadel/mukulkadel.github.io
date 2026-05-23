@@ -4,7 +4,7 @@ title: "The Apple Event 2024: A Glimpse into the Future of Technology"
 date: "2024-06-12 00:00:00 +0530"
 slug: apple-wwdc24-event-highlights
 description: "Discover the highlights from Apple's WWDC24 event, including VisionOS 2, iOS 18, macOS Sequoia, Apple Vision Pro updates, and more. Learn about the latest innovations and features announced by Apple."
-categories: ["Product Announcements", "Software Updates", "Tech Reviews", "Technology News"]
+categories: ["Technology News", "Tech Reviews", "Product Announcements"]
 tags: ["AirPods", "Apple Innovations", "Apple TV+", "Apple Updates", "Apple Vision Pro", "iOS 18", "iPadOS 18", "macOS Sequoia", "Product Launch", "Siri", "Software Features", "Tech Highlights", "VisionOS 2", "watchOS 11", "WWDC24"]
 ---
 

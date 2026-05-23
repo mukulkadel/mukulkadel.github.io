@@ -4,7 +4,8 @@ title: Introduction to Markdown and Mermaid
 date: "2024-02-04 00:00:00 +0530"
 slug: introduction-to-markdown-and-mermaid
 description: Markdown is a lightweight markup language with plain text formatting syntax. It’s designed so that it can be converted to HTML and many other formats. Mermaid, on the other hand, is a…
-categories: ["Uncategorized"]
+categories: ["Programming", "wiki"]
+tags: ["markdown", "mermaid", "diagrams", "documentation", "tutorial", "flowchart", "technical writing", "markup"]
 ---
 
 Markdown is a lightweight markup language with plain text formatting syntax. It’s designed so that it can be converted to HTML and many other formats. Mermaid, on the other hand, is a tool that generates diagrams and flowcharts from text in a similar syntax to Markdown, making it ideal for documentation purposes.

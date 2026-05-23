@@ -4,8 +4,8 @@ title: "UNIX: init command"
 date: "2024-02-04 00:00:00 +0530"
 slug: unix-init-command
 description: "Introduction: Unix-like operating systems provide a robust set of tools for managing processes, and at the heart of this process management is the init command. In this post, we’ll dive into the…"
-categories: ["Uncategorized"]
-tags: ["tutorial", "unix"]
+categories: ["unix", "wiki"]
+tags: ["unix", "tutorial", "init", "process management", "runlevels", "linux", "system boot", "systemd", "PID 1", "daemon"]
 ---
 
 **Introduction:** Unix-like operating systems provide a robust set of tools for managing processes, and at the heart of this process management is the `init` command. In this post, we’ll dive into the fundamentals of the `init` command and explore its capabilities in handling system initialization and process management.

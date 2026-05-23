@@ -4,8 +4,8 @@ title: What is /etc/hosts file?
 date: "2023-09-04 00:00:00 +0530"
 slug: what-is-etc-hosts-file
 description: The “/etc/hosts” file is a plain text file found in Unix-like operating systems, including Linux and macOS. It serves as a simple, local DNS (Domain Name System) resolver. But what does that…
-categories: ["unix"]
-tags: ["unix"]
+categories: ["unix", "wiki"]
+tags: ["unix", "etc hosts", "DNS", "networking", "linux", "macOS", "hostname resolution", "ip address", "local DNS"]
 ---
 
 The “/etc/hosts” file is a plain text file found in Unix-like operating systems, including Linux and macOS. It serves as a simple, local DNS (Domain Name System) resolver. But what does that mean, exactly?

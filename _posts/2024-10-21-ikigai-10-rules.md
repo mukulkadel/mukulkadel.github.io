@@ -5,6 +5,7 @@ date: "2024-10-21 00:00:00 +0530"
 slug: ikigai-10-rules
 description: Discover the 10 essential rules of Ikigai, a Japanese philosophy for a fulfilling life. Learn how to find purpose, embrace happiness, and live each day meaningfully.
 categories: ["Book", "Review"]
+tags: ["ikigai", "book review", "japanese philosophy", "self help", "personal development", "fulfillment", "productivity", "lifestyle", "mindfulness"]
 ---
 
 ## Introduction

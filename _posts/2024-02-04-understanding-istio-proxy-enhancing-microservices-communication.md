@@ -4,8 +4,8 @@ title: "Understanding Istio Proxy: Enhancing Microservices Communication"
 date: "2024-02-04 00:00:00 +0530"
 slug: understanding-istio-proxy-enhancing-microservices-communication
 description: In the evolving landscape of microservices architecture, managing communication and security between services can be complex. This is where Istio, a service mesh, steps in, bringing order and efficiency with its powerful…
-categories: ["Uncategorized"]
-tags: ["istio", "kubernetes", "microservices"]
+categories: ["Programming", "wiki"]
+tags: ["istio", "kubernetes", "microservices", "service mesh", "envoy", "cloud native", "devops", "proxy", "traffic management", "sidecar"]
 ---
 
 In the evolving landscape of microservices architecture, managing communication and security between services can be complex. This is where Istio, a service mesh, steps in, bringing order and efficiency with its powerful proxy component, Envoy. This blog post delves into what Istio Proxy is, how it works, and why it’s becoming an indispensable tool for modern cloud-native applications.

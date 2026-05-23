@@ -4,8 +4,8 @@ title: "Understanding CPU Throttling: What It Is and How to Manage It"
 date: "2024-02-07 00:00:00 +0530"
 slug: understanding-cpu-throttling-what-it-is-and-how-to-manage-it
 description: CPU throttling, a term that might sound daunting at first, is actually a protective measure for your computer. It’s like your CPU deciding to take a breather to avoid overheating or to…
-categories: ["wiki"]
-tags: ["container", "cpu throttling", "systems", "unix", "wiki", "windows"]
+categories: ["wiki", "unix"]
+tags: ["cpu throttling", "performance", "systems", "unix", "linux", "macOS", "windows", "container", "kubernetes", "cgroups"]
 ---
 
 CPU throttling, a term that might sound daunting at first, is actually a protective measure for your computer. It’s like your CPU deciding to take a breather to avoid overheating or to save energy. Let’s dive into what CPU throttling is, how you can detect it on different operating systems, and ways to prevent it.

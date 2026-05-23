@@ -1,0 +1,22 @@
+<header class="site-header">
+  <div class="container">
+    <a class="site-logo" href="{{ '/' | relative_url }}">
+      <span class="logo-mark">M</span>
+      <span class="site-title">{{ site.title }}</span>
+    </a>
+
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a class="nav-link{% if page.url == '/' or page.url contains '/page/' %} active{% endif %}" href="{{ '/' | relative_url }}">Blog</a>
+      <a class="nav-link{% if page.url contains '/categories' %} active{% endif %}" href="{{ '/categories/' | relative_url }}">Categories</a>
+      <a class="nav-link{% if page.url contains '/apps' %} active{% endif %}" href="{{ '/apps/' | relative_url }}">Apps</a>
+    </nav>
+  </div>
+</header>

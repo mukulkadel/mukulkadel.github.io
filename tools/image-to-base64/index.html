@@ -1,0 +1,154 @@
+---
+layout: app
+title: Image to Base64 Converter
+permalink: /tools/image-to-base64/
+description: Convert any image to a Base64 encoded string instantly in your browser. No uploads, 100% private.
+---
+
+<p style="color:var(--text-muted);margin-bottom:1.5rem;">
+  Drag &amp; drop an image or click to select one. The Base64 string is generated entirely in your browser — nothing is uploaded.
+</p>
+
+<div class="tool-zone" id="dropZone" role="button" tabindex="0" aria-label="Drop image here or click to select">
+  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" style="margin:0 auto 0.75rem;display:block;color:var(--text-muted)">
+    <rect x="3" y="3" width="18" height="18" rx="2"/>
+    <circle cx="8.5" cy="8.5" r="1.5"/>
+    <polyline points="21 15 16 10 5 21"/>
+  </svg>
+  <p style="color:var(--text-muted);margin:0;font-size:0.95rem;">Click to select an image, or drag and drop here</p>
+  <p style="color:var(--text-muted);margin:0.25rem 0 0;font-size:0.8rem;">PNG, JPG, GIF, WebP, SVG supported</p>
+  <input type="file" id="fileInput" accept="image/*" style="display:none" aria-label="Select image file">
+</div>
+
+<div id="result" style="display:none;">
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;flex-wrap:wrap;">
+    <strong id="fileName" style="font-size:0.9rem;"></strong>
+    <span id="fileSize" style="color:var(--text-muted);font-size:0.8rem;"></span>
+    <span id="fileDims" style="color:var(--text-muted);font-size:0.8rem;"></span>
+  </div>
+
+  <img id="preview" src="" alt="Preview" style="max-height:200px;margin:0 0 1rem;border:1px solid var(--border);">
+
+  <div style="display:flex;gap:0.5rem;margin-bottom:0.5rem;flex-wrap:wrap;align-items:center;">
+    <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;">
+      <input type="checkbox" id="includePrefix" checked> Include data URI prefix
+    </label>
+    <button class="btn btn-outline" id="copyBtn" type="button" style="margin-left:auto;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      Copy
+    </button>
+    <button class="btn btn-outline" id="downloadBtn" type="button">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download .txt
+    </button>
+    <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+  </div>
+
+  <div id="output" class="tool-output"></div>
+</div>
+
+<script>
+(function () {
+  var dropZone = document.getElementById('dropZone');
+  var fileInput = document.getElementById('fileInput');
+  var resultDiv = document.getElementById('result');
+  var outputDiv = document.getElementById('output');
+  var preview = document.getElementById('preview');
+  var fileNameEl = document.getElementById('fileName');
+  var fileSizeEl = document.getElementById('fileSize');
+  var fileDimsEl = document.getElementById('fileDims');
+  var copyBtn = document.getElementById('copyBtn');
+  var downloadBtn = document.getElementById('downloadBtn');
+  var resetBtn = document.getElementById('resetBtn');
+  var includePrefix = document.getElementById('includePrefix');
+
+  var currentBase64 = '';
+  var currentDataUri = '';
+
+  function formatBytes(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+  }
+
+  function processFile(file) {
+    if (!file || !file.type.startsWith('image/')) {
+      alert('Please select a valid image file.');
+      return;
+    }
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      currentDataUri = e.target.result;
+      currentBase64 = currentDataUri.split(',')[1];
+
+      fileNameEl.textContent = file.name;
+      fileSizeEl.textContent = '(' + formatBytes(file.size) + ')';
+
+      var img = new Image();
+      img.onload = function () {
+        fileDimsEl.textContent = '— ' + img.naturalWidth + '×' + img.naturalHeight + 'px';
+      };
+      img.src = currentDataUri;
+
+      preview.src = currentDataUri;
+      preview.alt = file.name;
+      updateOutput();
+      resultDiv.style.display = 'block';
+      dropZone.style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function updateOutput() {
+    outputDiv.textContent = includePrefix.checked ? currentDataUri : currentBase64;
+  }
+
+  includePrefix.addEventListener('change', updateOutput);
+
+  dropZone.addEventListener('click', function () { fileInput.click(); });
+  dropZone.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') fileInput.click(); });
+
+  fileInput.addEventListener('change', function () {
+    if (fileInput.files.length) processFile(fileInput.files[0]);
+  });
+
+  dropZone.addEventListener('dragover', function (e) {
+    e.preventDefault();
+    dropZone.classList.add('dragover');
+  });
+  dropZone.addEventListener('dragleave', function () { dropZone.classList.remove('dragover'); });
+  dropZone.addEventListener('drop', function (e) {
+    e.preventDefault();
+    dropZone.classList.remove('dragover');
+    var file = e.dataTransfer.files[0];
+    if (file) processFile(file);
+  });
+
+  copyBtn.addEventListener('click', function () {
+    var text = includePrefix.checked ? currentDataUri : currentBase64;
+    navigator.clipboard.writeText(text).then(function () {
+      copyBtn.textContent = 'Copied!';
+      setTimeout(function () { copyBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy'; }, 2000);
+    });
+  });
+
+  downloadBtn.addEventListener('click', function () {
+    var text = includePrefix.checked ? currentDataUri : currentBase64;
+    var blob = new Blob([text], { type: 'text/plain' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'base64.txt';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+
+  resetBtn.addEventListener('click', function () {
+    resultDiv.style.display = 'none';
+    dropZone.style.display = 'block';
+    fileInput.value = '';
+    currentBase64 = '';
+    currentDataUri = '';
+    outputDiv.textContent = '';
+  });
+})();
+</script>

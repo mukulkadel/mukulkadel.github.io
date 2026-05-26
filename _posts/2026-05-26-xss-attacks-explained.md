@@ -35,6 +35,7 @@ The browser executes the script and sends the session cookie to the attacker. Th
 
 The malicious script is stored in the database and served to every user who views the affected content. This is the most dangerous type — no crafted link needed.
 
+{% raw %}
 ```
 Attacker submits a comment:
 {
@@ -45,6 +46,7 @@ Vulnerable render code:
 <!-- Every visitor to this article now runs the attacker's script -->
 <div class="comment">{{ comment.body }}</div>
 ```
+{% endraw %}
 
 Every user who views the comments page has their cookie stolen. A single stored XSS payload can compromise thousands of sessions.
 
@@ -81,6 +83,7 @@ Modern frameworks do this automatically when you use template variables correctl
 
 **React (JSX):** safe by default — JSX encodes all expressions.
 
+{% raw %}
 ```jsx
 // Safe — React encodes this
 const Comment = ({ text }) => <div>{text}</div>;
@@ -88,9 +91,11 @@ const Comment = ({ text }) => <div>{text}</div>;
 // Dangerous — bypasses encoding
 const Comment = ({ text }) => <div dangerouslySetInnerHTML={{ __html: text }} />;
 ```
+{% endraw %}
 
 **Django templates:** auto-escaping is on by default.
 
+{% raw %}
 ```html
 <!-- Safe — Django escapes this -->
 <div>{{ comment.body }}</div>
@@ -98,6 +103,7 @@ const Comment = ({ text }) => <div dangerouslySetInnerHTML={{ __html: text }} />
 <!-- Dangerous — explicitly disabled -->
 <div>{{ comment.body|safe }}</div>
 ```
+{% endraw %}
 
 **Jinja2 / Flask:**
 

@@ -46,6 +46,7 @@ $ npm install @react-navigation/stack
 $ npm install react-native-gesture-handler  # required dependency
 ```
 
+{% raw %}
 ```jsx
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './screens/HomeScreen';
@@ -70,6 +71,7 @@ function AppStack() {
     );
 }
 ```
+{% endraw %}
 
 ### Navigating Between Screens
 
@@ -122,6 +124,7 @@ navigation.replace('ScreenName');                     // replace current screen
 
 ### Customizing the Header
 
+{% raw %}
 ```jsx
 <Stack.Screen
     name="Profile"
@@ -137,6 +140,7 @@ navigation.replace('ScreenName');                     // replace current screen
     }}
 />
 ```
+{% endraw %}
 
 ## Bottom Tab Navigator
 
@@ -146,6 +150,7 @@ Tab Navigator shows a persistent tab bar at the bottom — the standard pattern 
 $ npm install @react-navigation/bottom-tabs
 ```
 
+{% raw %}
 ```jsx
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -179,6 +184,7 @@ function AppTabs() {
     );
 }
 ```
+{% endraw %}
 
 ## Drawer Navigator
 
@@ -189,6 +195,7 @@ $ npm install @react-navigation/drawer
 $ npm install react-native-reanimated react-native-gesture-handler
 ```
 
+{% raw %}
 ```jsx
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
@@ -210,6 +217,7 @@ function AppDrawer() {
     );
 }
 ```
+{% endraw %}
 
 Open/close the drawer programmatically:
 
@@ -223,6 +231,7 @@ navigation.toggleDrawer();
 
 Real apps need multiple navigator types together. The typical pattern is tabs at the top level, each tab containing a stack:
 
+{% raw %}
 ```jsx
 function HomeStack() {
     return (
@@ -269,6 +278,7 @@ function App() {
     );
 }
 ```
+{% endraw %}
 
 `headerShown: false` on the Tab navigator prevents double headers — the Stack within each tab handles its own header.
 

@@ -21,6 +21,11 @@ description: Web tools and mini-apps I've built.
     <h2 class="app-card-title">Timer &amp; Stopwatch</h2>
     <p class="app-card-desc">A simple countdown timer and stopwatch. Link directly to a preset, e.g. #5minutes.</p>
   </a>
+  <a class="app-card" href="{{ '/apps/uuid-generator/' | relative_url }}">
+    <div class="app-card-icon">🆔</div>
+    <h2 class="app-card-title">UUID Generator</h2>
+    <p class="app-card-desc">Generate one or many random UUID v4 values instantly in your browser.</p>
+  </a>
 </div>
 
 <hr style="margin:3rem 0;">

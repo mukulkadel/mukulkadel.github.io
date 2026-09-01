@@ -1,0 +1,81 @@
+---
+layout: app
+title: UUID Generator
+permalink: /apps/uuid-generator/
+description: Generate one or many random UUID v4 values instantly in your browser, with no data sent to a server.
+---
+
+<p style="color:var(--text-muted);margin-bottom:1.5rem;">
+  Generate cryptographically random UUID v4 values. Everything happens locally in your browser — nothing is sent anywhere.
+</p>
+
+<div style="display:flex;gap:0.5rem;align-items:flex-end;flex-wrap:wrap;margin-bottom:1rem;">
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+    Count
+    <input type="number" id="countInput" min="1" max="100" value="5" style="width:80px;padding:0.4rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-family:var(--font-mono);">
+  </label>
+  <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;">
+    <input type="checkbox" id="uppercaseToggle"> Uppercase
+  </label>
+  <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;">
+    <input type="checkbox" id="hyphensToggle" checked> Hyphens
+  </label>
+  <button class="btn" id="generateBtn" type="button">Generate</button>
+  <button class="btn btn-outline" id="copyBtn" type="button">Copy All</button>
+</div>
+
+<div id="output" class="tool-output" style="max-height:400px;"></div>
+
+<script>
+(function () {
+  var countInput = document.getElementById('countInput');
+  var uppercaseToggle = document.getElementById('uppercaseToggle');
+  var hyphensToggle = document.getElementById('hyphensToggle');
+  var generateBtn = document.getElementById('generateBtn');
+  var copyBtn = document.getElementById('copyBtn');
+  var output = document.getElementById('output');
+
+  function uuidv4() {
+    if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+    var bytes = new Uint8Array(16);
+    crypto.getRandomValues(bytes);
+    bytes[6] = (bytes[6] & 0x0f) | 0x40;
+    bytes[8] = (bytes[8] & 0x3f) | 0x80;
+    var hex = [];
+    for (var i = 0; i < 256; i++) hex.push((i < 16 ? '0' : '') + i.toString(16));
+    var b = bytes;
+    return hex[b[0]] + hex[b[1]] + hex[b[2]] + hex[b[3]] + '-' +
+      hex[b[4]] + hex[b[5]] + '-' +
+      hex[b[6]] + hex[b[7]] + '-' +
+      hex[b[8]] + hex[b[9]] + '-' +
+      hex[b[10]] + hex[b[11]] + hex[b[12]] + hex[b[13]] + hex[b[14]] + hex[b[15]];
+  }
+
+  function generate() {
+    var count = Math.min(100, Math.max(1, parseInt(countInput.value, 10) || 1));
+    countInput.value = count;
+    var lines = [];
+    for (var i = 0; i < count; i++) {
+      var id = uuidv4();
+      if (!hyphensToggle.checked) id = id.replace(/-/g, '');
+      if (uppercaseToggle.checked) id = id.toUpperCase();
+      lines.push(id);
+    }
+    output.textContent = lines.join('\n');
+  }
+
+  generateBtn.addEventListener('click', generate);
+  uppercaseToggle.addEventListener('change', generate);
+  hyphensToggle.addEventListener('change', generate);
+
+  copyBtn.addEventListener('click', function () {
+    if (!output.textContent) return;
+    navigator.clipboard.writeText(output.textContent).then(function () {
+      copyBtn.textContent = 'Copied!';
+      setTimeout(function () { copyBtn.textContent = 'Copy All'; }, 2000);
+    });
+  });
+
+  generate();
+})();
+</script>

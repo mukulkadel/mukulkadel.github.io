@@ -26,6 +26,11 @@ description: Web tools and mini-apps I've built.
     <h2 class="app-card-title">UUID Generator</h2>
     <p class="app-card-desc">Generate one or many random UUID v4 values instantly in your browser.</p>
   </a>
+  <a class="app-card" href="{{ '/apps/password-generator/' | relative_url }}">
+    <div class="app-card-icon">🔑</div>
+    <h2 class="app-card-title">Password Generator</h2>
+    <p class="app-card-desc">Generate strong random passwords or passphrases with a live strength meter.</p>
+  </a>
 </div>
 
 <hr style="margin:3rem 0;">

@@ -1,0 +1,219 @@
+---
+layout: app
+title: Password Generator
+permalink: /apps/password-generator/
+description: Generate strong random passwords or passphrases with a live strength meter, entirely in your browser.
+---
+
+<p style="color:var(--text-muted);margin-bottom:1.5rem;">
+  Passwords are generated locally using <code>crypto.getRandomValues</code> — nothing is sent to a server, and nothing is stored.
+</p>
+
+<div style="margin-bottom:1.5rem;">
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;max-width:300px;">
+    Length: <span id="lengthValue" style="color:var(--text);font-family:var(--font-mono);">16</span>
+    <input type="range" id="lengthSlider" min="4" max="64" value="16">
+  </label>
+</div>
+
+<div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem;">
+  <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;">
+    <input type="checkbox" id="upperToggle" checked> Uppercase (A-Z)
+  </label>
+  <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;">
+    <input type="checkbox" id="lowerToggle" checked> Lowercase (a-z)
+  </label>
+  <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;">
+    <input type="checkbox" id="numberToggle" checked> Numbers (0-9)
+  </label>
+  <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;">
+    <input type="checkbox" id="symbolToggle" checked> Symbols (!@#$...)
+  </label>
+  <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;">
+    <input type="checkbox" id="ambiguousToggle"> Exclude ambiguous (0O1lI)
+  </label>
+</div>
+
+<div style="display:flex;gap:0.5rem;margin-bottom:1rem;">
+  <button class="btn" id="generateBtn" type="button">Generate</button>
+  <button class="btn btn-outline" id="copyBtn" type="button">Copy</button>
+</div>
+
+<div id="output" class="tool-output" style="font-size:1.2rem;text-align:center;padding:1.5rem;"></div>
+
+<div style="margin-top:1rem;">
+  <div style="height:6px;border-radius:3px;background:var(--surface);overflow:hidden;">
+    <div id="strengthBar" style="height:100%;width:0%;background:#e5484d;transition:width 0.2s, background 0.2s;"></div>
+  </div>
+  <p id="strengthLabel" style="color:var(--text-muted);font-size:0.85rem;margin-top:0.4rem;"></p>
+</div>
+
+<hr style="margin:3rem 0;">
+
+<h2>Passphrase</h2>
+<p style="color:var(--text-muted);margin-bottom:1rem;">A memorable alternative built from random words.</p>
+
+<div style="display:flex;gap:0.5rem;align-items:flex-end;flex-wrap:wrap;margin-bottom:1rem;">
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+    Words
+    <input type="number" id="wordCount" min="3" max="10" value="4" style="width:70px;padding:0.4rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-family:var(--font-mono);">
+  </label>
+  <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;">
+    <input type="checkbox" id="wordNumberToggle" checked> Add a number
+  </label>
+  <button class="btn btn-outline" id="generatePassphraseBtn" type="button">Generate Passphrase</button>
+</div>
+
+<div id="passphraseOutput" class="tool-output" style="font-size:1.1rem;text-align:center;padding:1.5rem;"></div>
+
+<script>
+(function () {
+  var UPPER = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  var LOWER = 'abcdefghijklmnopqrstuvwxyz';
+  var NUMBERS = '0123456789';
+  var SYMBOLS = '!@#$%^&*()-_=+[]{};:,.<>?';
+  var AMBIGUOUS = /[0O1lI]/;
+
+  var lengthSlider = document.getElementById('lengthSlider');
+  var lengthValue = document.getElementById('lengthValue');
+  var upperToggle = document.getElementById('upperToggle');
+  var lowerToggle = document.getElementById('lowerToggle');
+  var numberToggle = document.getElementById('numberToggle');
+  var symbolToggle = document.getElementById('symbolToggle');
+  var ambiguousToggle = document.getElementById('ambiguousToggle');
+  var generateBtn = document.getElementById('generateBtn');
+  var copyBtn = document.getElementById('copyBtn');
+  var output = document.getElementById('output');
+  var strengthBar = document.getElementById('strengthBar');
+  var strengthLabel = document.getElementById('strengthLabel');
+
+  function randomInt(max) {
+    var arr = new Uint32Array(1);
+    crypto.getRandomValues(arr);
+    return arr[0] % max;
+  }
+
+  function buildCharset() {
+    var charset = '';
+    if (upperToggle.checked) charset += UPPER;
+    if (lowerToggle.checked) charset += LOWER;
+    if (numberToggle.checked) charset += NUMBERS;
+    if (symbolToggle.checked) charset += SYMBOLS;
+    if (ambiguousToggle.checked) {
+      charset = charset.split('').filter(function (c) { return !AMBIGUOUS.test(c); }).join('');
+    }
+    return charset;
+  }
+
+  function generatePassword() {
+    var length = parseInt(lengthSlider.value, 10);
+    var charset = buildCharset();
+    if (!charset) {
+      output.textContent = 'Select at least one character type.';
+      strengthBar.style.width = '0%';
+      strengthLabel.textContent = '';
+      return;
+    }
+    var password = '';
+    for (var i = 0; i < length; i++) password += charset[randomInt(charset.length)];
+    output.textContent = password;
+    updateStrength(length, charset.length);
+  }
+
+  function updateStrength(length, poolSize) {
+    var entropy = length * Math.log2(poolSize);
+    var pct, color, label;
+    if (entropy < 40) { pct = 25; color = '#e5484d'; label = 'Weak (' + Math.round(entropy) + ' bits)'; }
+    else if (entropy < 60) { pct = 50; color = '#f5a623'; label = 'Fair (' + Math.round(entropy) + ' bits)'; }
+    else if (entropy < 80) { pct = 75; color = '#8bc34a'; label = 'Strong (' + Math.round(entropy) + ' bits)'; }
+    else { pct = 100; color = '#2e9e44'; label = 'Very strong (' + Math.round(entropy) + ' bits)'; }
+    strengthBar.style.width = pct + '%';
+    strengthBar.style.background = color;
+    strengthLabel.textContent = label;
+  }
+
+  lengthSlider.addEventListener('input', function () {
+    lengthValue.textContent = lengthSlider.value;
+    generatePassword();
+  });
+  [upperToggle, lowerToggle, numberToggle, symbolToggle, ambiguousToggle].forEach(function (el) {
+    el.addEventListener('change', generatePassword);
+  });
+  generateBtn.addEventListener('click', generatePassword);
+
+  copyBtn.addEventListener('click', function () {
+    if (!output.textContent) return;
+    navigator.clipboard.writeText(output.textContent).then(function () {
+      copyBtn.textContent = 'Copied!';
+      setTimeout(function () { copyBtn.textContent = 'Copy'; }, 2000);
+    });
+  });
+
+  // ---------- passphrase ----------
+  var WORDS = ('able acid aged also area army away baby back ball band bank base bath bear beat been '
+    + 'bell belt bend best bike bird blue boat body bold bolt bone book boom born boss both bowl '
+    + 'brave bread break brick bring broad brown build burn bush busy cake calm camp card care '
+    + 'case cash cast cave chain chair chalk chart chase cheap check chess chief child chill city '
+    + 'claim class clean clear climb clock cloth cloud club coal coast coat code coin cold color '
+    + 'comic cook cool corn cost couch count court cover crab craft crash crazy cream crew crop '
+    + 'crowd cruel crush curve cute daily dance dark dawn deal dear debt deep deer delta dense '
+    + 'depth desk dial diet dish dock dose down draft drama draw dream dress drift drink drive '
+    + 'drop dry duck dust duty each earn earth ease east easy edge eight elite empty ended enemy '
+    + 'enjoy enter entry equal error even event every exact exist extra face fact fade fair fall '
+    + 'false farm fast fault fear feed feel field fifty fight film final find fine fire firm first '
+    + 'fish five flag flat fleet floor flow fluid focus fold folk food foot force forth forty forum '
+    + 'found frame free fresh front frost fruit fuel full fund funny giant gift given glad glass '
+    + 'glow goal gold good grade grain grand grant grape graph grass great green greet grid grip '
+    + 'gross group grow guard guess guest guide habit happy harsh haste haven heavy hello hence '
+    + 'hobby hold holy home honey honor hope horse hotel house human humor hurry ideal idea image '
+    + 'inch index inner input into issue items ivory ivy jelly join joint joke judge juice jump '
+    + 'junior kind king knee knife knock known label lake lamp land large last late laugh layer '
+    + 'lead leaf learn least leave legal lemon level light like limit line link lion list live '
+    + 'load local lock logic lonely long loop loud love lower loyal lucky lunar lunch magic mail '
+    + 'main major maker march marsh match maybe meal media metal might mild mile milk mind mint '
+    + 'minor minus mix mode moment money month moon moral more moss most motor mount mouse mouth '
+    + 'move music nail name near neat need never news next nice night noble noise north nose note '
+    + 'noun oasis ocean offer often oil olive once open orbit order organ other outer oval oven '
+    + 'owner paint panel paper party patch path pause peace peak pearl phase photo piano pick piece '
+    + 'pilot pitch place plain plan plant plate play plot plus point pond pool poor power press '
+    + 'price pride prime print prior prize proof proud pulse pump pure push quick quiet quite race '
+    + 'radio rail rain range rapid rate reach ready realm rebel refer reign relax reply rest ridge '
+    + 'right ring rise risk river road robot rock roll roof room rose round route royal rugby rural '
+    + 'sadly safe saint salad salon salt sand save scale scene scope score scout sense serve seven '
+    + 'shade shape share sharp sheep sheet shelf shell shift shine ship shirt shock shoe shop short '
+    + 'shout show sight silk silly since sixty size skill skin skip sleep slide slope small smart '
+    + 'smell smile smoke snack snow social solid solve sound south space spare spark speak speed '
+    + 'spend spent spice spine spirit split spoon sport spray staff stage stair stamp stand start '
+    + 'state steam steel stem step stock stone store storm story stove strip study style sugar '
+    + 'suite super sweet swift swing table taste teach team tempo tend tent term thank theme thick '
+    + 'thing think third those three throw tidal tiger tight timer title toast today token tone '
+    + 'tooth topic torch total touch tough tower toxic trace track trade trail train trait trend '
+    + 'trial tribe trick truck true trust truth tulip tumor tune twin ultra uncle under union unit '
+    + 'until upper urban usage usual value vapor vast venue verse video view vinyl viral virus visa '
+    + 'vital vivid vocal voice voter wagon waist wake walk wall want warm wash waste watch water wave '
+    + 'weak wealth wear weekly weight welsh where which while white whole whose width witty woman '
+    + 'world worry worth would wound write wrong yield young youth zone').split(' ');
+
+  var wordCount = document.getElementById('wordCount');
+  var wordNumberToggle = document.getElementById('wordNumberToggle');
+  var generatePassphraseBtn = document.getElementById('generatePassphraseBtn');
+  var passphraseOutput = document.getElementById('passphraseOutput');
+
+  function generatePassphrase() {
+    var count = Math.min(10, Math.max(3, parseInt(wordCount.value, 10) || 4));
+    wordCount.value = count;
+    var parts = [];
+    for (var i = 0; i < count; i++) {
+      var word = WORDS[randomInt(WORDS.length)];
+      parts.push(word.charAt(0).toUpperCase() + word.slice(1));
+    }
+    if (wordNumberToggle.checked) parts.push(String(randomInt(100)));
+    passphraseOutput.textContent = parts.join('-');
+  }
+
+  generatePassphraseBtn.addEventListener('click', generatePassphrase);
+
+  generatePassword();
+  generatePassphrase();
+})();
+</script>

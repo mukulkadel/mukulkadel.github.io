@@ -1,0 +1,150 @@
+---
+layout: app
+title: Unix Timestamp Converter
+permalink: /apps/timestamp-converter/
+description: Convert Unix timestamps to human-readable dates and back, with a live current-time reference, entirely in your browser.
+---
+
+<p style="color:var(--text-muted);margin-bottom:1.5rem;">
+  Convert between Unix timestamps and human-readable dates. Everything runs locally in your browser.
+</p>
+
+<div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.5rem;flex-wrap:wrap;">
+  <span style="color:var(--text-muted);font-size:0.9rem;">Current time:</span>
+  <strong id="nowDisplay" style="font-family:var(--font-mono);"></strong>
+  <button class="btn btn-outline" id="useNowBtn" type="button">Use now</button>
+</div>
+
+<hr style="margin:2rem 0;">
+
+<h2>Timestamp &rarr; Date</h2>
+
+<div style="display:flex;gap:0.5rem;align-items:flex-end;flex-wrap:wrap;margin-bottom:1rem;">
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;flex:1;min-width:200px;">
+    Unix timestamp
+    <input type="text" id="tsInput" placeholder="e.g. 1700000000" style="padding:0.5rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-family:var(--font-mono);">
+  </label>
+  <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;">
+    <input type="radio" name="unit" id="unitSeconds" checked> Seconds
+  </label>
+  <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;">
+    <input type="radio" name="unit" id="unitMillis"> Milliseconds
+  </label>
+</div>
+
+<div id="tsResult" class="tool-output" style="display:none;"></div>
+<p id="tsError" style="color:#e5484d;font-size:0.9rem;display:none;"></p>
+
+<hr style="margin:2rem 0;">
+
+<h2>Date &rarr; Timestamp</h2>
+
+<div style="display:flex;gap:0.5rem;align-items:flex-end;flex-wrap:wrap;margin-bottom:1rem;">
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+    Date &amp; time (local)
+    <input type="datetime-local" id="dateInput" step="1" style="padding:0.5rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-family:var(--font-mono);">
+  </label>
+</div>
+
+<div id="dateResult" class="tool-output" style="display:none;"></div>
+
+<script>
+(function () {
+  var nowDisplay = document.getElementById('nowDisplay');
+  var useNowBtn = document.getElementById('useNowBtn');
+  var tsInput = document.getElementById('tsInput');
+  var unitSeconds = document.getElementById('unitSeconds');
+  var unitMillis = document.getElementById('unitMillis');
+  var tsResult = document.getElementById('tsResult');
+  var tsError = document.getElementById('tsError');
+  var dateInput = document.getElementById('dateInput');
+  var dateResult = document.getElementById('dateResult');
+
+  function updateNow() {
+    var now = new Date();
+    nowDisplay.textContent = Math.floor(now.getTime() / 1000) + ' (' + now.toLocaleString() + ')';
+  }
+  updateNow();
+  setInterval(updateNow, 1000);
+
+  useNowBtn.addEventListener('click', function () {
+    tsInput.value = Math.floor(Date.now() / 1000);
+    unitSeconds.checked = true;
+    convertTimestamp();
+  });
+
+  function convertTimestamp() {
+    var raw = tsInput.value.trim();
+    if (!raw) {
+      tsResult.style.display = 'none';
+      tsError.style.display = 'none';
+      return;
+    }
+    if (!/^-?\d+$/.test(raw)) {
+      tsError.textContent = 'Enter a valid integer timestamp.';
+      tsError.style.display = 'block';
+      tsResult.style.display = 'none';
+      return;
+    }
+    var num = parseInt(raw, 10);
+    var ms = unitMillis.checked ? num : num * 1000;
+    var date = new Date(ms);
+    if (isNaN(date.getTime())) {
+      tsError.textContent = 'That timestamp is out of range.';
+      tsError.style.display = 'block';
+      tsResult.style.display = 'none';
+      return;
+    }
+    tsError.style.display = 'none';
+    tsResult.style.display = 'block';
+    tsResult.textContent =
+      'Local:  ' + date.toString() + '\n' +
+      'UTC:    ' + date.toUTCString() + '\n' +
+      'ISO:    ' + date.toISOString() + '\n' +
+      'Relative: ' + relativeTime(date);
+  }
+
+  function relativeTime(date) {
+    var diffMs = date.getTime() - Date.now();
+    var diffSec = Math.round(diffMs / 1000);
+    var abs = Math.abs(diffSec);
+    var unit, value;
+    if (abs < 60) { unit = 'second'; value = diffSec; }
+    else if (abs < 3600) { unit = 'minute'; value = Math.round(diffSec / 60); }
+    else if (abs < 86400) { unit = 'hour'; value = Math.round(diffSec / 3600); }
+    else { unit = 'day'; value = Math.round(diffSec / 86400); }
+    var suffix = Math.abs(value) === 1 ? '' : 's';
+    return value >= 0 ? ('in ' + value + ' ' + unit + suffix) : ((-value) + ' ' + unit + suffix + ' ago');
+  }
+
+  tsInput.addEventListener('input', convertTimestamp);
+  unitSeconds.addEventListener('change', convertTimestamp);
+  unitMillis.addEventListener('change', convertTimestamp);
+
+  function convertDate() {
+    var raw = dateInput.value;
+    if (!raw) {
+      dateResult.style.display = 'none';
+      return;
+    }
+    var date = new Date(raw);
+    if (isNaN(date.getTime())) {
+      dateResult.style.display = 'none';
+      return;
+    }
+    dateResult.style.display = 'block';
+    dateResult.textContent =
+      'Seconds:      ' + Math.floor(date.getTime() / 1000) + '\n' +
+      'Milliseconds: ' + date.getTime();
+  }
+
+  dateInput.addEventListener('input', convertDate);
+
+  (function initDateInput() {
+    var now = new Date();
+    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+    dateInput.value = now.toISOString().slice(0, 19);
+    convertDate();
+  })();
+})();
+</script>

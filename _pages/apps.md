@@ -36,6 +36,11 @@ description: Web tools and mini-apps I've built.
     <h2 class="app-card-title">Hash Generator</h2>
     <p class="app-card-desc">Generate SHA-1, SHA-256, SHA-384, and SHA-512 hashes of any text.</p>
   </a>
+  <a class="app-card" href="{{ '/apps/timestamp-converter/' | relative_url }}">
+    <div class="app-card-icon">🕓</div>
+    <h2 class="app-card-title">Unix Timestamp Converter</h2>
+    <p class="app-card-desc">Convert Unix timestamps to human-readable dates and back.</p>
+  </a>
 </div>
 
 <hr style="margin:3rem 0;">

@@ -1,0 +1,185 @@
+---
+layout: app
+title: Markdown Live Preview
+permalink: /apps/markdown-preview/
+description: Write Markdown and see it rendered live as HTML, entirely in your browser, with a raw HTML source view.
+---
+
+<p style="color:var(--text-muted);margin-bottom:1rem;">
+  Type Markdown on the left and see it rendered on the right. Uses a small built-in parser (headings, bold/italic, links,
+  images, lists, blockquotes, code blocks, inline code, horizontal rules) — not a full CommonMark implementation, but it
+  covers everyday Markdown. Everything runs locally in your browser.
+</p>
+
+<div style="display:flex;gap:0.5rem;margin-bottom:1rem;">
+  <button class="btn btn-outline" id="viewSourceBtn" type="button">View HTML Source</button>
+  <button class="btn btn-outline" id="copyHtmlBtn" type="button">Copy HTML</button>
+</div>
+
+<div style="display:flex;gap:1rem;flex-wrap:wrap;">
+  <div style="flex:1;min-width:280px;">
+    <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.3rem;">Markdown</p>
+    <textarea id="input" class="tool-output" style="width:100%;min-height:400px;resize:vertical;font-size:0.85rem;"></textarea>
+  </div>
+  <div style="flex:1;min-width:280px;">
+    <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.3rem;">Preview</p>
+    <div id="preview" style="border:1px solid var(--border);border-radius:var(--radius);padding:1rem;min-height:400px;overflow:auto;"></div>
+    <div id="htmlSource" class="tool-output" style="display:none;max-height:400px;white-space:pre-wrap;"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  function escapeHtml(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function sanitizeUrl(url) {
+    return /^\s*(javascript|data|vbscript):/i.test(url) ? '#' : url;
+  }
+
+  function renderInline(text) {
+    var codeSpans = [];
+    text = text.replace(/`([^`]+)`/g, function (m, code) {
+      codeSpans.push(escapeHtml(code));
+      return ' CODE' + (codeSpans.length - 1) + ' ';
+    });
+
+    text = escapeHtml(text);
+
+    text = text.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, function (m, alt, url) {
+      return '<img src="' + sanitizeUrl(url) + '" alt="' + alt + '">';
+    });
+    text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function (m, label, url) {
+      return '<a href="' + sanitizeUrl(url) + '">' + label + '</a>';
+    });
+    text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    text = text.replace(/__([^_]+)__/g, '<strong>$1</strong>');
+    text = text.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+    text = text.replace(/(^|[^\w])_([^_]+)_($|[^\w])/g, '$1<em>$2</em>$3');
+    text = text.replace(/  $/, '<br>');
+
+    text = text.replace(/ CODE(\d+) /g, function (m, i) {
+      return '<code>' + codeSpans[parseInt(i, 10)] + '</code>';
+    });
+
+    return text;
+  }
+
+  function renderMarkdown(md) {
+    var lines = md.replace(/\r\n/g, '\n').split('\n');
+    var html = [];
+    var i = 0;
+
+    while (i < lines.length) {
+      var line = lines[i];
+
+      var fenceMatch = line.match(/^```(\w*)\s*$/);
+      if (fenceMatch) {
+        var codeLines = [];
+        i++;
+        while (i < lines.length && !/^```\s*$/.test(lines[i])) {
+          codeLines.push(lines[i]);
+          i++;
+        }
+        i++;
+        var lang = fenceMatch[1];
+        html.push('<pre><code' + (lang ? ' class="language-' + lang + '"' : '') + '>' +
+          escapeHtml(codeLines.join('\n')) + '</code></pre>');
+        continue;
+      }
+
+      if (/^\s*$/.test(line)) { i++; continue; }
+
+      if (/^(---+|\*\*\*+|___+)\s*$/.test(line)) {
+        html.push('<hr>');
+        i++;
+        continue;
+      }
+
+      var headingMatch = line.match(/^(#{1,6})\s+(.*)$/);
+      if (headingMatch) {
+        var level = headingMatch[1].length;
+        html.push('<h' + level + '>' + renderInline(headingMatch[2].trim()) + '</h' + level + '>');
+        i++;
+        continue;
+      }
+
+      if (/^>\s?/.test(line)) {
+        var quoteLines = [];
+        while (i < lines.length && /^>\s?/.test(lines[i])) {
+          quoteLines.push(lines[i].replace(/^>\s?/, ''));
+          i++;
+        }
+        html.push('<blockquote>' + renderMarkdown(quoteLines.join('\n')) + '</blockquote>');
+        continue;
+      }
+
+      if (/^[-*+]\s+/.test(line)) {
+        var items = [];
+        while (i < lines.length && /^[-*+]\s+/.test(lines[i])) {
+          items.push(renderInline(lines[i].replace(/^[-*+]\s+/, '')));
+          i++;
+        }
+        html.push('<ul>' + items.map(function (it) { return '<li>' + it + '</li>'; }).join('') + '</ul>');
+        continue;
+      }
+
+      if (/^\d+\.\s+/.test(line)) {
+        var oitems = [];
+        while (i < lines.length && /^\d+\.\s+/.test(lines[i])) {
+          oitems.push(renderInline(lines[i].replace(/^\d+\.\s+/, '')));
+          i++;
+        }
+        html.push('<ol>' + oitems.map(function (it) { return '<li>' + it + '</li>'; }).join('') + '</ol>');
+        continue;
+      }
+
+      var paraLines = [];
+      while (i < lines.length && !/^\s*$/.test(lines[i]) &&
+        !/^```/.test(lines[i]) && !/^#{1,6}\s/.test(lines[i]) &&
+        !/^>\s?/.test(lines[i]) && !/^[-*+]\s+/.test(lines[i]) && !/^\d+\.\s+/.test(lines[i]) &&
+        !/^(---+|\*\*\*+|___+)\s*$/.test(lines[i])) {
+        paraLines.push(lines[i]);
+        i++;
+      }
+      html.push('<p>' + renderInline(paraLines.join(' ')) + '</p>');
+    }
+
+    return html.join('\n');
+  }
+
+  var input = document.getElementById('input');
+  var preview = document.getElementById('preview');
+  var htmlSource = document.getElementById('htmlSource');
+  var viewSourceBtn = document.getElementById('viewSourceBtn');
+  var copyHtmlBtn = document.getElementById('copyHtmlBtn');
+  var showingSource = false;
+
+  function update() {
+    var html = renderMarkdown(input.value);
+    preview.innerHTML = html;
+    htmlSource.textContent = html;
+  }
+
+  input.addEventListener('input', update);
+
+  viewSourceBtn.addEventListener('click', function () {
+    showingSource = !showingSource;
+    preview.style.display = showingSource ? 'none' : 'block';
+    htmlSource.style.display = showingSource ? 'block' : 'none';
+    viewSourceBtn.textContent = showingSource ? 'View Rendered Preview' : 'View HTML Source';
+  });
+
+  copyHtmlBtn.addEventListener('click', function () {
+    if (!htmlSource.textContent) return;
+    navigator.clipboard.writeText(htmlSource.textContent).then(function () {
+      copyHtmlBtn.textContent = 'Copied!';
+      setTimeout(function () { copyHtmlBtn.textContent = 'Copy HTML'; }, 2000);
+    });
+  });
+
+  input.value = '# Welcome\n\nThis is a **live** Markdown preview with *italic*, `inline code`, and [links](https://example.com).\n\n- Point one\n- Point two\n\n> A blockquote\n\n```js\nconsole.log("hello");\n```';
+  update();
+})();
+</script>

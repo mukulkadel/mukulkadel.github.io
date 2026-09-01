@@ -81,6 +81,11 @@ description: Web tools and mini-apps I've built.
     <h2 class="app-card-title">JSON, YAML &amp; CSV Converter</h2>
     <p class="app-card-desc">Convert data between JSON, YAML, and CSV formats.</p>
   </a>
+  <a class="app-card" href="{{ '/apps/markdown-preview/' | relative_url }}">
+    <div class="app-card-icon">📃</div>
+    <h2 class="app-card-title">Markdown Live Preview</h2>
+    <p class="app-card-desc">Write Markdown and see it rendered live as HTML.</p>
+  </a>
 </div>
 
 <hr style="margin:3rem 0;">

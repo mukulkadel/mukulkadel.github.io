@@ -76,6 +76,11 @@ description: Web tools and mini-apps I've built.
     <h2 class="app-card-title">JSON Formatter &amp; Validator</h2>
     <p class="app-card-desc">Format, validate, minify, and explore JSON in a collapsible tree.</p>
   </a>
+  <a class="app-card" href="{{ '/apps/json-yaml-csv-converter/' | relative_url }}">
+    <div class="app-card-icon">🔁</div>
+    <h2 class="app-card-title">JSON, YAML &amp; CSV Converter</h2>
+    <p class="app-card-desc">Convert data between JSON, YAML, and CSV formats.</p>
+  </a>
 </div>
 
 <hr style="margin:3rem 0;">

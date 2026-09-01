@@ -1,0 +1,152 @@
+---
+layout: app
+title: Base64 to Image Converter
+permalink: /apps/base64-to-image/
+description: Convert a Base64 encoded string back into a viewable, downloadable image instantly in your browser. No uploads, 100% private.
+---
+
+<p style="color:var(--text-muted);margin-bottom:1.5rem;">
+  Paste a Base64 string (with or without the <code>data:image/...;base64,</code> prefix) below. The image is decoded entirely in your browser — nothing is uploaded.
+</p>
+
+<div style="margin-bottom:1rem;">
+  <textarea id="base64Input" class="tool-output" style="width:100%;min-height:160px;resize:vertical;font-size:0.85rem;" placeholder="Paste Base64 string here, e.g. data:image/png;base64,iVBORw0KGgo..."></textarea>
+</div>
+
+<div style="display:flex;gap:0.5rem;margin-bottom:1.5rem;flex-wrap:wrap;">
+  <button class="btn btn-outline" id="convertBtn" type="button">Convert to Image</button>
+  <button class="btn btn-outline" id="clearBtn" type="button">Clear</button>
+</div>
+
+<p id="errorMsg" style="display:none;color:#e5484d;font-size:0.9rem;margin-bottom:1rem;"></p>
+
+<div id="result" style="display:none;">
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;flex-wrap:wrap;">
+    <strong id="fileDims" style="font-size:0.9rem;"></strong>
+    <span id="fileType" style="color:var(--text-muted);font-size:0.8rem;"></span>
+    <span id="fileSize" style="color:var(--text-muted);font-size:0.8rem;"></span>
+  </div>
+
+  <img id="preview" src="" alt="Decoded image" style="max-height:300px;margin:0 0 1rem;border:1px solid var(--border);">
+
+  <div>
+    <button class="btn btn-outline" id="downloadBtn" type="button">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download Image
+    </button>
+  </div>
+</div>
+
+<script>
+(function () {
+  var input = document.getElementById('base64Input');
+  var convertBtn = document.getElementById('convertBtn');
+  var clearBtn = document.getElementById('clearBtn');
+  var errorMsg = document.getElementById('errorMsg');
+  var resultDiv = document.getElementById('result');
+  var preview = document.getElementById('preview');
+  var fileDimsEl = document.getElementById('fileDims');
+  var fileTypeEl = document.getElementById('fileType');
+  var fileSizeEl = document.getElementById('fileSize');
+  var downloadBtn = document.getElementById('downloadBtn');
+
+  var currentDataUri = '';
+  var currentExt = 'png';
+
+  var extByMime = {
+    'image/png': 'png',
+    'image/jpeg': 'jpeg',
+    'image/gif': 'gif',
+    'image/webp': 'webp',
+    'image/svg+xml': 'svg',
+    'image/bmp': 'bmp',
+    'image/x-icon': 'ico'
+  };
+
+  function formatBytes(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+  }
+
+  function showError(message) {
+    errorMsg.textContent = message;
+    errorMsg.style.display = 'block';
+    resultDiv.style.display = 'none';
+  }
+
+  function hideError() {
+    errorMsg.style.display = 'none';
+  }
+
+  function convert() {
+    hideError();
+    var raw = input.value.trim();
+    if (!raw) {
+      showError('Please paste a Base64 string first.');
+      return;
+    }
+
+    var mime = 'image/png';
+    var data = raw;
+
+    var match = raw.match(/^data:(image\/[a-zA-Z0-9.+-]+);base64,(.*)$/s);
+    if (match) {
+      mime = match[1];
+      data = match[2];
+    } else {
+      data = raw.replace(/\s+/g, '');
+    }
+
+    data = data.replace(/\s+/g, '');
+
+    if (!/^[A-Za-z0-9+/]+=*$/.test(data)) {
+      showError('That doesn\'t look like a valid Base64 string.');
+      return;
+    }
+
+    var bytes;
+    try {
+      var binary = atob(data);
+      bytes = binary.length;
+    } catch (e) {
+      showError('Could not decode this Base64 string. Check that it\'s complete and unmodified.');
+      return;
+    }
+
+    currentExt = extByMime[mime] || 'png';
+    currentDataUri = 'data:' + mime + ';base64,' + data;
+
+    var img = new Image();
+    img.onload = function () {
+      fileDimsEl.textContent = img.naturalWidth + '×' + img.naturalHeight + 'px';
+      fileTypeEl.textContent = mime;
+      fileSizeEl.textContent = '(' + formatBytes(bytes) + ')';
+      preview.src = currentDataUri;
+      preview.alt = 'Decoded image';
+      resultDiv.style.display = 'block';
+    };
+    img.onerror = function () {
+      showError('This Base64 data doesn\'t decode into a valid image.');
+    };
+    img.src = currentDataUri;
+  }
+
+  convertBtn.addEventListener('click', convert);
+
+  clearBtn.addEventListener('click', function () {
+    input.value = '';
+    hideError();
+    resultDiv.style.display = 'none';
+    currentDataUri = '';
+  });
+
+  downloadBtn.addEventListener('click', function () {
+    if (!currentDataUri) return;
+    var a = document.createElement('a');
+    a.href = currentDataUri;
+    a.download = 'image.' + currentExt;
+    a.click();
+  });
+})();
+</script>

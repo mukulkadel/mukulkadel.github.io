@@ -11,6 +11,11 @@ description: Web tools and mini-apps I've built.
     <h2 class="app-card-title">Image to Base64</h2>
     <p class="app-card-desc">Convert images to Base64 encoded strings instantly in your browser. No uploads, fully private.</p>
   </a>
+  <a class="app-card" href="{{ '/apps/base64-to-image/' | relative_url }}">
+    <div class="app-card-icon">🔄</div>
+    <h2 class="app-card-title">Base64 to Image</h2>
+    <p class="app-card-desc">Convert Base64 encoded strings back into viewable, downloadable images. No uploads, fully private.</p>
+  </a>
 </div>
 
 <hr style="margin:3rem 0;">

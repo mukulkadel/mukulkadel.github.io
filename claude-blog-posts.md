@@ -63,8 +63,8 @@ Use 5–12 granular, SEO-relevant tags. Err toward more rather than fewer.
 ## Progress tracker
 
 **Total posts**: 149
-**Completed**: 36
-**Remaining**: 113
+**Completed**: 46
+**Remaining**: 103
 
 ---
 
@@ -230,42 +230,42 @@ Use 5–12 granular, SEO-relevant tags. Err toward more rather than fewer.
   - `categories`: ["wiki", "Programming"]
   - `tags`: ["javascript", "event loop", "async", "promises", "call stack", "microtasks", "macrotasks", "node", "frontend", "backend"]
 
-- [ ] **31** — Writing Idiomatic Python: Common Patterns and Anti-Patterns
+- [x] **31** — Writing Idiomatic Python: Common Patterns and Anti-Patterns
   - `slug`: idiomatic-python-patterns-anti-patterns
   - `categories`: ["Programming", "wiki"]
   - `tags`: ["python", "idiomatic", "best practices", "patterns", "list comprehensions", "generators", "context managers", "pythonic", "code quality"]
 
-- [ ] **32** — How Git's Object Model Works Internally
+- [x] **32** — How Git's Object Model Works Internally
   - `slug`: git-object-model-internals
   - `categories`: ["wiki", "Programming"]
   - `tags`: ["git", "internals", "object model", "blobs", "trees", "commits", "refs", "pack files", "plumbing", "version control"]
 
-- [ ] **33** — Understanding Memory Leaks in Long-Running Python Applications
+- [x] **33** — Understanding Memory Leaks in Long-Running Python Applications
   - `slug`: python-memory-leaks-debugging
   - `categories`: ["Programming", "wiki"]
   - `tags`: ["python", "memory leaks", "debugging", "profiling", "gc", "garbage collection", "backend", "performance", "tracemalloc"]
 
-- [ ] **34** — Profiling and Benchmarking Python Applications
+- [x] **34** — Profiling and Benchmarking Python Applications
   - `slug`: python-profiling-benchmarking
   - `categories`: ["Programming", "Tutorials"]
   - `tags`: ["python", "profiling", "benchmarking", "performance", "cProfile", "py-spy", "line_profiler", "optimization", "backend"]
 
-- [ ] **35** — How a Database Engine Works Internally (B-Trees, WAL, MVCC)
+- [x] **35** — How a Database Engine Works Internally (B-Trees, WAL, MVCC)
   - `slug`: database-engine-internals-btree-wal-mvcc
   - `categories`: ["wiki", "SQL"]
   - `tags`: ["database internals", "b-tree", "wal", "mvcc", "postgresql", "storage engine", "concurrency", "transactions", "sql"]
 
-- [ ] **36** — Building a Plugin System in Python
+- [x] **36** — Building a Plugin System in Python
   - `slug`: building-plugin-system-python
   - `categories`: ["Programming", "Tutorials"]
   - `tags`: ["python", "plugin system", "extensibility", "architecture", "importlib", "abc", "design patterns", "backend", "tutorial"]
 
-- [ ] **37** — Understanding Copy-on-Write in Linux and Databases
+- [x] **37** — Understanding Copy-on-Write in Linux and Databases
   - `slug`: copy-on-write-linux-databases-explained
   - `categories`: ["wiki"]
   - `tags`: ["copy-on-write", "cow", "linux", "fork", "database", "postgresql", "memory", "kernel", "filesystems", "internals"]
 
-- [ ] **38** — Understanding Linux Process Scheduling
+- [x] **38** — Understanding Linux Process Scheduling
   - `slug`: linux-process-scheduling-explained
   - `categories`: ["wiki", "unix"]
   - `tags`: ["linux", "process scheduling", "cfs", "kernel", "cpu", "nice", "priority", "real-time", "sysadmin", "performance"]
@@ -274,12 +274,12 @@ Use 5–12 granular, SEO-relevant tags. Err toward more rather than fewer.
 
 ### Scripting & Automation
 
-- [ ] **39** — Python Scripts That Save Hours: File and Directory Processing Patterns
+- [x] **39** — Python Scripts That Save Hours: File and Directory Processing Patterns
   - `slug`: python-file-processing-automation-scripts
   - `categories`: ["Programming", "Tutorials"]
   - `tags`: ["python", "scripting", "automation", "file processing", "pathlib", "shutil", "glob", "batch processing", "productivity"]
 
-- [ ] **40** — Web Scraping with Python: Requests, BeautifulSoup, and Playwright
+- [x] **40** — Web Scraping with Python: Requests, BeautifulSoup, and Playwright
   - `slug`: web-scraping-python-requests-beautifulsoup-playwright
   - `categories`: ["Programming", "Tutorials"]
   - `tags`: ["web scraping", "python", "beautifulsoup", "playwright", "requests", "automation", "html", "data extraction", "tutorial"]

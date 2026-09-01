@@ -1,0 +1,327 @@
+---
+layout: app
+title: Timer & Stopwatch
+permalink: /apps/timer/
+description: A simple countdown timer and stopwatch that runs entirely in your browser. Share a link like /apps/timer/#5minutes to start a preset countdown instantly.
+---
+
+<p style="color:var(--text-muted);margin-bottom:1.5rem;">
+  Pick a preset or set a custom duration, or link directly to one — e.g. <code>#5minutes</code>, <code>#1hour30minutes</code>, or <code>#stopwatch</code>. Runs entirely in your browser; the tab title updates so you can track it from another window.
+</p>
+
+<div style="display:flex;gap:0.5rem;margin-bottom:1.5rem;">
+  <button class="btn btn-outline" id="modeTimerBtn" type="button" style="flex:1;justify-content:center;"></button>
+  <button class="btn btn-outline" id="modeStopwatchBtn" type="button" style="flex:1;justify-content:center;"></button>
+</div>
+
+<!-- Timer panel -->
+<div id="timerPanel">
+  <div id="timerSetup">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(90px, 1fr));gap:0.5rem;margin-bottom:1.5rem;" id="presetGrid"></div>
+
+    <div style="display:flex;gap:0.5rem;align-items:flex-end;flex-wrap:wrap;margin-bottom:1rem;">
+      <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+        Hours
+        <input type="number" id="customHours" min="0" max="99" value="0" style="width:70px;padding:0.4rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-family:var(--font-mono);">
+      </label>
+      <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+        Minutes
+        <input type="number" id="customMinutes" min="0" max="59" value="5" style="width:70px;padding:0.4rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-family:var(--font-mono);">
+      </label>
+      <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+        Seconds
+        <input type="number" id="customSeconds" min="0" max="59" value="0" style="width:70px;padding:0.4rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-family:var(--font-mono);">
+      </label>
+      <button class="btn" id="startCustomBtn" type="button">Start</button>
+    </div>
+  </div>
+
+  <div id="timerRunning" style="display:none;text-align:center;">
+    <div id="timerDisplay" style="font-family:var(--font-mono);font-size:4.5rem;font-weight:600;letter-spacing:0.02em;margin:1.5rem 0;color:var(--text);">00:00</div>
+    <div style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;">
+      <button class="btn btn-outline" id="pauseResumeBtn" type="button">Pause</button>
+      <button class="btn btn-outline" id="addMinuteBtn" type="button">+1 min</button>
+      <button class="btn btn-outline" id="resetTimerBtn" type="button">Reset</button>
+    </div>
+  </div>
+</div>
+
+<!-- Stopwatch panel -->
+<div id="stopwatchPanel" style="display:none;text-align:center;">
+  <div id="stopwatchDisplay" style="font-family:var(--font-mono);font-size:4.5rem;font-weight:600;letter-spacing:0.02em;margin:1.5rem 0;color:var(--text);">00:00.0</div>
+  <div style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;">
+    <button class="btn" id="stopwatchStartBtn" type="button">Start</button>
+    <button class="btn btn-outline" id="stopwatchPauseBtn" type="button" style="display:none;">Pause</button>
+    <button class="btn btn-outline" id="stopwatchLapBtn" type="button" style="display:none;">Lap</button>
+    <button class="btn btn-outline" id="stopwatchResetBtn" type="button">Reset</button>
+  </div>
+  <ul id="lapList" style="list-style:none;padding:0;margin:1.5rem 0 0;max-width:300px;margin-left:auto;margin-right:auto;text-align:left;font-family:var(--font-mono);font-size:0.85rem;color:var(--text-muted);"></ul>
+</div>
+
+<script>
+(function () {
+  var PRESETS = [
+    { label: '1 min', seconds: 60 },
+    { label: '3 min', seconds: 180 },
+    { label: '5 min', seconds: 300 },
+    { label: '10 min', seconds: 600 },
+    { label: '15 min', seconds: 900 },
+    { label: '20 min', seconds: 1200 },
+    { label: '30 min', seconds: 1800 },
+    { label: '45 min', seconds: 2700 },
+    { label: '1 hour', seconds: 3600 }
+  ];
+
+  var origTitle = document.title;
+
+  var modeTimerBtn = document.getElementById('modeTimerBtn');
+  var modeStopwatchBtn = document.getElementById('modeStopwatchBtn');
+  var timerPanel = document.getElementById('timerPanel');
+  var stopwatchPanel = document.getElementById('stopwatchPanel');
+
+  var presetGrid = document.getElementById('presetGrid');
+  var timerSetup = document.getElementById('timerSetup');
+  var timerRunning = document.getElementById('timerRunning');
+  var timerDisplay = document.getElementById('timerDisplay');
+  var customHours = document.getElementById('customHours');
+  var customMinutes = document.getElementById('customMinutes');
+  var customSeconds = document.getElementById('customSeconds');
+  var startCustomBtn = document.getElementById('startCustomBtn');
+  var pauseResumeBtn = document.getElementById('pauseResumeBtn');
+  var addMinuteBtn = document.getElementById('addMinuteBtn');
+  var resetTimerBtn = document.getElementById('resetTimerBtn');
+
+  var stopwatchDisplay = document.getElementById('stopwatchDisplay');
+  var stopwatchStartBtn = document.getElementById('stopwatchStartBtn');
+  var stopwatchPauseBtn = document.getElementById('stopwatchPauseBtn');
+  var stopwatchLapBtn = document.getElementById('stopwatchLapBtn');
+  var stopwatchResetBtn = document.getElementById('stopwatchResetBtn');
+  var lapList = document.getElementById('lapList');
+
+  // ---------- shared beep ----------
+  function beep(times) {
+    var AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    var ctx = new AudioCtx();
+    var n = times || 3;
+    for (var i = 0; i < n; i++) {
+      (function (i) {
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = 880;
+        gain.gain.value = 0.15;
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        var start = ctx.currentTime + i * 0.5;
+        osc.start(start);
+        osc.stop(start + 0.3);
+      })(i);
+    }
+  }
+
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+  // ---------- mode switching ----------
+  function setMode(mode) {
+    var isTimer = mode === 'timer';
+    timerPanel.style.display = isTimer ? 'block' : 'none';
+    stopwatchPanel.style.display = isTimer ? 'none' : 'block';
+    modeTimerBtn.className = 'btn' + (isTimer ? '' : ' btn-outline');
+    modeStopwatchBtn.className = 'btn' + (isTimer ? ' btn-outline' : '');
+    document.title = origTitle;
+  }
+  modeTimerBtn.textContent = 'Timer';
+  modeStopwatchBtn.textContent = 'Stopwatch';
+  modeTimerBtn.addEventListener('click', function () { setMode('timer'); });
+  modeStopwatchBtn.addEventListener('click', function () { setMode('stopwatch'); });
+
+  // ---------- countdown timer ----------
+  var remaining = 0;
+  var timerInterval = null;
+  var timerPaused = false;
+
+  function renderPresets() {
+    PRESETS.forEach(function (p) {
+      var btn = document.createElement('button');
+      btn.className = 'btn btn-outline';
+      btn.type = 'button';
+      btn.textContent = p.label;
+      btn.style.justifyContent = 'center';
+      btn.addEventListener('click', function () { startTimer(p.seconds); });
+      presetGrid.appendChild(btn);
+    });
+  }
+  renderPresets();
+
+  function updateTimerDisplay() {
+    var h = Math.floor(remaining / 3600);
+    var m = Math.floor((remaining % 3600) / 60);
+    var s = remaining % 60;
+    var text = h > 0 ? (h + ':' + pad(m) + ':' + pad(s)) : (pad(m) + ':' + pad(s));
+    timerDisplay.textContent = text;
+    document.title = text + ' — Timer';
+  }
+
+  function startTimer(totalSeconds) {
+    remaining = totalSeconds;
+    timerPaused = false;
+    timerSetup.style.display = 'none';
+    timerRunning.style.display = 'block';
+    pauseResumeBtn.textContent = 'Pause';
+    updateTimerDisplay();
+    clearInterval(timerInterval);
+    timerInterval = setInterval(function () {
+      if (timerPaused) return;
+      remaining--;
+      if (remaining <= 0) {
+        remaining = 0;
+        updateTimerDisplay();
+        clearInterval(timerInterval);
+        timerInterval = null;
+        document.title = "Time's up! — Timer";
+        beep(4);
+        return;
+      }
+      updateTimerDisplay();
+    }, 1000);
+  }
+
+  startCustomBtn.addEventListener('click', function () {
+    var h = parseInt(customHours.value, 10) || 0;
+    var m = parseInt(customMinutes.value, 10) || 0;
+    var s = parseInt(customSeconds.value, 10) || 0;
+    var total = h * 3600 + m * 60 + s;
+    if (total <= 0) return;
+    startTimer(total);
+  });
+
+  pauseResumeBtn.addEventListener('click', function () {
+    timerPaused = !timerPaused;
+    pauseResumeBtn.textContent = timerPaused ? 'Resume' : 'Pause';
+  });
+
+  addMinuteBtn.addEventListener('click', function () {
+    if (!timerInterval && remaining <= 0) {
+      startTimer(60);
+    } else {
+      remaining += 60;
+      updateTimerDisplay();
+    }
+  });
+
+  resetTimerBtn.addEventListener('click', function () {
+    clearInterval(timerInterval);
+    timerInterval = null;
+    timerPaused = false;
+    timerRunning.style.display = 'none';
+    timerSetup.style.display = 'block';
+    document.title = origTitle;
+  });
+
+  // ---------- stopwatch ----------
+  var swStartedAt = 0;
+  var swElapsed = 0;
+  var swInterval = null;
+  var swRunning = false;
+  var lapCount = 0;
+
+  function formatElapsed(ms) {
+    var totalTenths = Math.floor(ms / 100);
+    var tenths = totalTenths % 10;
+    var totalSeconds = Math.floor(ms / 1000);
+    var h = Math.floor(totalSeconds / 3600);
+    var m = Math.floor((totalSeconds % 3600) / 60);
+    var s = totalSeconds % 60;
+    var base = (h > 0 ? h + ':' + pad(m) : pad(m)) + ':' + pad(s) + '.' + tenths;
+    return base;
+  }
+
+  function updateStopwatchDisplay() {
+    var ms = swElapsed + (swRunning ? (Date.now() - swStartedAt) : 0);
+    var text = formatElapsed(ms);
+    stopwatchDisplay.textContent = text;
+    document.title = text + ' — Stopwatch';
+  }
+
+  stopwatchStartBtn.addEventListener('click', function () {
+    swRunning = true;
+    swStartedAt = Date.now();
+    stopwatchStartBtn.style.display = 'none';
+    stopwatchPauseBtn.style.display = 'inline-flex';
+    stopwatchLapBtn.style.display = 'inline-flex';
+    swInterval = setInterval(updateStopwatchDisplay, 100);
+  });
+
+  stopwatchPauseBtn.addEventListener('click', function () {
+    swRunning = false;
+    swElapsed += Date.now() - swStartedAt;
+    clearInterval(swInterval);
+    stopwatchPauseBtn.style.display = 'none';
+    stopwatchStartBtn.style.display = 'inline-flex';
+    stopwatchStartBtn.textContent = 'Resume';
+  });
+
+  stopwatchLapBtn.addEventListener('click', function () {
+    lapCount++;
+    var ms = swElapsed + (swRunning ? (Date.now() - swStartedAt) : 0);
+    var li = document.createElement('li');
+    li.style.padding = '0.25rem 0';
+    li.style.borderBottom = '1px solid var(--border)';
+    li.textContent = 'Lap ' + lapCount + ' — ' + formatElapsed(ms);
+    lapList.insertBefore(li, lapList.firstChild);
+  });
+
+  stopwatchResetBtn.addEventListener('click', function () {
+    swRunning = false;
+    swElapsed = 0;
+    lapCount = 0;
+    clearInterval(swInterval);
+    swInterval = null;
+    lapList.innerHTML = '';
+    stopwatchDisplay.textContent = '00:00.0';
+    stopwatchStartBtn.style.display = 'inline-flex';
+    stopwatchStartBtn.textContent = 'Start';
+    stopwatchPauseBtn.style.display = 'none';
+    stopwatchLapBtn.style.display = 'none';
+    document.title = origTitle;
+  });
+
+  // ---------- hash-based deep links, e.g. #5minutes, #1hour30minutes, #stopwatch ----------
+  function parseHash() {
+    var hash = window.location.hash.replace(/^#/, '').trim().toLowerCase();
+    if (!hash) return null;
+    if (hash === 'stopwatch') return { mode: 'stopwatch' };
+
+    var re = /(\d+)\s*(hours?|hrs?|minutes?|mins?|seconds?|secs?)/g;
+    var match;
+    var total = 0;
+    var found = false;
+    while ((match = re.exec(hash)) !== null) {
+      found = true;
+      var n = parseInt(match[1], 10);
+      var unit = match[2];
+      if (/^h/.test(unit)) total += n * 3600;
+      else if (/^m/.test(unit)) total += n * 60;
+      else total += n;
+    }
+    if (!found && /^\d+$/.test(hash)) {
+      total = parseInt(hash, 10) * 60;
+      found = true;
+    }
+    if (!found || total <= 0) return null;
+    return { mode: 'timer', seconds: total };
+  }
+
+  var parsed = parseHash();
+  if (parsed && parsed.mode === 'stopwatch') {
+    setMode('stopwatch');
+    stopwatchStartBtn.click();
+  } else if (parsed && parsed.mode === 'timer') {
+    setMode('timer');
+    startTimer(parsed.seconds);
+  } else {
+    setMode('timer');
+  }
+})();
+</script>

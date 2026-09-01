@@ -16,6 +16,11 @@ description: Web tools and mini-apps I've built.
     <h2 class="app-card-title">Base64 to Image</h2>
     <p class="app-card-desc">Convert Base64 encoded strings back into viewable, downloadable images. No uploads, fully private.</p>
   </a>
+  <a class="app-card" href="{{ '/apps/timer/' | relative_url }}">
+    <div class="app-card-icon">⏱️</div>
+    <h2 class="app-card-title">Timer &amp; Stopwatch</h2>
+    <p class="app-card-desc">A simple countdown timer and stopwatch. Link directly to a preset, e.g. #5minutes.</p>
+  </a>
 </div>
 
 <hr style="margin:3rem 0;">

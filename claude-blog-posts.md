@@ -63,8 +63,8 @@ Use 5–12 granular, SEO-relevant tags. Err toward more rather than fewer.
 ## Progress tracker
 
 **Total posts**: 149
-**Completed**: 26
-**Remaining**: 123
+**Completed**: 36
+**Remaining**: 113
 
 ---
 
@@ -176,27 +176,27 @@ Use 5–12 granular, SEO-relevant tags. Err toward more rather than fewer.
   - `categories`: ["wiki"]
   - `tags`: ["vpn", "wireguard", "networking", "tunneling", "encryption", "privacy", "linux", "security", "peer-to-peer"]
 
-- [ ] **21** — How HTTP Caching Headers Work: Cache-Control, ETag, and Vary
+- [x] **21** — How HTTP Caching Headers Work: Cache-Control, ETag, and Vary
   - `slug`: http-caching-headers-explained
   - `categories`: ["wiki", "Programming"]
   - `tags`: ["http caching", "cache-control", "etag", "vary", "http headers", "web performance", "browser", "cdn", "nginx", "backend"]
 
-- [ ] **22** — How NAT Works: Network Address Translation Explained
+- [x] **22** — How NAT Works: Network Address Translation Explained
   - `slug`: how-nat-works-explained
   - `categories`: ["wiki"]
   - `tags`: ["nat", "network address translation", "networking", "ipv4", "router", "linux", "sysadmin", "masquerade", "port forwarding"]
 
-- [ ] **23** — Wireshark for Developers: Reading and Debugging Network Traffic
+- [x] **23** — Wireshark for Developers: Reading and Debugging Network Traffic
   - `slug`: wireshark-for-developers
   - `categories`: ["wiki", "Tutorials"]
   - `tags`: ["wireshark", "networking", "packet capture", "debugging", "tcp", "http", "tls", "pcap", "network analysis", "troubleshooting"]
 
-- [ ] **24** — IPv6 for Developers: What Changes and What You Need to Know
+- [x] **24** — IPv6 for Developers: What Changes and What You Need to Know
   - `slug`: ipv6-for-developers-explained
   - `categories`: ["wiki"]
   - `tags`: ["ipv6", "networking", "ip addressing", "internet protocol", "dual stack", "linux", "devops", "sysadmin", "transition"]
 
-- [ ] **25** — Understanding Anycast: How CDNs Route Traffic to the Nearest Server
+- [x] **25** — Understanding Anycast: How CDNs Route Traffic to the Nearest Server
   - `slug`: anycast-routing-how-cdns-work
   - `categories`: ["wiki"]
   - `tags`: ["anycast", "cdn", "routing", "networking", "dns", "cloudflare", "bgp", "latency", "load balancing", "infrastructure"]
@@ -205,27 +205,27 @@ Use 5–12 granular, SEO-relevant tags. Err toward more rather than fewer.
 
 ### Programming Patterns & Internals
 
-- [ ] **26** — Event Sourcing Explained with a Practical Python Example
+- [x] **26** — Event Sourcing Explained with a Practical Python Example
   - `slug`: event-sourcing-explained-python
   - `categories`: ["wiki", "Programming"]
   - `tags`: ["event sourcing", "events", "python", "backend", "architecture", "audit log", "state", "database", "design patterns"]
 
-- [ ] **27** — State Machines: Making Complex Logic Explicit
+- [x] **27** — State Machines: Making Complex Logic Explicit
   - `slug`: state-machines-explained
   - `categories`: ["wiki", "Programming"]
   - `tags`: ["state machine", "finite state machine", "programming", "design patterns", "python", "backend", "workflow", "logic", "modeling"]
 
-- [ ] **28** — Dependency Injection Without a Framework
+- [x] **28** — Dependency Injection Without a Framework
   - `slug`: dependency-injection-without-framework
   - `categories`: ["wiki", "Programming"]
   - `tags`: ["dependency injection", "inversion of control", "python", "design patterns", "testing", "decoupling", "backend", "architecture"]
 
-- [ ] **29** — Functional Programming Concepts That Apply to Any Language
+- [x] **29** — Functional Programming Concepts That Apply to Any Language
   - `slug`: functional-programming-concepts-any-language
   - `categories`: ["wiki", "Programming"]
   - `tags`: ["functional programming", "immutability", "pure functions", "map filter reduce", "python", "javascript", "programming", "design patterns"]
 
-- [ ] **30** — How JavaScript's Event Loop Really Works
+- [x] **30** — How JavaScript's Event Loop Really Works
   - `slug`: javascript-event-loop-explained
   - `categories`: ["wiki", "Programming"]
   - `tags`: ["javascript", "event loop", "async", "promises", "call stack", "microtasks", "macrotasks", "node", "frontend", "backend"]

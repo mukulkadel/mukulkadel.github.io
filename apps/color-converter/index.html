@@ -1,0 +1,169 @@
+---
+layout: app
+title: Color Converter
+permalink: /apps/color-converter/
+description: Convert colors between HEX, RGB, and HSL instantly in your browser, with a live picker and preview swatch.
+---
+
+<p style="color:var(--text-muted);margin-bottom:1.5rem;">
+  Edit any field and the others update live. Everything runs locally in your browser.
+</p>
+
+<div style="display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap;margin-bottom:1.5rem;">
+  <input type="color" id="colorPicker" value="#0969da" style="width:64px;height:64px;border:1px solid var(--border);border-radius:var(--radius);background:none;cursor:pointer;padding:0;">
+  <div id="swatch" style="width:64px;height:64px;border:1px solid var(--border);border-radius:var(--radius);background:#0969da;"></div>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr;gap:1rem;max-width:500px;">
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+    HEX
+    <div style="display:flex;gap:0.5rem;">
+      <input type="text" id="hexInput" style="flex:1;padding:0.5rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-family:var(--font-mono);">
+      <button class="btn btn-outline copy-btn" type="button" data-target="hexInput" style="padding:0.4rem 0.7rem;">Copy</button>
+    </div>
+  </label>
+
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+    RGB
+    <div style="display:flex;gap:0.5rem;">
+      <input type="text" id="rgbInput" style="flex:1;padding:0.5rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-family:var(--font-mono);">
+      <button class="btn btn-outline copy-btn" type="button" data-target="rgbInput" style="padding:0.4rem 0.7rem;">Copy</button>
+    </div>
+  </label>
+
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+    HSL
+    <div style="display:flex;gap:0.5rem;">
+      <input type="text" id="hslInput" style="flex:1;padding:0.5rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-family:var(--font-mono);">
+      <button class="btn btn-outline copy-btn" type="button" data-target="hslInput" style="padding:0.4rem 0.7rem;">Copy</button>
+    </div>
+  </label>
+</div>
+
+<p id="errorMsg" style="color:#e5484d;font-size:0.9rem;margin-top:1rem;display:none;"></p>
+
+<script>
+(function () {
+  var colorPicker = document.getElementById('colorPicker');
+  var swatch = document.getElementById('swatch');
+  var hexInput = document.getElementById('hexInput');
+  var rgbInput = document.getElementById('rgbInput');
+  var hslInput = document.getElementById('hslInput');
+  var errorMsg = document.getElementById('errorMsg');
+
+  function hexToRgb(hex) {
+    hex = hex.replace(/^#/, '');
+    if (hex.length === 3) hex = hex.split('').map(function (c) { return c + c; }).join('');
+    if (!/^[0-9a-fA-F]{6}$/.test(hex)) return null;
+    var num = parseInt(hex, 16);
+    return { r: (num >> 16) & 255, g: (num >> 8) & 255, b: num & 255 };
+  }
+
+  function rgbToHex(r, g, b) {
+    return '#' + [r, g, b].map(function (v) {
+      return Math.max(0, Math.min(255, Math.round(v))).toString(16).padStart(2, '0');
+    }).join('');
+  }
+
+  function rgbToHsl(r, g, b) {
+    r /= 255; g /= 255; b /= 255;
+    var max = Math.max(r, g, b), min = Math.min(r, g, b);
+    var h, s, l = (max + min) / 2;
+    if (max === min) { h = s = 0; }
+    else {
+      var d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      switch (max) {
+        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+        case g: h = (b - r) / d + 2; break;
+        default: h = (r - g) / d + 4;
+      }
+      h /= 6;
+    }
+    return { h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100) };
+  }
+
+  function hslToRgb(h, s, l) {
+    h /= 360; s /= 100; l /= 100;
+    var r, g, b;
+    if (s === 0) { r = g = b = l; }
+    else {
+      var hue2rgb = function (p, q, t) {
+        if (t < 0) t += 1;
+        if (t > 1) t -= 1;
+        if (t < 1 / 6) return p + (q - p) * 6 * t;
+        if (t < 1 / 2) return q;
+        if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+        return p;
+      };
+      var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+      var p = 2 * l - q;
+      r = hue2rgb(p, q, h + 1 / 3);
+      g = hue2rgb(p, q, h);
+      b = hue2rgb(p, q, h - 1 / 3);
+    }
+    return { r: Math.round(r * 255), g: Math.round(g * 255), b: Math.round(b * 255) };
+  }
+
+  function setFromRgb(r, g, b, skip) {
+    var hex = rgbToHex(r, g, b);
+    var hsl = rgbToHsl(r, g, b);
+    if (skip !== 'hex') hexInput.value = hex;
+    if (skip !== 'rgb') rgbInput.value = 'rgb(' + r + ', ' + g + ', ' + b + ')';
+    if (skip !== 'hsl') hslInput.value = 'hsl(' + hsl.h + ', ' + hsl.s + '%, ' + hsl.l + '%)';
+    colorPicker.value = hex;
+    swatch.style.background = hex;
+    errorMsg.style.display = 'none';
+  }
+
+  function showError() {
+    errorMsg.textContent = "Couldn't parse that value.";
+    errorMsg.style.display = 'block';
+  }
+
+  colorPicker.addEventListener('input', function () {
+    var rgb = hexToRgb(colorPicker.value);
+    if (rgb) setFromRgb(rgb.r, rgb.g, rgb.b);
+  });
+
+  hexInput.addEventListener('input', function () {
+    var rgb = hexToRgb(hexInput.value);
+    if (rgb) setFromRgb(rgb.r, rgb.g, rgb.b, 'hex');
+    else showError();
+  });
+
+  rgbInput.addEventListener('input', function () {
+    var match = rgbInput.value.match(/(\d+)\D+(\d+)\D+(\d+)/);
+    if (match) {
+      var r = parseInt(match[1], 10), g = parseInt(match[2], 10), b = parseInt(match[3], 10);
+      if (r <= 255 && g <= 255 && b <= 255) { setFromRgb(r, g, b, 'rgb'); return; }
+    }
+    showError();
+  });
+
+  hslInput.addEventListener('input', function () {
+    var match = hslInput.value.match(/(\d+)\D+(\d+)%?\D+(\d+)%?/);
+    if (match) {
+      var h = parseInt(match[1], 10), s = parseInt(match[2], 10), l = parseInt(match[3], 10);
+      var rgb = hslToRgb(h, s, l);
+      setFromRgb(rgb.r, rgb.g, rgb.b, 'hsl');
+      return;
+    }
+    showError();
+  });
+
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var target = document.getElementById(btn.getAttribute('data-target'));
+      if (!target.value) return;
+      navigator.clipboard.writeText(target.value).then(function () {
+        var original = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(function () { btn.textContent = original; }, 2000);
+      });
+    });
+  });
+
+  setFromRgb(9, 105, 218);
+})();
+</script>

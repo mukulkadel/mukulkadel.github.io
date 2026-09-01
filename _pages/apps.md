@@ -51,6 +51,11 @@ description: Web tools and mini-apps I've built.
     <h2 class="app-card-title">Case Converter</h2>
     <p class="app-card-desc">Convert text between camelCase, snake_case, kebab-case, and more.</p>
   </a>
+  <a class="app-card" href="{{ '/apps/color-converter/' | relative_url }}">
+    <div class="app-card-icon">🎨</div>
+    <h2 class="app-card-title">Color Converter</h2>
+    <p class="app-card-desc">Convert colors between HEX, RGB, and HSL with a live picker.</p>
+  </a>
 </div>
 
 <hr style="margin:3rem 0;">

@@ -31,6 +31,11 @@ description: Web tools and mini-apps I've built.
     <h2 class="app-card-title">Password Generator</h2>
     <p class="app-card-desc">Generate strong random passwords or passphrases with a live strength meter.</p>
   </a>
+  <a class="app-card" href="{{ '/apps/hash-generator/' | relative_url }}">
+    <div class="app-card-icon">🔒</div>
+    <h2 class="app-card-title">Hash Generator</h2>
+    <p class="app-card-desc">Generate SHA-1, SHA-256, SHA-384, and SHA-512 hashes of any text.</p>
+  </a>
 </div>
 
 <hr style="margin:3rem 0;">

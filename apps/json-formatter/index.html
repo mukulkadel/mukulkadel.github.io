@@ -1,0 +1,175 @@
+---
+layout: app
+title: JSON Formatter & Validator
+permalink: /apps/json-formatter/
+description: Format, validate, minify, and explore JSON in a collapsible tree view, entirely in your browser.
+---
+
+<p style="color:var(--text-muted);margin-bottom:1.5rem;">
+  Paste JSON to validate and pretty-print it, or minify it down. Everything runs locally in your browser.
+</p>
+
+<div style="margin-bottom:1rem;">
+  <textarea id="input" class="tool-output" style="width:100%;min-height:200px;resize:vertical;font-size:0.85rem;" placeholder='{"example": [1, 2, 3], "nested": {"key": true}}'></textarea>
+</div>
+
+<div style="display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem;">
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+    Indent
+    <select id="indentSelect" style="padding:0.4rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);">
+      <option value="2">2 spaces</option>
+      <option value="4">4 spaces</option>
+      <option value="tab">Tab</option>
+    </select>
+  </label>
+  <button class="btn" id="formatBtn" type="button">Format</button>
+  <button class="btn btn-outline" id="minifyBtn" type="button">Minify</button>
+  <button class="btn btn-outline" id="copyBtn" type="button">Copy Output</button>
+</div>
+
+<p id="statusMsg" style="font-size:0.9rem;margin-bottom:1rem;"></p>
+
+<div id="output" class="tool-output" style="display:none;max-height:300px;"></div>
+
+<div id="treeContainer" style="display:none;margin-top:1.5rem;">
+  <h2>Tree View</h2>
+  <div id="tree" style="font-family:var(--font-mono);font-size:0.85rem;border:1px solid var(--border);border-radius:var(--radius);padding:1rem;overflow:auto;max-height:400px;"></div>
+</div>
+
+<script>
+(function () {
+  var input = document.getElementById('input');
+  var indentSelect = document.getElementById('indentSelect');
+  var formatBtn = document.getElementById('formatBtn');
+  var minifyBtn = document.getElementById('minifyBtn');
+  var copyBtn = document.getElementById('copyBtn');
+  var statusMsg = document.getElementById('statusMsg');
+  var output = document.getElementById('output');
+  var treeContainer = document.getElementById('treeContainer');
+  var tree = document.getElementById('tree');
+
+  function getIndent() {
+    var v = indentSelect.value;
+    return v === 'tab' ? '\t' : parseInt(v, 10);
+  }
+
+  function positionToLineCol(text, pos) {
+    var lines = text.slice(0, pos).split('\n');
+    return { line: lines.length, col: lines[lines.length - 1].length + 1 };
+  }
+
+  function parseInput() {
+    var text = input.value;
+    try {
+      var data = JSON.parse(text);
+      return { ok: true, data: data };
+    } catch (e) {
+      var msg = e.message;
+      var posMatch = msg.match(/position (\d+)/);
+      var detail = '';
+      if (posMatch) {
+        var lc = positionToLineCol(text, parseInt(posMatch[1], 10));
+        detail = ' (line ' + lc.line + ', column ' + lc.col + ')';
+      }
+      return { ok: false, error: msg + detail };
+    }
+  }
+
+  function showError(msg) {
+    statusMsg.textContent = 'Invalid JSON: ' + msg;
+    statusMsg.style.color = '#e5484d';
+    output.style.display = 'none';
+    treeContainer.style.display = 'none';
+  }
+
+  function showSuccess(msg) {
+    statusMsg.textContent = msg;
+    statusMsg.style.color = '#2e9e44';
+  }
+
+  function format() {
+    var result = parseInput();
+    if (!result.ok) { showError(result.error); return; }
+    output.textContent = JSON.stringify(result.data, null, getIndent());
+    output.style.display = 'block';
+    showSuccess('Valid JSON.');
+    renderTree(result.data);
+  }
+
+  function minify() {
+    var result = parseInput();
+    if (!result.ok) { showError(result.error); return; }
+    output.textContent = JSON.stringify(result.data);
+    output.style.display = 'block';
+    showSuccess('Valid JSON.');
+    renderTree(result.data);
+  }
+
+  function renderTree(data) {
+    tree.innerHTML = '';
+    tree.appendChild(buildNode(data, null));
+    treeContainer.style.display = 'block';
+  }
+
+  function typeColor(value) {
+    if (value === null) return 'var(--text-muted)';
+    if (typeof value === 'string') return '#2e9e44';
+    if (typeof value === 'number') return '#0969da';
+    if (typeof value === 'boolean') return '#e5484d';
+    return 'inherit';
+  }
+
+  function formatPrimitive(value) {
+    if (value === null) return 'null';
+    if (typeof value === 'string') return JSON.stringify(value);
+    return String(value);
+  }
+
+  function buildNode(value, key) {
+    var wrapper = document.createElement('div');
+
+    if (value !== null && typeof value === 'object') {
+      var isArray = Array.isArray(value);
+      var entries = isArray ? value.map(function (v, i) { return [i, v]; }) : Object.keys(value).map(function (k) { return [k, value[k]]; });
+      var details = document.createElement('details');
+      details.open = true;
+      var summary = document.createElement('summary');
+      summary.style.cursor = 'pointer';
+      var label = key !== null ? '"' + key + '": ' : '';
+      summary.textContent = label + (isArray ? '[' : '{') + ' ' + entries.length + (isArray ? ' items' : ' keys') + ' ' + (isArray ? ']' : '}');
+      details.appendChild(summary);
+      var childContainer = document.createElement('div');
+      childContainer.style.marginLeft = '1.25rem';
+      childContainer.style.borderLeft = '1px dashed var(--border)';
+      childContainer.style.paddingLeft = '0.75rem';
+      entries.forEach(function (entry) {
+        childContainer.appendChild(buildNode(entry[1], isArray ? null : entry[0]));
+      });
+      details.appendChild(childContainer);
+      wrapper.appendChild(details);
+    } else {
+      var line = document.createElement('div');
+      var prefix = key !== null ? '"' + key + '": ' : '';
+      var span = document.createElement('span');
+      span.style.color = typeColor(value);
+      span.textContent = formatPrimitive(value);
+      line.textContent = prefix;
+      line.appendChild(span);
+      wrapper.appendChild(line);
+    }
+
+    return wrapper;
+  }
+
+  formatBtn.addEventListener('click', format);
+  minifyBtn.addEventListener('click', minify);
+
+  copyBtn.addEventListener('click', function () {
+    if (!output.textContent) return;
+    navigator.clipboard.writeText(output.textContent).then(function () {
+      copyBtn.textContent = 'Copied!';
+      setTimeout(function () { copyBtn.textContent = 'Copy Output'; }, 2000);
+    });
+  });
+})();
+</script>

@@ -71,6 +71,11 @@ description: Web tools and mini-apps I've built.
     <h2 class="app-card-title">Lorem Ipsum &amp; Dummy Data</h2>
     <p class="app-card-desc">Generate placeholder text or fake names, emails, and UUIDs.</p>
   </a>
+  <a class="app-card" href="{{ '/apps/json-formatter/' | relative_url }}">
+    <div class="app-card-icon">🗂️</div>
+    <h2 class="app-card-title">JSON Formatter &amp; Validator</h2>
+    <p class="app-card-desc">Format, validate, minify, and explore JSON in a collapsible tree.</p>
+  </a>
 </div>
 
 <hr style="margin:3rem 0;">

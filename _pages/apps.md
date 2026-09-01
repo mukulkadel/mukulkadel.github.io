@@ -56,6 +56,11 @@ description: Web tools and mini-apps I've built.
     <h2 class="app-card-title">Color Converter</h2>
     <p class="app-card-desc">Convert colors between HEX, RGB, and HSL with a live picker.</p>
   </a>
+  <a class="app-card" href="{{ '/apps/word-counter/' | relative_url }}">
+    <div class="app-card-icon">📝</div>
+    <h2 class="app-card-title">Word &amp; Character Counter</h2>
+    <p class="app-card-desc">Count words, characters, sentences, and estimate reading time.</p>
+  </a>
 </div>
 
 <hr style="margin:3rem 0;">

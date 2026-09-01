@@ -1,0 +1,83 @@
+---
+layout: app
+title: Word & Character Counter
+permalink: /apps/word-counter/
+description: Count words, characters, sentences, and paragraphs, and estimate reading time, entirely in your browser.
+---
+
+<p style="color:var(--text-muted);margin-bottom:1.5rem;">
+  Stats update live as you type. Everything runs locally in your browser.
+</p>
+
+<div style="margin-bottom:1.5rem;">
+  <textarea id="input" class="tool-output" style="width:100%;min-height:220px;resize:vertical;font-size:0.95rem;" placeholder="Start typing or paste text here..."></textarea>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(140px, 1fr));gap:1rem;">
+  <div class="stat-card">
+    <div class="stat-value" id="wordCount">0</div>
+    <div class="stat-label">Words</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value" id="charCount">0</div>
+    <div class="stat-label">Characters</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value" id="charNoSpaceCount">0</div>
+    <div class="stat-label">Characters (no spaces)</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value" id="sentenceCount">0</div>
+    <div class="stat-label">Sentences</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value" id="paragraphCount">0</div>
+    <div class="stat-label">Paragraphs</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value" id="readingTime">0 min</div>
+    <div class="stat-label">Reading time</div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var input = document.getElementById('input');
+  var wordCount = document.getElementById('wordCount');
+  var charCount = document.getElementById('charCount');
+  var charNoSpaceCount = document.getElementById('charNoSpaceCount');
+  var sentenceCount = document.getElementById('sentenceCount');
+  var paragraphCount = document.getElementById('paragraphCount');
+  var readingTime = document.getElementById('readingTime');
+
+  var WORDS_PER_MINUTE = 200;
+
+  function update() {
+    var text = input.value;
+
+    var words = text.trim().length ? text.trim().split(/\s+/) : [];
+    wordCount.textContent = words.length;
+
+    charCount.textContent = text.length;
+    charNoSpaceCount.textContent = text.replace(/\s/g, '').length;
+
+    var sentences = text.split(/[.!?]+/).filter(function (s) { return s.trim().length > 0; });
+    sentenceCount.textContent = sentences.length;
+
+    var paragraphs = text.split(/\n\s*\n/).filter(function (p) { return p.trim().length > 0; });
+    paragraphCount.textContent = text.trim().length ? Math.max(paragraphs.length, 1) : 0;
+
+    var minutes = words.length / WORDS_PER_MINUTE;
+    var text2;
+    if (minutes < 1) {
+      text2 = Math.max(1, Math.round(minutes * 60)) + ' sec';
+    } else {
+      text2 = Math.ceil(minutes) + ' min';
+    }
+    readingTime.textContent = words.length ? text2 : '0 min';
+  }
+
+  input.addEventListener('input', update);
+  update();
+})();
+</script>

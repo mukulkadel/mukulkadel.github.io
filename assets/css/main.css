@@ -875,6 +875,25 @@ pre[data-lang]::before {
 }
 .btn-outline:hover { background: var(--tag-bg); color: var(--accent); }
 
+.stat-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  text-align: center;
+  background: var(--surface);
+}
+.stat-value {
+  font-family: var(--font-mono);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
 /* ============================================================
    Responsive
    ============================================================ */

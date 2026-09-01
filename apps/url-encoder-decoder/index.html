@@ -1,0 +1,77 @@
+---
+layout: app
+title: URL Encoder / Decoder
+permalink: /apps/url-encoder-decoder/
+description: Encode or decode URL components instantly in your browser, with support for full query strings.
+---
+
+<p style="color:var(--text-muted);margin-bottom:1.5rem;">
+  Encode or decode text using <code>encodeURIComponent</code> / <code>decodeURIComponent</code>. Everything runs locally in your browser.
+</p>
+
+<div style="margin-bottom:1rem;">
+  <textarea id="input" class="tool-output" style="width:100%;min-height:140px;resize:vertical;font-size:0.85rem;" placeholder="Paste text or a URL here..."></textarea>
+</div>
+
+<div style="display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap;">
+  <button class="btn" id="encodeBtn" type="button">Encode</button>
+  <button class="btn" id="decodeBtn" type="button">Decode</button>
+  <button class="btn btn-outline" id="swapBtn" type="button">Swap</button>
+  <button class="btn btn-outline" id="copyBtn" type="button" style="margin-left:auto;">Copy Output</button>
+</div>
+
+<p id="errorMsg" style="color:#e5484d;font-size:0.9rem;display:none;"></p>
+
+<div id="output" class="tool-output" style="min-height:80px;"></div>
+
+<script>
+(function () {
+  var input = document.getElementById('input');
+  var output = document.getElementById('output');
+  var errorMsg = document.getElementById('errorMsg');
+  var encodeBtn = document.getElementById('encodeBtn');
+  var decodeBtn = document.getElementById('decodeBtn');
+  var swapBtn = document.getElementById('swapBtn');
+  var copyBtn = document.getElementById('copyBtn');
+
+  function showError(msg) {
+    errorMsg.textContent = msg;
+    errorMsg.style.display = 'block';
+  }
+  function hideError() {
+    errorMsg.style.display = 'none';
+  }
+
+  encodeBtn.addEventListener('click', function () {
+    hideError();
+    try {
+      output.textContent = encodeURIComponent(input.value);
+    } catch (e) {
+      showError('Could not encode this input.');
+    }
+  });
+
+  decodeBtn.addEventListener('click', function () {
+    hideError();
+    try {
+      output.textContent = decodeURIComponent(input.value);
+    } catch (e) {
+      showError('Could not decode this input — it may not be valid percent-encoded text.');
+    }
+  });
+
+  swapBtn.addEventListener('click', function () {
+    var tmp = input.value;
+    input.value = output.textContent;
+    output.textContent = tmp;
+  });
+
+  copyBtn.addEventListener('click', function () {
+    if (!output.textContent) return;
+    navigator.clipboard.writeText(output.textContent).then(function () {
+      copyBtn.textContent = 'Copied!';
+      setTimeout(function () { copyBtn.textContent = 'Copy Output'; }, 2000);
+    });
+  });
+})();
+</script>

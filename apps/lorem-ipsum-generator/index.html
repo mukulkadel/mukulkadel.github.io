@@ -1,0 +1,214 @@
+---
+layout: app
+title: Lorem Ipsum & Dummy Data Generator
+permalink: /apps/lorem-ipsum-generator/
+description: Generate lorem ipsum placeholder text or dummy names, emails, and UUIDs instantly in your browser.
+---
+
+<p style="color:var(--text-muted);margin-bottom:1.5rem;">
+  Generate placeholder text and fake data for mockups and tests. Everything runs locally in your browser.
+</p>
+
+<div style="display:flex;gap:0.5rem;margin-bottom:1.5rem;">
+  <button class="btn" id="modeLoremBtn" type="button" style="flex:1;justify-content:center;">Lorem Ipsum</button>
+  <button class="btn btn-outline" id="modeDataBtn" type="button" style="flex:1;justify-content:center;">Dummy Data</button>
+</div>
+
+<!-- Lorem ipsum panel -->
+<div id="loremPanel">
+  <div style="display:flex;gap:0.5rem;align-items:flex-end;flex-wrap:wrap;margin-bottom:1rem;">
+    <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+      Unit
+      <select id="loremUnit" style="padding:0.5rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);">
+        <option value="paragraphs">Paragraphs</option>
+        <option value="sentences">Sentences</option>
+        <option value="words">Words</option>
+      </select>
+    </label>
+    <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+      Count
+      <input type="number" id="loremCount" min="1" max="50" value="3" style="width:70px;padding:0.5rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-family:var(--font-mono);">
+    </label>
+    <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;">
+      <input type="checkbox" id="startClassic" checked> Start with "Lorem ipsum..."
+    </label>
+    <button class="btn" id="generateLoremBtn" type="button">Generate</button>
+  </div>
+  <div id="loremOutput" class="tool-output" style="max-height:350px;"></div>
+</div>
+
+<!-- Dummy data panel -->
+<div id="dataPanel" style="display:none;">
+  <div style="display:flex;gap:0.5rem;align-items:flex-end;flex-wrap:wrap;margin-bottom:1rem;">
+    <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+      Type
+      <select id="dataType" style="padding:0.5rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);">
+        <option value="names">Full names</option>
+        <option value="emails">Emails</option>
+        <option value="uuids">UUIDs</option>
+        <option value="phones">Phone numbers</option>
+      </select>
+    </label>
+    <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+      Count
+      <input type="number" id="dataCount" min="1" max="100" value="10" style="width:70px;padding:0.5rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-family:var(--font-mono);">
+    </label>
+    <button class="btn" id="generateDataBtn" type="button">Generate</button>
+  </div>
+  <div id="dataOutput" class="tool-output" style="max-height:350px;"></div>
+</div>
+
+<div style="margin-top:1rem;">
+  <button class="btn btn-outline" id="copyBtn" type="button">Copy Output</button>
+</div>
+
+<script>
+(function () {
+  var LOREM_WORDS = ('lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor '
+    + 'incididunt ut labore et dolore magna aliqua enim ad minim veniam quis nostrud exercitation '
+    + 'ullamco laboris nisi aliquip ex ea commodo consequat duis aute irure in reprehenderit '
+    + 'voluptate velit esse cillum eu fugiat nulla pariatur excepteur sint occaecat cupidatat '
+    + 'non proident sunt culpa qui officia deserunt mollit anim id est laborum').split(' ');
+
+  var FIRST_NAMES = ['James', 'Mary', 'Robert', 'Patricia', 'John', 'Jennifer', 'Michael', 'Linda', 'William', 'Elizabeth', 'David', 'Barbara', 'Richard', 'Susan', 'Joseph', 'Jessica', 'Thomas', 'Sarah', 'Charles', 'Karen'];
+  var LAST_NAMES = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez', 'Hernandez', 'Lopez', 'Gonzalez', 'Wilson', 'Anderson', 'Thomas', 'Taylor', 'Moore', 'Jackson', 'Martin'];
+  var DOMAINS = ['example.com', 'mail.com', 'test.org', 'sample.net', 'demo.io'];
+
+  function randomInt(max) {
+    var arr = new Uint32Array(1);
+    crypto.getRandomValues(arr);
+    return arr[0] % max;
+  }
+
+  function pick(arr) { return arr[randomInt(arr.length)]; }
+
+  function capitalize(w) { return w.charAt(0).toUpperCase() + w.slice(1); }
+
+  function loremWords(n) {
+    var out = [];
+    for (var i = 0; i < n; i++) out.push(pick(LOREM_WORDS));
+    return out;
+  }
+
+  function loremSentence() {
+    var len = 6 + randomInt(10);
+    var words = loremWords(len);
+    return capitalize(words.join(' ')) + '.';
+  }
+
+  function loremParagraph() {
+    var count = 3 + randomInt(4);
+    var sentences = [];
+    for (var i = 0; i < count; i++) sentences.push(loremSentence());
+    return sentences.join(' ');
+  }
+
+  function uuidv4() {
+    if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+    var bytes = new Uint8Array(16);
+    crypto.getRandomValues(bytes);
+    bytes[6] = (bytes[6] & 0x0f) | 0x40;
+    bytes[8] = (bytes[8] & 0x3f) | 0x80;
+    var hex = [];
+    for (var i = 0; i < 256; i++) hex.push((i < 16 ? '0' : '') + i.toString(16));
+    var b = bytes;
+    return hex[b[0]] + hex[b[1]] + hex[b[2]] + hex[b[3]] + '-' + hex[b[4]] + hex[b[5]] + '-' +
+      hex[b[6]] + hex[b[7]] + '-' + hex[b[8]] + hex[b[9]] + '-' +
+      hex[b[10]] + hex[b[11]] + hex[b[12]] + hex[b[13]] + hex[b[14]] + hex[b[15]];
+  }
+
+  // ---------- mode switching ----------
+  var modeLoremBtn = document.getElementById('modeLoremBtn');
+  var modeDataBtn = document.getElementById('modeDataBtn');
+  var loremPanel = document.getElementById('loremPanel');
+  var dataPanel = document.getElementById('dataPanel');
+
+  function setMode(mode) {
+    var isLorem = mode === 'lorem';
+    loremPanel.style.display = isLorem ? 'block' : 'none';
+    dataPanel.style.display = isLorem ? 'none' : 'block';
+    modeLoremBtn.className = 'btn' + (isLorem ? '' : ' btn-outline');
+    modeDataBtn.className = 'btn' + (isLorem ? ' btn-outline' : '');
+  }
+  modeLoremBtn.addEventListener('click', function () { setMode('lorem'); });
+  modeDataBtn.addEventListener('click', function () { setMode('data'); });
+
+  // ---------- lorem ipsum ----------
+  var loremUnit = document.getElementById('loremUnit');
+  var loremCount = document.getElementById('loremCount');
+  var startClassic = document.getElementById('startClassic');
+  var generateLoremBtn = document.getElementById('generateLoremBtn');
+  var loremOutput = document.getElementById('loremOutput');
+
+  function generateLorem() {
+    var unit = loremUnit.value;
+    var count = Math.min(50, Math.max(1, parseInt(loremCount.value, 10) || 1));
+    loremCount.value = count;
+    var result;
+
+    if (unit === 'words') {
+      var words = loremWords(count);
+      result = capitalize(words.join(' ')) + '.';
+    } else if (unit === 'sentences') {
+      var sentences = [];
+      for (var i = 0; i < count; i++) sentences.push(loremSentence());
+      result = sentences.join(' ');
+    } else {
+      var paragraphs = [];
+      for (var j = 0; j < count; j++) paragraphs.push(loremParagraph());
+      result = paragraphs.join('\n\n');
+    }
+
+    if (startClassic.checked) {
+      result = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ' + result;
+    }
+    loremOutput.textContent = result;
+  }
+
+  generateLoremBtn.addEventListener('click', generateLorem);
+
+  // ---------- dummy data ----------
+  var dataType = document.getElementById('dataType');
+  var dataCount = document.getElementById('dataCount');
+  var generateDataBtn = document.getElementById('generateDataBtn');
+  var dataOutput = document.getElementById('dataOutput');
+
+  function generateData() {
+    var type = dataType.value;
+    var count = Math.min(100, Math.max(1, parseInt(dataCount.value, 10) || 1));
+    dataCount.value = count;
+    var lines = [];
+    for (var i = 0; i < count; i++) {
+      if (type === 'names') {
+        lines.push(pick(FIRST_NAMES) + ' ' + pick(LAST_NAMES));
+      } else if (type === 'emails') {
+        var first = pick(FIRST_NAMES).toLowerCase();
+        var last = pick(LAST_NAMES).toLowerCase();
+        lines.push(first + '.' + last + randomInt(100) + '@' + pick(DOMAINS));
+      } else if (type === 'uuids') {
+        lines.push(uuidv4());
+      } else {
+        lines.push('+1-' + (200 + randomInt(800)) + '-' + (100 + randomInt(900)) + '-' + String(1000 + randomInt(9000)));
+      }
+    }
+    dataOutput.textContent = lines.join('\n');
+  }
+
+  generateDataBtn.addEventListener('click', generateData);
+
+  // ---------- copy ----------
+  var copyBtn = document.getElementById('copyBtn');
+  copyBtn.addEventListener('click', function () {
+    var active = loremPanel.style.display !== 'none' ? loremOutput : dataOutput;
+    if (!active.textContent) return;
+    navigator.clipboard.writeText(active.textContent).then(function () {
+      copyBtn.textContent = 'Copied!';
+      setTimeout(function () { copyBtn.textContent = 'Copy Output'; }, 2000);
+    });
+  });
+
+  setMode('lorem');
+  generateLorem();
+  generateData();
+})();
+</script>

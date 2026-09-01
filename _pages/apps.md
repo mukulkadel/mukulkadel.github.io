@@ -66,6 +66,11 @@ description: Web tools and mini-apps I've built.
     <h2 class="app-card-title">Text Cleaner</h2>
     <p class="app-card-desc">Trim whitespace and collapse blank lines in messy pasted text.</p>
   </a>
+  <a class="app-card" href="{{ '/apps/lorem-ipsum-generator/' | relative_url }}">
+    <div class="app-card-icon">📄</div>
+    <h2 class="app-card-title">Lorem Ipsum &amp; Dummy Data</h2>
+    <p class="app-card-desc">Generate placeholder text or fake names, emails, and UUIDs.</p>
+  </a>
 </div>
 
 <hr style="margin:3rem 0;">

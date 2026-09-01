@@ -1,0 +1,102 @@
+---
+layout: app
+title: Case Converter
+permalink: /apps/case-converter/
+description: Convert text between camelCase, snake_case, kebab-case, PascalCase, Title Case, and CONSTANT_CASE instantly in your browser.
+---
+
+<p style="color:var(--text-muted);margin-bottom:1.5rem;">
+  Paste any text — words, a sentence, or an identifier — and see it converted into common naming conventions.
+</p>
+
+<div style="margin-bottom:1.5rem;">
+  <textarea id="input" class="tool-output" style="width:100%;min-height:100px;resize:vertical;font-size:0.9rem;" placeholder="e.g. Hello World, hello-world, hello_world, helloWorld..."></textarea>
+</div>
+
+<div id="results" style="display:flex;flex-direction:column;gap:0.6rem;"></div>
+
+<script>
+(function () {
+  var input = document.getElementById('input');
+  var results = document.getElementById('results');
+
+  var FORMATS = [
+    { name: 'camelCase', fn: toCamel },
+    { name: 'PascalCase', fn: toPascal },
+    { name: 'snake_case', fn: toSnake },
+    { name: 'kebab-case', fn: toKebab },
+    { name: 'CONSTANT_CASE', fn: function (words) { return toSnake(words).toUpperCase(); } },
+    { name: 'Title Case', fn: toTitle },
+    { name: 'Sentence case', fn: toSentence },
+    { name: 'dot.case', fn: function (words) { return words.join('.'); } }
+  ];
+
+  var rows = {};
+
+  FORMATS.forEach(function (f) {
+    var row = document.createElement('div');
+    row.innerHTML =
+      '<div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.25rem;">' +
+      '<strong style="font-size:0.85rem;width:120px;">' + f.name + '</strong>' +
+      '<button class="btn btn-outline copy-btn" type="button" data-name="' + f.name + '" style="margin-left:auto;padding:0.25rem 0.6rem;font-size:0.8rem;">Copy</button>' +
+      '</div>' +
+      '<div class="tool-output" id="out-' + f.name.replace(/[^a-zA-Z]/g, '') + '" style="margin-top:0;word-break:break-all;"></div>';
+    results.appendChild(row);
+    rows[f.name] = row.querySelector('.tool-output');
+  });
+
+  results.addEventListener('click', function (e) {
+    var btn = e.target.closest('.copy-btn');
+    if (!btn) return;
+    var name = btn.getAttribute('data-name');
+    var text = rows[name].textContent;
+    if (!text) return;
+    navigator.clipboard.writeText(text).then(function () {
+      var original = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(function () { btn.textContent = original; }, 2000);
+    });
+  });
+
+  function splitWords(text) {
+    var normalized = text
+      .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+      .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')
+      .replace(/[_\-.]+/g, ' ')
+      .replace(/[^a-zA-Z0-9 ]+/g, ' ');
+    return normalized.split(/\s+/).filter(Boolean).map(function (w) { return w.toLowerCase(); });
+  }
+
+  function toCamel(words) {
+    return words.map(function (w, i) {
+      return i === 0 ? w : w.charAt(0).toUpperCase() + w.slice(1);
+    }).join('');
+  }
+
+  function toPascal(words) {
+    return words.map(function (w) { return w.charAt(0).toUpperCase() + w.slice(1); }).join('');
+  }
+
+  function toSnake(words) { return words.join('_'); }
+  function toKebab(words) { return words.join('-'); }
+
+  function toTitle(words) {
+    return words.map(function (w) { return w.charAt(0).toUpperCase() + w.slice(1); }).join(' ');
+  }
+
+  function toSentence(words) {
+    if (!words.length) return '';
+    var joined = words.join(' ');
+    return joined.charAt(0).toUpperCase() + joined.slice(1);
+  }
+
+  function update() {
+    var words = splitWords(input.value);
+    FORMATS.forEach(function (f) {
+      rows[f.name].textContent = words.length ? f.fn(words) : '';
+    });
+  }
+
+  input.addEventListener('input', update);
+})();
+</script>

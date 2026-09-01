@@ -19,7 +19,7 @@ _posts/              Blog posts (Markdown)
 _pages/              Static pages as a Jekyll collection (permalink /:slug/)
 assets/css/main.css  All styles — single file, CSS custom properties, dark mode via prefers-color-scheme
 assets/js/main.js    Reading progress bar, copy-code buttons, highlight.js + mermaid init
-tools/               Self-contained static mini-apps (e.g. image-to-base64)
+apps/                Self-contained static mini-apps (e.g. image-to-base64)
 ```
 
 ## Post front matter
@@ -83,7 +83,7 @@ IDs live in `_config.yml` (`google_analytics`, `google_adsense_client`). They ar
 
 - **New post**: create `_posts/YYYY-MM-DD-slug.md` with required front matter above.
 - **New page**: create `_pages/name.md` with `layout: page`, `title:`, `permalink:`, and `description:`.
-- **New mini-app**: drop static build output into `tools/your-app/` and add a card in `_pages/apps.md`.
+- **New mini-app**: drop static build output into `apps/your-app/` and add a card in `_pages/apps.md`.
 
 ## Blogging patterns
 

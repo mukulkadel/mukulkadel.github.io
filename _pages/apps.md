@@ -6,7 +6,7 @@ description: Web tools and mini-apps I've built.
 ---
 
 <div class="apps-grid">
-  <a class="app-card" href="{{ '/tools/image-to-base64/' | relative_url }}">
+  <a class="app-card" href="{{ '/apps/image-to-base64/' | relative_url }}">
     <div class="app-card-icon">🖼️</div>
     <h2 class="app-card-title">Image to Base64</h2>
     <p class="app-card-desc">Convert images to Base64 encoded strings instantly in your browser. No uploads, fully private.</p>

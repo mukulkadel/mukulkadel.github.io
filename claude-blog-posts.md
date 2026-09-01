@@ -63,8 +63,8 @@ Use 5–12 granular, SEO-relevant tags. Err toward more rather than fewer.
 ## Progress tracker
 
 **Total posts**: 149
-**Completed**: 16
-**Remaining**: 133
+**Completed**: 26
+**Remaining**: 123
 
 ---
 
@@ -122,27 +122,27 @@ Use 5–12 granular, SEO-relevant tags. Err toward more rather than fewer.
   - `categories`: ["wiki", "Programming"]
   - `tags`: ["distributed tracing", "opentelemetry", "jaeger", "observability", "microservices", "spans", "backend", "devops", "debugging"]
 
-- [ ] **11** — System Design: Building a Search Engine with Inverted Indexes
+- [x] **11** — System Design: Building a Search Engine with Inverted Indexes
   - `slug`: system-design-search-engine-inverted-index
   - `categories`: ["wiki", "Programming"]
   - `tags`: ["search engine", "inverted index", "elasticsearch", "full-text search", "system design", "backend", "architecture", "interview"]
 
-- [ ] **12** — Zero-Downtime Deployments: Blue-Green, Canary, and Rolling Strategies
+- [x] **12** — Zero-Downtime Deployments: Blue-Green, Canary, and Rolling Strategies
   - `slug`: zero-downtime-deployment-strategies
   - `categories`: ["wiki", "Programming"]
   - `tags`: ["zero downtime", "blue-green deployment", "canary release", "rolling deployment", "devops", "kubernetes", "ci/cd", "backend"]
 
-- [ ] **13** — System Design: Designing a Task Queue and Job Scheduler
+- [x] **13** — System Design: Designing a Task Queue and Job Scheduler
   - `slug`: system-design-task-queue-job-scheduler
   - `categories`: ["wiki", "Programming"]
   - `tags`: ["task queue", "job scheduler", "celery", "sidekiq", "redis", "backend", "system design", "async", "workers", "architecture"]
 
-- [ ] **14** — Write-Ahead Logging: How Databases Recover from Crashes
+- [x] **14** — Write-Ahead Logging: How Databases Recover from Crashes
   - `slug`: write-ahead-logging-database-recovery
   - `categories`: ["wiki", "SQL"]
   - `tags`: ["write-ahead log", "wal", "database", "crash recovery", "postgresql", "durability", "acid", "storage engine", "internals"]
 
-- [ ] **15** — CQRS: Command Query Responsibility Segregation Explained
+- [x] **15** — CQRS: Command Query Responsibility Segregation Explained
   - `slug`: cqrs-command-query-responsibility-segregation
   - `categories`: ["wiki", "Programming"]
   - `tags`: ["cqrs", "command query", "architecture", "event sourcing", "backend", "read models", "write models", "microservices", "design patterns"]
@@ -151,27 +151,27 @@ Use 5–12 granular, SEO-relevant tags. Err toward more rather than fewer.
 
 ### Networking Deep Dives
 
-- [ ] **16** — How BGP Works: The Protocol That Routes the Internet
+- [x] **16** — How BGP Works: The Protocol That Routes the Internet
   - `slug`: how-bgp-works-explained
   - `categories`: ["wiki"]
   - `tags`: ["bgp", "border gateway protocol", "networking", "routing", "internet", "autonomous systems", "isp", "peering", "infrastructure"]
 
-- [ ] **17** — IP Subnetting and CIDR Notation: A Practical Guide
+- [x] **17** — IP Subnetting and CIDR Notation: A Practical Guide
   - `slug`: ip-subnetting-cidr-notation-guide
   - `categories`: ["wiki"]
   - `tags`: ["subnetting", "cidr", "ip addressing", "networking", "ipv4", "netmask", "vpc", "devops", "linux", "sysadmin"]
 
-- [ ] **18** — How the TLS Handshake Works Step by Step
+- [x] **18** — How the TLS Handshake Works Step by Step
   - `slug`: tls-handshake-explained-step-by-step
   - `categories`: ["wiki"]
   - `tags`: ["tls", "ssl", "handshake", "https", "encryption", "certificates", "networking", "security", "asymmetric encryption"]
 
-- [ ] **19** — iptables and nftables: Packet Filtering on Linux
+- [x] **19** — iptables and nftables: Packet Filtering on Linux
   - `slug`: iptables-nftables-packet-filtering-linux
   - `categories`: ["wiki", "unix"]
   - `tags`: ["iptables", "nftables", "firewall", "linux", "packet filtering", "networking", "sysadmin", "security", "chains", "rules"]
 
-- [ ] **20** — VPNs Explained: How WireGuard Works Under the Hood
+- [x] **20** — VPNs Explained: How WireGuard Works Under the Hood
   - `slug`: vpn-wireguard-explained
   - `categories`: ["wiki"]
   - `tags`: ["vpn", "wireguard", "networking", "tunneling", "encryption", "privacy", "linux", "security", "peer-to-peer"]

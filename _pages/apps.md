@@ -61,6 +61,11 @@ description: Web tools and mini-apps I've built.
     <h2 class="app-card-title">Word &amp; Character Counter</h2>
     <p class="app-card-desc">Count words, characters, sentences, and estimate reading time.</p>
   </a>
+  <a class="app-card" href="{{ '/apps/text-cleaner/' | relative_url }}">
+    <div class="app-card-icon">🧹</div>
+    <h2 class="app-card-title">Text Cleaner</h2>
+    <p class="app-card-desc">Trim whitespace and collapse blank lines in messy pasted text.</p>
+  </a>
 </div>
 
 <hr style="margin:3rem 0;">

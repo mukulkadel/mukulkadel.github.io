@@ -1,0 +1,100 @@
+---
+layout: app
+title: Text Cleaner
+permalink: /apps/text-cleaner/
+description: Trim whitespace, collapse blank lines, and clean up messy pasted text instantly in your browser.
+---
+
+<p style="color:var(--text-muted);margin-bottom:1.5rem;">
+  Paste messy text, pick the cleanup steps you want, and get a tidy result. Everything runs locally in your browser.
+</p>
+
+<div style="margin-bottom:1rem;">
+  <textarea id="input" class="tool-output" style="width:100%;min-height:180px;resize:vertical;font-size:0.85rem;" placeholder="Paste messy text here..."></textarea>
+</div>
+
+<div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1rem;">
+  <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;">
+    <input type="checkbox" id="trimLines" checked> Trim each line
+  </label>
+  <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;">
+    <input type="checkbox" id="collapseBlank" checked> Collapse blank lines
+  </label>
+  <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;">
+    <input type="checkbox" id="removeBlank"> Remove all blank lines
+  </label>
+  <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;">
+    <input type="checkbox" id="collapseSpaces" checked> Collapse repeated spaces
+  </label>
+  <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;">
+    <input type="checkbox" id="stripLineBreaks"> Join into a single line
+  </label>
+</div>
+
+<div style="display:flex;gap:0.5rem;margin-bottom:1rem;">
+  <button class="btn btn-outline" id="copyBtn" type="button">Copy Output</button>
+</div>
+
+<div id="output" class="tool-output" style="min-height:100px;max-height:300px;"></div>
+
+<script>
+(function () {
+  var input = document.getElementById('input');
+  var output = document.getElementById('output');
+  var copyBtn = document.getElementById('copyBtn');
+  var trimLines = document.getElementById('trimLines');
+  var collapseBlank = document.getElementById('collapseBlank');
+  var removeBlank = document.getElementById('removeBlank');
+  var collapseSpaces = document.getElementById('collapseSpaces');
+  var stripLineBreaks = document.getElementById('stripLineBreaks');
+
+  function clean() {
+    var text = input.value;
+    var lines = text.split('\n');
+
+    if (trimLines.checked) {
+      lines = lines.map(function (l) { return l.trim(); });
+    }
+
+    if (collapseSpaces.checked) {
+      lines = lines.map(function (l) { return l.replace(/[ \t]{2,}/g, ' '); });
+    }
+
+    if (removeBlank.checked) {
+      lines = lines.filter(function (l) { return l.trim().length > 0; });
+    } else if (collapseBlank.checked) {
+      var result = [];
+      var prevBlank = false;
+      lines.forEach(function (l) {
+        var isBlank = l.trim().length === 0;
+        if (isBlank && prevBlank) return;
+        result.push(l);
+        prevBlank = isBlank;
+      });
+      lines = result;
+    }
+
+    var cleaned = lines.join('\n');
+    if (stripLineBreaks.checked) {
+      cleaned = cleaned.split('\n').map(function (l) { return l.trim(); }).filter(Boolean).join(' ');
+    }
+
+    output.textContent = cleaned;
+  }
+
+  [input, trimLines, collapseBlank, removeBlank, collapseSpaces, stripLineBreaks].forEach(function (el) {
+    el.addEventListener('input', clean);
+    el.addEventListener('change', clean);
+  });
+
+  copyBtn.addEventListener('click', function () {
+    if (!output.textContent) return;
+    navigator.clipboard.writeText(output.textContent).then(function () {
+      copyBtn.textContent = 'Copied!';
+      setTimeout(function () { copyBtn.textContent = 'Copy Output'; }, 2000);
+    });
+  });
+
+  clean();
+})();
+</script>

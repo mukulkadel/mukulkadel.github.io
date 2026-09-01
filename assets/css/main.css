@@ -352,17 +352,27 @@ pre[data-lang]::before {
   color: var(--text-muted);
 }
 
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.footer-legal,
 .footer-social {
   display: flex;
   gap: 0.75rem;
 }
 
+.footer-legal a,
 .footer-social a {
   color: var(--text-muted);
   font-size: 0.875rem;
   text-decoration: none;
   transition: color 0.15s;
 }
+.footer-legal a:hover,
 .footer-social a:hover { color: var(--accent); text-decoration: none; }
 
 /* ============================================================

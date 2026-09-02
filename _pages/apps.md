@@ -126,6 +126,11 @@ description: Web tools and mini-apps I've built.
     <h2 class="app-card-title">CSS Gradient, Shadow &amp; Radius Playground</h2>
     <p class="app-card-desc">Interactively build gradients, shadows, and border radii.</p>
   </a>
+  <a class="app-card" href="{{ '/apps/qr-generator/' | relative_url }}">
+    <div class="app-card-icon">🔳</div>
+    <h2 class="app-card-title">QR Code Generator</h2>
+    <p class="app-card-desc">Generate a QR code from any text or URL, downloadable as PNG.</p>
+  </a>
 </div>
 
 <hr style="margin:3rem 0;">

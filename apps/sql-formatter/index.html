@@ -1,0 +1,162 @@
+---
+layout: app
+title: SQL Formatter
+permalink: /apps/sql-formatter/
+description: Pretty-print SQL queries with keyword casing and clause indentation, entirely in your browser.
+---
+
+<p style="color:var(--text-muted);margin-bottom:1.5rem;">
+  Paste a SQL query to format it. This is a best-effort formatter built with regex-based rules (not a full SQL parser) — it
+  handles common <code>SELECT</code>/<code>JOIN</code>/<code>WHERE</code>/<code>GROUP BY</code> style queries well, but
+  unusual syntax may not format perfectly. Everything runs locally in your browser.
+</p>
+
+<div style="margin-bottom:1rem;">
+  <textarea id="input" class="tool-output" style="width:100%;min-height:140px;resize:vertical;font-size:0.85rem;" placeholder="select id, name from users where active = 1 order by name"></textarea>
+</div>
+
+<div style="display:flex;gap:0.5rem;margin-bottom:1rem;">
+  <button class="btn" id="formatBtn" type="button">Format</button>
+  <button class="btn btn-outline" id="copyBtn" type="button">Copy Output</button>
+</div>
+
+<div id="output" class="tool-output" style="max-height:400px;"></div>
+
+<script>
+(function () {
+  var MAJOR_CLAUSES = [
+    'SELECT DISTINCT', 'SELECT', 'FROM', 'WHERE', 'GROUP BY', 'ORDER BY', 'HAVING',
+    'LIMIT', 'OFFSET', 'INSERT INTO', 'VALUES', 'UPDATE', 'SET', 'DELETE FROM',
+    'LEFT OUTER JOIN', 'RIGHT OUTER JOIN', 'FULL OUTER JOIN', 'LEFT JOIN', 'RIGHT JOIN',
+    'INNER JOIN', 'FULL JOIN', 'CROSS JOIN', 'JOIN', 'UNION ALL', 'UNION'
+  ];
+
+  var KEYWORDS = [
+    'SELECT', 'DISTINCT', 'FROM', 'WHERE', 'AND', 'OR', 'NOT', 'IN', 'IS', 'NULL',
+    'GROUP', 'BY', 'ORDER', 'HAVING', 'LIMIT', 'OFFSET', 'INSERT', 'INTO', 'VALUES',
+    'UPDATE', 'SET', 'DELETE', 'JOIN', 'INNER', 'LEFT', 'RIGHT', 'FULL', 'OUTER',
+    'CROSS', 'ON', 'AS', 'UNION', 'ALL', 'CASE', 'WHEN', 'THEN', 'ELSE', 'END',
+    'LIKE', 'BETWEEN', 'EXISTS', 'ASC', 'DESC', 'CREATE', 'TABLE', 'ALTER', 'DROP',
+    'PRIMARY', 'KEY', 'FOREIGN', 'REFERENCES', 'DEFAULT', 'COUNT', 'SUM', 'AVG',
+    'MIN', 'MAX'
+  ];
+
+  function protectLiterals(sql) {
+    var literals = [];
+    var protectedSql = sql.replace(/'(?:[^'\\]|\\.)*'|"(?:[^"\\]|\\.)*"|--[^\n]*/g, function (m) {
+      literals.push(m);
+      return ' ' + (literals.length - 1) + ' ';
+    });
+    return { sql: protectedSql, literals: literals };
+  }
+
+  function restoreLiterals(sql, literals) {
+    return sql.replace(/ (\d+) /g, function (m, i) {
+      return literals[parseInt(i, 10)];
+    });
+  }
+
+  function splitTopLevel(text, sep) {
+    var parts = [];
+    var depth = 0;
+    var current = '';
+    for (var i = 0; i < text.length; i++) {
+      var c = text[i];
+      if (c === '(') depth++;
+      if (c === ')') depth--;
+      if (c === sep && depth === 0) {
+        parts.push(current.trim());
+        current = '';
+      } else {
+        current += c;
+      }
+    }
+    if (current.trim() !== '') parts.push(current.trim());
+    return parts;
+  }
+
+  function formatSQL(sql) {
+    var protectedResult = protectLiterals(sql);
+    var text = protectedResult.sql;
+
+    text = text.replace(/\s+/g, ' ').trim();
+
+    KEYWORDS.forEach(function (kw) {
+      var re = new RegExp('\\b' + kw + '\\b', 'gi');
+      text = text.replace(re, kw);
+    });
+
+    var sortedClauses = MAJOR_CLAUSES.slice().sort(function (a, b) { return b.length - a.length; });
+    var pattern = sortedClauses.map(function (c) { return c.replace(/ /g, '\\s+'); }).join('|');
+    var clauseRe = new RegExp('\\s*\\b(' + pattern + ')\\b\\s*', 'g');
+    text = text.replace(clauseRe, function (m, matched) {
+      return '\n' + matched.replace(/\s+/g, ' ') + ' ';
+    });
+
+    var lines = text.split('\n').map(function (l) { return l.trim(); }).filter(Boolean);
+
+    var output = [];
+    lines.forEach(function (line) {
+      var clauseMatch = sortedClauses.find(function (c) { return line.indexOf(c) === 0; });
+      if (!clauseMatch) { output.push(line); return; }
+
+      var rest = line.slice(clauseMatch.length).trim();
+
+      if (clauseMatch === 'SELECT' || clauseMatch === 'SELECT DISTINCT') {
+        var cols = splitTopLevel(rest, ',');
+        output.push(clauseMatch);
+        cols.forEach(function (col, idx) {
+          output.push('  ' + col + (idx < cols.length - 1 ? ',' : ''));
+        });
+        return;
+      }
+
+      if (clauseMatch === 'WHERE' || clauseMatch === 'ON' || clauseMatch === 'HAVING') {
+        var condParts = rest.split(/\s+(AND|OR)\s+/);
+        output.push(clauseMatch + ' ' + condParts[0]);
+        for (var i = 1; i < condParts.length; i += 2) {
+          output.push('  ' + condParts[i] + ' ' + condParts[i + 1]);
+        }
+        return;
+      }
+
+      if (clauseMatch === 'GROUP BY' || clauseMatch === 'ORDER BY') {
+        var items = splitTopLevel(rest, ',');
+        output.push(clauseMatch + ' ' + items.join(', '));
+        return;
+      }
+
+      output.push(clauseMatch + (rest ? ' ' + rest : ''));
+    });
+
+    return restoreLiterals(output.join('\n'), protectedResult.literals);
+  }
+
+  var input = document.getElementById('input');
+  var formatBtn = document.getElementById('formatBtn');
+  var copyBtn = document.getElementById('copyBtn');
+  var output = document.getElementById('output');
+
+  function format() {
+    if (!input.value.trim()) { output.textContent = ''; return; }
+    try {
+      output.textContent = formatSQL(input.value);
+    } catch (e) {
+      output.textContent = 'Could not format this query: ' + e.message;
+    }
+  }
+
+  formatBtn.addEventListener('click', format);
+
+  copyBtn.addEventListener('click', function () {
+    if (!output.textContent) return;
+    navigator.clipboard.writeText(output.textContent).then(function () {
+      copyBtn.textContent = 'Copied!';
+      setTimeout(function () { copyBtn.textContent = 'Copy Output'; }, 2000);
+    });
+  });
+
+  input.value = 'select u.id, u.name, o.total from users u inner join orders o on u.id = o.user_id where o.total > 100 and u.active = 1 order by o.total desc limit 10';
+  format();
+})();
+</script>

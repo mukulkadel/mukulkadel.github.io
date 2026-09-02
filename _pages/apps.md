@@ -101,6 +101,11 @@ description: Web tools and mini-apps I've built.
     <h2 class="app-card-title">JWT Decoder</h2>
     <p class="app-card-desc">Decode a JWT's header and payload (no signature verification).</p>
   </a>
+  <a class="app-card" href="{{ '/apps/sql-formatter/' | relative_url }}">
+    <div class="app-card-icon">🗃️</div>
+    <h2 class="app-card-title">SQL Formatter</h2>
+    <p class="app-card-desc">Pretty-print SQL queries with keyword casing and indentation.</p>
+  </a>
 </div>
 
 <hr style="margin:3rem 0;">

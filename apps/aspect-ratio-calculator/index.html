@@ -1,0 +1,141 @@
+---
+layout: app
+title: Aspect Ratio Calculator
+permalink: /apps/aspect-ratio-calculator/
+description: Calculate an aspect ratio from dimensions, or find a missing width or height for a target ratio, instantly in your browser.
+---
+
+<p style="color:var(--text-muted);margin-bottom:1.5rem;">
+  Everything runs locally in your browser.
+</p>
+
+<h2>Find the Ratio</h2>
+<p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:0.75rem;">Enter a width and height to get the simplified ratio.</p>
+
+<div style="display:flex;gap:1rem;align-items:flex-end;flex-wrap:wrap;margin-bottom:1rem;">
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+    Width
+    <input type="number" id="ratioWidth" value="1920" min="1" style="width:120px;padding:0.5rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-family:var(--font-mono);">
+  </label>
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+    Height
+    <input type="number" id="ratioHeight" value="1080" min="1" style="width:120px;padding:0.5rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-family:var(--font-mono);">
+  </label>
+</div>
+
+<div id="ratioResult" class="tool-output" style="font-size:1.2rem;text-align:center;padding:1rem;"></div>
+
+<hr style="margin:2.5rem 0;">
+
+<h2>Find a Missing Dimension</h2>
+<p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:0.75rem;">Pick a target ratio and one known dimension to compute the other.</p>
+
+<div style="display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap;">
+  <button class="btn btn-outline preset-btn" type="button" data-ratio="16:9">16:9</button>
+  <button class="btn btn-outline preset-btn" type="button" data-ratio="4:3">4:3</button>
+  <button class="btn btn-outline preset-btn" type="button" data-ratio="1:1">1:1</button>
+  <button class="btn btn-outline preset-btn" type="button" data-ratio="21:9">21:9</button>
+  <button class="btn btn-outline preset-btn" type="button" data-ratio="3:2">3:2</button>
+  <button class="btn btn-outline preset-btn" type="button" data-ratio="9:16">9:16</button>
+</div>
+
+<div style="display:flex;gap:1rem;align-items:flex-end;flex-wrap:wrap;margin-bottom:1rem;">
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+    Ratio width
+    <input type="number" id="targetRatioW" value="16" min="1" style="width:100px;padding:0.5rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-family:var(--font-mono);">
+  </label>
+  <span style="color:var(--text-muted);padding-bottom:0.5rem;">:</span>
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+    Ratio height
+    <input type="number" id="targetRatioH" value="9" min="1" style="width:100px;padding:0.5rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-family:var(--font-mono);">
+  </label>
+</div>
+
+<div style="display:flex;gap:1rem;align-items:flex-end;flex-wrap:wrap;margin-bottom:1rem;">
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+    Known width
+    <input type="number" id="knownWidth" value="1920" min="1" style="width:120px;padding:0.5rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-family:var(--font-mono);">
+  </label>
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+    Known height
+    <input type="number" id="knownHeight" placeholder="(computed)" style="width:120px;padding:0.5rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-family:var(--font-mono);">
+  </label>
+</div>
+
+<div id="dimResult" class="tool-output" style="font-size:1.2rem;text-align:center;padding:1rem;"></div>
+
+<script>
+(function () {
+  function gcd(a, b) { return b === 0 ? a : gcd(b, a % b); }
+
+  var ratioWidth = document.getElementById('ratioWidth');
+  var ratioHeight = document.getElementById('ratioHeight');
+  var ratioResult = document.getElementById('ratioResult');
+
+  function updateRatio() {
+    var w = parseFloat(ratioWidth.value);
+    var h = parseFloat(ratioHeight.value);
+    if (!w || !h || w <= 0 || h <= 0) {
+      ratioResult.textContent = 'Enter valid positive dimensions';
+      return;
+    }
+    var isInt = Number.isInteger(w) && Number.isInteger(h);
+    if (isInt) {
+      var d = gcd(w, h);
+      ratioResult.textContent = w + ' × ' + h + ' = ' + (w / d) + ':' + (h / d);
+    } else {
+      ratioResult.textContent = w + ' × ' + h + ' = ' + (w / h).toFixed(4) + ':1';
+    }
+  }
+
+  ratioWidth.addEventListener('input', updateRatio);
+  ratioHeight.addEventListener('input', updateRatio);
+
+  var targetRatioW = document.getElementById('targetRatioW');
+  var targetRatioH = document.getElementById('targetRatioH');
+  var knownWidth = document.getElementById('knownWidth');
+  var knownHeight = document.getElementById('knownHeight');
+  var dimResult = document.getElementById('dimResult');
+  var lastEdited = 'width';
+
+  document.querySelectorAll('.preset-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var parts = btn.getAttribute('data-ratio').split(':');
+      targetRatioW.value = parts[0];
+      targetRatioH.value = parts[1];
+      updateDim();
+    });
+  });
+
+  function updateDim() {
+    var rw = parseFloat(targetRatioW.value);
+    var rh = parseFloat(targetRatioH.value);
+    if (!rw || !rh || rw <= 0 || rh <= 0) {
+      dimResult.textContent = 'Enter a valid ratio';
+      return;
+    }
+
+    if (lastEdited === 'width') {
+      var w = parseFloat(knownWidth.value);
+      if (!w || w <= 0) { dimResult.textContent = 'Enter a known width'; return; }
+      var computedH = w * (rh / rw);
+      knownHeight.value = Math.round(computedH * 100) / 100;
+      dimResult.textContent = w + ' × ' + knownHeight.value + ' at ' + rw + ':' + rh;
+    } else {
+      var h = parseFloat(knownHeight.value);
+      if (!h || h <= 0) { dimResult.textContent = 'Enter a known height'; return; }
+      var computedW = h * (rw / rh);
+      knownWidth.value = Math.round(computedW * 100) / 100;
+      dimResult.textContent = knownWidth.value + ' × ' + h + ' at ' + rw + ':' + rh;
+    }
+  }
+
+  targetRatioW.addEventListener('input', updateDim);
+  targetRatioH.addEventListener('input', updateDim);
+  knownWidth.addEventListener('input', function () { lastEdited = 'width'; updateDim(); });
+  knownHeight.addEventListener('input', function () { lastEdited = 'height'; updateDim(); });
+
+  updateRatio();
+  updateDim();
+})();
+</script>

@@ -111,6 +111,11 @@ description: Web tools and mini-apps I've built.
     <h2 class="app-card-title">CSS / JS Minifier &amp; Beautifier</h2>
     <p class="app-card-desc">Minify or beautify CSS and JavaScript with no build step.</p>
   </a>
+  <a class="app-card" href="{{ '/apps/unit-converter/' | relative_url }}">
+    <div class="app-card-icon">📐</div>
+    <h2 class="app-card-title">Unit Converter</h2>
+    <p class="app-card-desc">Convert length, weight, temperature, and data storage units.</p>
+  </a>
 </div>
 
 <hr style="margin:3rem 0;">

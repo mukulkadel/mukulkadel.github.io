@@ -131,6 +131,11 @@ description: Web tools and mini-apps I've built.
     <h2 class="app-card-title">QR Code Generator</h2>
     <p class="app-card-desc">Generate a QR code from any text or URL, downloadable as PNG.</p>
   </a>
+  <a class="app-card" href="{{ '/apps/favicon-generator/' | relative_url }}">
+    <div class="app-card-icon">🧩</div>
+    <h2 class="app-card-title">Favicon Generator</h2>
+    <p class="app-card-desc">Resize an image into standard favicon sizes, download as PNG.</p>
+  </a>
 </div>
 
 <hr style="margin:3rem 0;">

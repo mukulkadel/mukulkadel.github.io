@@ -1,0 +1,161 @@
+---
+layout: app
+title: Favicon Generator
+permalink: /apps/favicon-generator/
+description: Resize an image into standard favicon sizes and download each as a PNG, entirely in your browser.
+---
+
+<p style="color:var(--text-muted);margin-bottom:1.5rem;">
+  Upload an image and it's resized to common favicon sizes using a canvas — nothing is uploaded anywhere. Download the
+  sizes you need individually.
+</p>
+
+<div class="tool-zone" id="dropZone" role="button" tabindex="0" aria-label="Drop image here or click to select">
+  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" style="margin:0 auto 0.75rem;display:block;color:var(--text-muted)">
+    <rect x="3" y="3" width="18" height="18" rx="2"/>
+    <circle cx="8.5" cy="8.5" r="1.5"/>
+    <polyline points="21 15 16 10 5 21"/>
+  </svg>
+  <p style="color:var(--text-muted);margin:0;font-size:0.95rem;">Click to select an image, or drag and drop here</p>
+  <p style="color:var(--text-muted);margin:0.25rem 0 0;font-size:0.8rem;">PNG, JPG, GIF, WebP, SVG supported</p>
+  <input type="file" id="fileInput" accept="image/*" style="display:none" aria-label="Select image file">
+</div>
+
+<div id="result" style="display:none;">
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:1.5rem;flex-wrap:wrap;">
+    <strong id="fileName" style="font-size:0.9rem;"></strong>
+    <button class="btn btn-outline" id="downloadAllBtn" type="button" style="margin-left:auto;">Download All</button>
+    <button class="btn btn-outline" id="resetBtn" type="button">Reset</button>
+  </div>
+
+  <div id="sizesGrid" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(140px, 1fr));gap:1rem;"></div>
+</div>
+
+<script>
+(function () {
+  var SIZES = [16, 32, 48, 96, 180, 192, 512];
+
+  var dropZone = document.getElementById('dropZone');
+  var fileInput = document.getElementById('fileInput');
+  var resultDiv = document.getElementById('result');
+  var fileNameEl = document.getElementById('fileName');
+  var sizesGrid = document.getElementById('sizesGrid');
+  var downloadAllBtn = document.getElementById('downloadAllBtn');
+  var resetBtn = document.getElementById('resetBtn');
+
+  var generatedCanvases = {};
+
+  function resizeToCanvas(img, size) {
+    var canvas = document.createElement('canvas');
+    canvas.width = size;
+    canvas.height = size;
+    var ctx = canvas.getContext('2d');
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+
+    var scale = Math.min(size / img.naturalWidth, size / img.naturalHeight);
+    var w = img.naturalWidth * scale;
+    var h = img.naturalHeight * scale;
+    var x = (size - w) / 2;
+    var y = (size - h) / 2;
+    ctx.drawImage(img, x, y, w, h);
+    return canvas;
+  }
+
+  function downloadCanvas(canvas, filename) {
+    var a = document.createElement('a');
+    a.href = canvas.toDataURL('image/png');
+    a.download = filename;
+    a.click();
+  }
+
+  function processFile(file) {
+    if (!file || !file.type.startsWith('image/')) {
+      alert('Please select a valid image file.');
+      return;
+    }
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      var img = new Image();
+      img.onload = function () {
+        fileNameEl.textContent = file.name;
+        sizesGrid.innerHTML = '';
+        generatedCanvases = {};
+
+        SIZES.forEach(function (size) {
+          var canvas = resizeToCanvas(img, size);
+          generatedCanvases[size] = canvas;
+
+          var card = document.createElement('div');
+          card.style.cssText = 'border:1px solid var(--border);border-radius:var(--radius);padding:1rem;text-align:center;';
+
+          var previewWrap = document.createElement('div');
+          previewWrap.style.cssText = 'display:flex;align-items:center;justify-content:center;height:64px;margin-bottom:0.75rem;';
+          var previewImg = document.createElement('img');
+          previewImg.src = canvas.toDataURL('image/png');
+          previewImg.style.cssText = 'max-width:' + Math.min(size, 64) + 'px;max-height:' + Math.min(size, 64) + 'px;image-rendering:pixelated;';
+          previewWrap.appendChild(previewImg);
+
+          var label = document.createElement('p');
+          label.style.cssText = 'font-size:0.85rem;color:var(--text-muted);margin:0 0 0.5rem;';
+          label.textContent = size + '×' + size;
+
+          var btn = document.createElement('button');
+          btn.className = 'btn btn-outline';
+          btn.type = 'button';
+          btn.textContent = 'Download';
+          btn.style.cssText = 'width:100%;justify-content:center;padding:0.4rem;font-size:0.8rem;';
+          btn.addEventListener('click', function () {
+            downloadCanvas(canvas, 'favicon-' + size + 'x' + size + '.png');
+          });
+
+          card.appendChild(previewWrap);
+          card.appendChild(label);
+          card.appendChild(btn);
+          sizesGrid.appendChild(card);
+        });
+
+        resultDiv.style.display = 'block';
+        dropZone.style.display = 'none';
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  dropZone.addEventListener('click', function () { fileInput.click(); });
+  dropZone.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') fileInput.click(); });
+
+  fileInput.addEventListener('change', function () {
+    if (fileInput.files.length) processFile(fileInput.files[0]);
+  });
+
+  dropZone.addEventListener('dragover', function (e) {
+    e.preventDefault();
+    dropZone.classList.add('dragover');
+  });
+  dropZone.addEventListener('dragleave', function () { dropZone.classList.remove('dragover'); });
+  dropZone.addEventListener('drop', function (e) {
+    e.preventDefault();
+    dropZone.classList.remove('dragover');
+    var file = e.dataTransfer.files[0];
+    if (file) processFile(file);
+  });
+
+  downloadAllBtn.addEventListener('click', function () {
+    SIZES.forEach(function (size, i) {
+      setTimeout(function () {
+        downloadCanvas(generatedCanvases[size], 'favicon-' + size + 'x' + size + '.png');
+      }, i * 200);
+    });
+  });
+
+  resetBtn.addEventListener('click', function () {
+    resultDiv.style.display = 'none';
+    dropZone.style.display = 'block';
+    fileInput.value = '';
+    sizesGrid.innerHTML = '';
+    generatedCanvases = {};
+  });
+})();
+</script>

@@ -1,0 +1,151 @@
+---
+layout: app
+title: CSS / JS Minifier & Beautifier
+permalink: /apps/code-minifier/
+description: Minify or beautify CSS and JavaScript instantly in your browser, with no build step.
+---
+
+<p style="color:var(--text-muted);margin-bottom:1rem;">
+  Toggle between CSS and JS, then minify or beautify. This uses lightweight regex-based transforms rather than a full
+  parser: CSS minification is safe and complete, but JS "minify" only strips comments and collapses whitespace/blank lines
+  per line — it deliberately keeps line breaks rather than joining everything onto one line, since safely doing that
+  requires understanding automatic semicolon insertion. Beautify also can't recognize JS regex literals (e.g. <code>/{/</code>),
+  so a stray regex containing brace/paren characters may not reformat correctly. Everything runs locally in your browser.
+</p>
+
+<div style="display:flex;gap:0.5rem;margin-bottom:1rem;">
+  <button class="btn" id="modeCssBtn" type="button" style="flex:1;justify-content:center;">CSS</button>
+  <button class="btn btn-outline" id="modeJsBtn" type="button" style="flex:1;justify-content:center;">JavaScript</button>
+</div>
+
+<div style="margin-bottom:1rem;">
+  <textarea id="input" class="tool-output" style="width:100%;min-height:220px;resize:vertical;font-size:0.85rem;"></textarea>
+</div>
+
+<div style="display:flex;gap:0.5rem;margin-bottom:1rem;">
+  <button class="btn" id="minifyBtn" type="button">Minify</button>
+  <button class="btn" id="beautifyBtn" type="button">Beautify</button>
+  <button class="btn btn-outline" id="copyBtn" type="button">Copy Output</button>
+</div>
+
+<div id="output" class="tool-output" style="max-height:350px;"></div>
+
+<script>
+(function () {
+  var LITERAL_RE = /`(?:[^`\\]|\\.)*`|'(?:[^'\\]|\\.)*'|"(?:[^"\\]|\\.)*"|\/\*[\s\S]*?\*\/|\/\/[^\n]*/g;
+
+  function protect(code, stripComments) {
+    var placeholders = [];
+    var text = code.replace(LITERAL_RE, function (m) {
+      if (stripComments && (m.slice(0, 2) === '/*' || m.slice(0, 2) === '//')) return '';
+      placeholders.push(m);
+      var marker = '\x01' + (placeholders.length - 1) + '\x01';
+      return m.slice(0, 2) === '//' ? marker + '\x02' : marker;
+    });
+    return { text: text, placeholders: placeholders };
+  }
+
+  function restore(text, placeholders) {
+    return text.replace(/\x01(\d+)\x01/g, function (m, i) {
+      return placeholders[parseInt(i, 10)];
+    });
+  }
+
+  function minifyCSS(code) {
+    var p = protect(code, true);
+    var text = p.text.replace(/\s+/g, ' ').trim();
+    text = text.replace(/\s*([{}:;,])\s*/g, '$1');
+    text = text.replace(/;}/g, '}');
+    return restore(text, p.placeholders);
+  }
+
+  function minifyJS(code) {
+    var p = protect(code, true);
+    var lines = p.text.split('\n')
+      .map(function (l) { return l.replace(/[ \t]+/g, ' ').trim(); })
+      .filter(function (l) { return l.length > 0; });
+    return restore(lines.join('\n'), p.placeholders);
+  }
+
+  function beautify(code) {
+    var p = protect(code, false);
+    var text = p.text.replace(/\s+/g, ' ').trim();
+
+    var out = '';
+    var parenDepth = 0;
+    for (var i = 0; i < text.length; i++) {
+      var c = text[i];
+      if (c === '(' || c === '[') { parenDepth++; out += c; continue; }
+      if (c === ')' || c === ']') { parenDepth--; out += c; continue; }
+      if (c === '{') { out = out.replace(/ +$/, ''); out += ' {\n'; continue; }
+      if (c === '}') { out = out.replace(/ +$/, ''); out += '\n}\n'; continue; }
+      if (c === ';' && parenDepth === 0) { out += ';\n'; continue; }
+      if (c === '\x02') { out += '\n'; continue; }
+      out += c;
+    }
+
+    var rawLines = out.split('\n').map(function (l) { return l.trim(); }).filter(Boolean);
+    var depth = 0;
+    var indentedLines = [];
+    rawLines.forEach(function (line) {
+      if (line.charAt(0) === '}') depth = Math.max(0, depth - 1);
+      indentedLines.push('  '.repeat(depth) + line);
+      if (line.charAt(line.length - 1) === '{') depth++;
+    });
+
+    for (var li = indentedLines.length - 2; li >= 0; li--) {
+      if (/^\s*}\s*$/.test(indentedLines[li]) && /^\s*(else|catch|finally)\b/.test(indentedLines[li + 1])) {
+        indentedLines[li] = indentedLines[li].replace(/\s*$/, '') + ' ' + indentedLines[li + 1].trim();
+        indentedLines.splice(li + 1, 1);
+      }
+    }
+
+    return restore(indentedLines.join('\n'), p.placeholders);
+  }
+
+  var modeCssBtn = document.getElementById('modeCssBtn');
+  var modeJsBtn = document.getElementById('modeJsBtn');
+  var input = document.getElementById('input');
+  var minifyBtn = document.getElementById('minifyBtn');
+  var beautifyBtn = document.getElementById('beautifyBtn');
+  var copyBtn = document.getElementById('copyBtn');
+  var output = document.getElementById('output');
+  var mode = 'css';
+
+  var SAMPLES = {
+    css: '.card {\n  color: red;\n  margin: 0 auto;\n}\n\n.card:hover, .btn {\n  color: blue;\n}',
+    js: 'function greet(name) {\n  // say hi\n  console.log("Hello " + name);\n}\n\nif (active) {\n  greet("world");\n} else {\n  console.log("inactive");\n}'
+  };
+
+  function setMode(m) {
+    mode = m;
+    modeCssBtn.className = 'btn' + (m === 'css' ? '' : ' btn-outline');
+    modeJsBtn.className = 'btn' + (m === 'js' ? '' : ' btn-outline');
+    input.value = SAMPLES[m];
+    output.textContent = '';
+  }
+
+  modeCssBtn.addEventListener('click', function () { setMode('css'); });
+  modeJsBtn.addEventListener('click', function () { setMode('js'); });
+
+  minifyBtn.addEventListener('click', function () {
+    if (!input.value.trim()) { output.textContent = ''; return; }
+    output.textContent = mode === 'css' ? minifyCSS(input.value) : minifyJS(input.value);
+  });
+
+  beautifyBtn.addEventListener('click', function () {
+    if (!input.value.trim()) { output.textContent = ''; return; }
+    output.textContent = beautify(input.value);
+  });
+
+  copyBtn.addEventListener('click', function () {
+    if (!output.textContent) return;
+    navigator.clipboard.writeText(output.textContent).then(function () {
+      copyBtn.textContent = 'Copied!';
+      setTimeout(function () { copyBtn.textContent = 'Copy Output'; }, 2000);
+    });
+  });
+
+  setMode('css');
+})();
+</script>

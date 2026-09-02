@@ -106,6 +106,11 @@ description: Web tools and mini-apps I've built.
     <h2 class="app-card-title">SQL Formatter</h2>
     <p class="app-card-desc">Pretty-print SQL queries with keyword casing and indentation.</p>
   </a>
+  <a class="app-card" href="{{ '/apps/code-minifier/' | relative_url }}">
+    <div class="app-card-icon">📦</div>
+    <h2 class="app-card-title">CSS / JS Minifier &amp; Beautifier</h2>
+    <p class="app-card-desc">Minify or beautify CSS and JavaScript with no build step.</p>
+  </a>
 </div>
 
 <hr style="margin:3rem 0;">

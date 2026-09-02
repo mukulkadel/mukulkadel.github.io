@@ -86,6 +86,11 @@ description: Web tools and mini-apps I've built.
     <h2 class="app-card-title">Markdown Live Preview</h2>
     <p class="app-card-desc">Write Markdown and see it rendered live as HTML.</p>
   </a>
+  <a class="app-card" href="{{ '/apps/regex-tester/' | relative_url }}">
+    <div class="app-card-icon">🔍</div>
+    <h2 class="app-card-title">Regex Tester</h2>
+    <p class="app-card-desc">Test regular expressions with live match highlighting and groups.</p>
+  </a>
 </div>
 
 <hr style="margin:3rem 0;">

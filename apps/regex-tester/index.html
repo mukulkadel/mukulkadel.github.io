@@ -1,0 +1,121 @@
+---
+layout: app
+title: Regex Tester
+permalink: /apps/regex-tester/
+description: Test regular expressions against sample text with live match highlighting and capture groups, entirely in your browser.
+---
+
+<p style="color:var(--text-muted);margin-bottom:1.5rem;">
+  Matches highlight live as you type. Everything runs locally using your browser's native regex engine.
+</p>
+
+<div style="display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem;">
+  <span style="font-family:var(--font-mono);color:var(--text-muted);">/</span>
+  <input type="text" id="patternInput" placeholder="pattern" style="flex:1;min-width:200px;padding:0.5rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-family:var(--font-mono);">
+  <span style="font-family:var(--font-mono);color:var(--text-muted);">/</span>
+  <input type="text" id="flagsInput" value="g" placeholder="flags" style="width:70px;padding:0.5rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-family:var(--font-mono);">
+</div>
+
+<p id="errorMsg" style="color:#e5484d;font-size:0.9rem;display:none;margin-bottom:1rem;"></p>
+<p id="matchCount" style="color:var(--text-muted);font-size:0.85rem;margin-bottom:0.5rem;"></p>
+
+<div style="margin-bottom:1.5rem;">
+  <textarea id="testInput" class="tool-output" style="width:100%;min-height:160px;resize:vertical;font-size:0.9rem;" placeholder="Paste test text here..."></textarea>
+</div>
+
+<h2>Highlighted Matches</h2>
+<div id="highlighted" style="border:1px solid var(--border);border-radius:var(--radius);padding:1rem;white-space:pre-wrap;word-break:break-word;font-family:var(--font-mono);font-size:0.9rem;min-height:80px;margin-bottom:1.5rem;"></div>
+
+<h2>Capture Groups</h2>
+<div id="groups" class="tool-output" style="max-height:250px;"></div>
+
+<script>
+(function () {
+  var patternInput = document.getElementById('patternInput');
+  var flagsInput = document.getElementById('flagsInput');
+  var testInput = document.getElementById('testInput');
+  var errorMsg = document.getElementById('errorMsg');
+  var matchCount = document.getElementById('matchCount');
+  var highlighted = document.getElementById('highlighted');
+  var groups = document.getElementById('groups');
+
+  function escapeHtml(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function update() {
+    var pattern = patternInput.value;
+    var flags = flagsInput.value;
+    var text = testInput.value;
+
+    errorMsg.style.display = 'none';
+
+    if (!pattern) {
+      highlighted.textContent = text;
+      matchCount.textContent = '';
+      groups.textContent = '';
+      return;
+    }
+
+    var re;
+    try {
+      re = new RegExp(pattern, flags.indexOf('g') === -1 ? flags + 'g' : flags);
+    } catch (e) {
+      errorMsg.textContent = 'Invalid regex: ' + e.message;
+      errorMsg.style.display = 'block';
+      highlighted.textContent = text;
+      matchCount.textContent = '';
+      groups.textContent = '';
+      return;
+    }
+
+    var matches = [];
+    var m;
+    var lastIndex = 0;
+    var safety = 0;
+    while ((m = re.exec(text)) !== null && safety < 10000) {
+      matches.push(m);
+      safety++;
+      if (m[0] === '') re.lastIndex++;
+    }
+
+    matchCount.textContent = matches.length + (matches.length === 1 ? ' match' : ' matches');
+
+    var htmlParts = [];
+    var cursor = 0;
+    matches.forEach(function (match) {
+      htmlParts.push(escapeHtml(text.slice(cursor, match.index)));
+      htmlParts.push('<mark style="background:var(--tag-bg);color:var(--tag-text);border-radius:3px;padding:0 2px;">' + escapeHtml(match[0]) + '</mark>');
+      cursor = match.index + match[0].length;
+    });
+    htmlParts.push(escapeHtml(text.slice(cursor)));
+    highlighted.innerHTML = htmlParts.join('') || '<span style="color:var(--text-muted);">(no matches)</span>';
+
+    if (matches.length === 0) {
+      groups.textContent = '';
+    } else {
+      var lines = [];
+      matches.forEach(function (match, idx) {
+        lines.push('Match ' + (idx + 1) + ': "' + match[0] + '" at index ' + match.index);
+        for (var g = 1; g < match.length; g++) {
+          lines.push('  Group ' + g + ': ' + (match[g] === undefined ? '(undefined)' : '"' + match[g] + '"'));
+        }
+        if (match.groups) {
+          Object.keys(match.groups).forEach(function (name) {
+            lines.push('  ' + name + ': ' + (match.groups[name] === undefined ? '(undefined)' : '"' + match.groups[name] + '"'));
+          });
+        }
+      });
+      groups.textContent = lines.join('\n');
+    }
+  }
+
+  patternInput.addEventListener('input', update);
+  flagsInput.addEventListener('input', update);
+  testInput.addEventListener('input', update);
+
+  patternInput.value = '\\b\\w+@\\w+\\.\\w+\\b';
+  testInput.value = 'Contact us at hello@example.com or support@test.org for help.';
+  update();
+})();
+</script>

@@ -1,0 +1,122 @@
+---
+layout: app
+title: JWT Decoder
+permalink: /apps/jwt-decoder/
+description: Decode a JSON Web Token's header and payload instantly in your browser. Does not verify the signature.
+---
+
+<p style="color:var(--text-muted);margin-bottom:1.5rem;">
+  Paste a JWT to decode its header and payload. <strong>This does not verify the signature</strong> — it only decodes the
+  base64url-encoded parts, so never trust a token's contents without verifying it against your issuer's key. Everything
+  runs locally in your browser; nothing is sent anywhere.
+</p>
+
+<div style="margin-bottom:1rem;">
+  <textarea id="input" class="tool-output" style="width:100%;min-height:120px;resize:vertical;font-size:0.8rem;word-break:break-all;" placeholder="Paste a JWT here (header.payload.signature)"></textarea>
+</div>
+
+<p id="errorMsg" style="color:#e5484d;font-size:0.9rem;display:none;"></p>
+<p id="expStatus" style="font-size:0.9rem;font-weight:600;display:none;"></p>
+
+<div id="resultSection" style="display:none;">
+  <h2>Header</h2>
+  <div id="headerOutput" class="tool-output"></div>
+
+  <h2>Payload</h2>
+  <div id="payloadOutput" class="tool-output"></div>
+
+  <h2>Signature</h2>
+  <div id="signatureOutput" class="tool-output" style="word-break:break-all;"></div>
+</div>
+
+<script>
+(function () {
+  var input = document.getElementById('input');
+  var errorMsg = document.getElementById('errorMsg');
+  var expStatus = document.getElementById('expStatus');
+  var resultSection = document.getElementById('resultSection');
+  var headerOutput = document.getElementById('headerOutput');
+  var payloadOutput = document.getElementById('payloadOutput');
+  var signatureOutput = document.getElementById('signatureOutput');
+
+  function base64UrlDecode(str) {
+    var base64 = str.replace(/-/g, '+').replace(/_/g, '/');
+    var pad = base64.length % 4;
+    if (pad) base64 += '='.repeat(4 - pad);
+    var binary = atob(base64);
+    var bytes = new Uint8Array(binary.length);
+    for (var i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+    return new TextDecoder('utf-8').decode(bytes);
+  }
+
+  function formatTimestamp(ts) {
+    var date = new Date(ts * 1000);
+    return date.toString() + ' (' + date.toISOString() + ')';
+  }
+
+  function decode() {
+    var token = input.value.trim();
+    errorMsg.style.display = 'none';
+    expStatus.style.display = 'none';
+
+    if (!token) {
+      resultSection.style.display = 'none';
+      return;
+    }
+
+    var parts = token.split('.');
+    if (parts.length !== 3) {
+      errorMsg.textContent = 'A JWT should have three dot-separated parts (header.payload.signature).';
+      errorMsg.style.display = 'block';
+      resultSection.style.display = 'none';
+      return;
+    }
+
+    var header, payload;
+    try {
+      header = JSON.parse(base64UrlDecode(parts[0]));
+    } catch (e) {
+      errorMsg.textContent = 'Could not decode the header: ' + e.message;
+      errorMsg.style.display = 'block';
+      resultSection.style.display = 'none';
+      return;
+    }
+    try {
+      payload = JSON.parse(base64UrlDecode(parts[1]));
+    } catch (e) {
+      errorMsg.textContent = 'Could not decode the payload: ' + e.message;
+      errorMsg.style.display = 'block';
+      resultSection.style.display = 'none';
+      return;
+    }
+
+    headerOutput.textContent = JSON.stringify(header, null, 2);
+
+    var payloadDisplay = JSON.parse(JSON.stringify(payload));
+    ['exp', 'iat', 'nbf'].forEach(function (claim) {
+      if (typeof payloadDisplay[claim] === 'number') {
+        payloadDisplay[claim] = payloadDisplay[claim] + ' (' + formatTimestamp(payloadDisplay[claim]) + ')';
+      }
+    });
+    payloadOutput.textContent = JSON.stringify(payloadDisplay, null, 2);
+
+    signatureOutput.textContent = parts[2] || '(none)';
+
+    if (typeof payload.exp === 'number') {
+      var now = Math.floor(Date.now() / 1000);
+      if (payload.exp < now) {
+        expStatus.textContent = '⚠ Token expired ' + formatTimestamp(payload.exp);
+        expStatus.style.color = '#e5484d';
+      } else {
+        expStatus.textContent = '✓ Token valid until ' + formatTimestamp(payload.exp);
+        expStatus.style.color = '#2e9e44';
+      }
+      expStatus.style.display = 'block';
+    }
+
+    resultSection.style.display = 'block';
+  }
+
+  input.addEventListener('input', decode);
+})();
+</script>

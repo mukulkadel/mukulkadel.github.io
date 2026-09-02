@@ -96,6 +96,11 @@ description: Web tools and mini-apps I've built.
     <h2 class="app-card-title">Diff Checker</h2>
     <p class="app-card-desc">Compare two blocks of text line by line with highlighted changes.</p>
   </a>
+  <a class="app-card" href="{{ '/apps/jwt-decoder/' | relative_url }}">
+    <div class="app-card-icon">🪙</div>
+    <h2 class="app-card-title">JWT Decoder</h2>
+    <p class="app-card-desc">Decode a JWT's header and payload (no signature verification).</p>
+  </a>
 </div>
 
 <hr style="margin:3rem 0;">

@@ -1,0 +1,193 @@
+---
+layout: app
+title: Pomodoro Timer
+permalink: /apps/pomodoro-timer/
+description: A configurable Pomodoro work/break cycle timer that auto-advances and alerts you at each transition, running entirely in your browser.
+---
+
+<p style="color:var(--text-muted);margin-bottom:1.5rem;">
+  Set your work and break lengths, then start — it auto-advances through work and break periods and beeps at each
+  transition. Runs entirely in your browser; the tab title updates so you can track it from another window.
+</p>
+
+<div id="setup" style="display:flex;gap:1rem;align-items:flex-end;flex-wrap:wrap;margin-bottom:1.5rem;">
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+    Work (min)
+    <input type="number" id="workMinutes" min="1" max="120" value="25" style="width:80px;padding:0.5rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-family:var(--font-mono);">
+  </label>
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+    Short break (min)
+    <input type="number" id="shortBreakMinutes" min="1" max="60" value="5" style="width:80px;padding:0.5rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-family:var(--font-mono);">
+  </label>
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+    Long break (min)
+    <input type="number" id="longBreakMinutes" min="1" max="60" value="15" style="width:80px;padding:0.5rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-family:var(--font-mono);">
+  </label>
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+    Cycles before long break
+    <input type="number" id="cyclesBeforeLong" min="1" max="12" value="4" style="width:80px;padding:0.5rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);color:var(--text);font-family:var(--font-mono);">
+  </label>
+</div>
+
+<div style="text-align:center;">
+  <p id="phaseLabel" style="font-size:1.1rem;font-weight:600;margin-bottom:0.25rem;color:var(--accent);">Work</p>
+  <p id="cycleLabel" style="color:var(--text-muted);font-size:0.85rem;margin-bottom:0.5rem;">Cycle 1</p>
+  <div id="display" style="font-family:var(--font-mono);font-size:4.5rem;font-weight:600;letter-spacing:0.02em;margin:1rem 0;color:var(--text);">25:00</div>
+  <div style="display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;">
+    <button class="btn" id="startBtn" type="button">Start</button>
+    <button class="btn btn-outline" id="pauseResumeBtn" type="button" style="display:none;">Pause</button>
+    <button class="btn btn-outline" id="skipBtn" type="button" style="display:none;">Skip</button>
+    <button class="btn btn-outline" id="resetBtn" type="button" style="display:none;">Reset</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  var workMinutes = document.getElementById('workMinutes');
+  var shortBreakMinutes = document.getElementById('shortBreakMinutes');
+  var longBreakMinutes = document.getElementById('longBreakMinutes');
+  var cyclesBeforeLong = document.getElementById('cyclesBeforeLong');
+  var setup = document.getElementById('setup');
+
+  var phaseLabel = document.getElementById('phaseLabel');
+  var cycleLabel = document.getElementById('cycleLabel');
+  var display = document.getElementById('display');
+  var startBtn = document.getElementById('startBtn');
+  var pauseResumeBtn = document.getElementById('pauseResumeBtn');
+  var skipBtn = document.getElementById('skipBtn');
+  var resetBtn = document.getElementById('resetBtn');
+
+  var origTitle = document.title;
+  var remaining = 0;
+  var interval = null;
+  var paused = false;
+  var phase = 'work'; // 'work' | 'short' | 'long'
+  var cycleCount = 1;
+
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+  function beep(times) {
+    var AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    var ctx = new AudioCtx();
+    var n = times || 3;
+    for (var i = 0; i < n; i++) {
+      (function (i) {
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = phase === 'work' ? 660 : 880;
+        gain.gain.value = 0.15;
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        var start = ctx.currentTime + i * 0.4;
+        osc.start(start);
+        osc.stop(start + 0.25);
+      })(i);
+    }
+  }
+
+  function phaseDuration(p) {
+    if (p === 'work') return Math.max(1, parseInt(workMinutes.value, 10) || 25) * 60;
+    if (p === 'short') return Math.max(1, parseInt(shortBreakMinutes.value, 10) || 5) * 60;
+    return Math.max(1, parseInt(longBreakMinutes.value, 10) || 15) * 60;
+  }
+
+  function phaseName(p) {
+    if (p === 'work') return 'Work';
+    if (p === 'short') return 'Short Break';
+    return 'Long Break';
+  }
+
+  function updateDisplay() {
+    var m = Math.floor(remaining / 60);
+    var s = remaining % 60;
+    var text = pad(m) + ':' + pad(s);
+    display.textContent = text;
+    document.title = text + ' — ' + phaseName(phase);
+    phaseLabel.textContent = phaseName(phase);
+    phaseLabel.style.color = phase === 'work' ? 'var(--accent)' : '#2e9e44';
+    cycleLabel.textContent = 'Cycle ' + cycleCount + ' of ' + (parseInt(cyclesBeforeLong.value, 10) || 4);
+  }
+
+  function nextPhase() {
+    var maxCycles = Math.max(1, parseInt(cyclesBeforeLong.value, 10) || 4);
+    if (phase === 'work') {
+      phase = (cycleCount >= maxCycles) ? 'long' : 'short';
+    } else {
+      if (phase === 'long') cycleCount = 1;
+      else cycleCount++;
+      phase = 'work';
+    }
+    remaining = phaseDuration(phase);
+    updateDisplay();
+  }
+
+  function tick() {
+    if (paused) return;
+    remaining--;
+    if (remaining < 0) {
+      beep(3);
+      nextPhase();
+      return;
+    }
+    updateDisplay();
+  }
+
+  function start() {
+    setup.querySelectorAll('input').forEach(function (el) { el.disabled = true; });
+    phase = 'work';
+    cycleCount = 1;
+    remaining = phaseDuration('work');
+    paused = false;
+    updateDisplay();
+
+    startBtn.style.display = 'none';
+    pauseResumeBtn.style.display = 'inline-flex';
+    skipBtn.style.display = 'inline-flex';
+    resetBtn.style.display = 'inline-flex';
+    pauseResumeBtn.textContent = 'Pause';
+
+    clearInterval(interval);
+    interval = setInterval(tick, 1000);
+  }
+
+  startBtn.addEventListener('click', start);
+
+  pauseResumeBtn.addEventListener('click', function () {
+    paused = !paused;
+    pauseResumeBtn.textContent = paused ? 'Resume' : 'Pause';
+  });
+
+  skipBtn.addEventListener('click', function () {
+    nextPhase();
+  });
+
+  resetBtn.addEventListener('click', function () {
+    clearInterval(interval);
+    interval = null;
+    paused = false;
+    phase = 'work';
+    cycleCount = 1;
+    setup.querySelectorAll('input').forEach(function (el) { el.disabled = false; });
+    document.title = origTitle;
+
+    startBtn.style.display = 'inline-flex';
+    pauseResumeBtn.style.display = 'none';
+    skipBtn.style.display = 'none';
+    resetBtn.style.display = 'none';
+
+    remaining = phaseDuration('work');
+    updateDisplay();
+  });
+
+  remaining = phaseDuration('work');
+  updateDisplay();
+
+  [workMinutes, shortBreakMinutes, longBreakMinutes, cyclesBeforeLong].forEach(function (el) {
+    el.addEventListener('input', function () {
+      if (!interval) { remaining = phaseDuration('work'); updateDisplay(); }
+    });
+  });
+})();
+</script>

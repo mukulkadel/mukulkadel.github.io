@@ -136,6 +136,11 @@ description: Web tools and mini-apps I've built.
     <h2 class="app-card-title">Favicon Generator</h2>
     <p class="app-card-desc">Resize an image into standard favicon sizes, download as PNG.</p>
   </a>
+  <a class="app-card" href="{{ '/apps/pomodoro-timer/' | relative_url }}">
+    <div class="app-card-icon">🍅</div>
+    <h2 class="app-card-title">Pomodoro Timer</h2>
+    <p class="app-card-desc">A configurable work/break cycle timer that auto-advances.</p>
+  </a>
 </div>
 
 <hr style="margin:3rem 0;">

@@ -121,6 +121,11 @@ description: Web tools and mini-apps I've built.
     <h2 class="app-card-title">Aspect Ratio Calculator</h2>
     <p class="app-card-desc">Find a ratio from dimensions, or a missing width or height.</p>
   </a>
+  <a class="app-card" href="{{ '/apps/css-playground/' | relative_url }}">
+    <div class="app-card-icon">✨</div>
+    <h2 class="app-card-title">CSS Gradient, Shadow &amp; Radius Playground</h2>
+    <p class="app-card-desc">Interactively build gradients, shadows, and border radii.</p>
+  </a>
 </div>
 
 <hr style="margin:3rem 0;">

@@ -1,0 +1,189 @@
+---
+layout: app
+title: CSS Gradient, Shadow & Radius Playground
+permalink: /apps/css-playground/
+description: Interactively build a CSS linear-gradient, box-shadow, and border-radius with a live preview and copyable CSS, entirely in your browser.
+---
+
+<p style="color:var(--text-muted);margin-bottom:1.5rem;">
+  Adjust the controls and copy the generated CSS. Everything runs locally in your browser.
+</p>
+
+<h2>Linear Gradient</h2>
+<div style="display:flex;gap:1rem;align-items:flex-end;flex-wrap:wrap;margin-bottom:1rem;">
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+    Angle: <span id="gradAngleValue">90</span>&deg;
+    <input type="range" id="gradAngle" min="0" max="360" value="90">
+  </label>
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+    Color 1
+    <input type="color" id="gradColor1" value="#0969da" style="width:60px;height:36px;border:1px solid var(--border);border-radius:var(--radius);padding:0;">
+  </label>
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+    Color 2
+    <input type="color" id="gradColor2" value="#8b5cf6" style="width:60px;height:36px;border:1px solid var(--border);border-radius:var(--radius);padding:0;">
+  </label>
+</div>
+<div id="gradPreview" style="height:150px;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:0.75rem;"></div>
+<div style="display:flex;gap:0.5rem;align-items:flex-start;">
+  <div id="gradOutput" class="tool-output" style="flex:1;margin-top:0;"></div>
+  <button class="btn btn-outline copy-btn" type="button" data-target="gradOutput" style="flex-shrink:0;">Copy</button>
+</div>
+
+<hr style="margin:2.5rem 0;">
+
+<h2>Box Shadow</h2>
+<div style="display:flex;gap:1rem;align-items:flex-end;flex-wrap:wrap;margin-bottom:1rem;">
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+    X offset: <span id="shadowXValue">0</span>px
+    <input type="range" id="shadowX" min="-50" max="50" value="0">
+  </label>
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+    Y offset: <span id="shadowYValue">10</span>px
+    <input type="range" id="shadowY" min="-50" max="50" value="10">
+  </label>
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+    Blur: <span id="shadowBlurValue">20</span>px
+    <input type="range" id="shadowBlur" min="0" max="100" value="20">
+  </label>
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+    Spread: <span id="shadowSpreadValue">0</span>px
+    <input type="range" id="shadowSpread" min="-30" max="30" value="0">
+  </label>
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+    Color
+    <input type="color" id="shadowColor" value="#000000" style="width:60px;height:36px;border:1px solid var(--border);border-radius:var(--radius);padding:0;">
+  </label>
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+    Opacity: <span id="shadowOpacityValue">0.25</span>
+    <input type="range" id="shadowOpacity" min="0" max="1" step="0.05" value="0.25">
+  </label>
+  <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;cursor:pointer;padding-bottom:0.4rem;">
+    <input type="checkbox" id="shadowInset"> Inset
+  </label>
+</div>
+<div style="padding:3rem;display:flex;justify-content:center;">
+  <div id="shadowPreview" style="width:150px;height:100px;background:var(--surface);border-radius:8px;"></div>
+</div>
+<div style="display:flex;gap:0.5rem;align-items:flex-start;">
+  <div id="shadowOutput" class="tool-output" style="flex:1;margin-top:0;"></div>
+  <button class="btn btn-outline copy-btn" type="button" data-target="shadowOutput" style="flex-shrink:0;">Copy</button>
+</div>
+
+<hr style="margin:2.5rem 0;">
+
+<h2>Border Radius</h2>
+<div style="display:flex;gap:1rem;align-items:flex-end;flex-wrap:wrap;margin-bottom:1rem;">
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+    Top-left: <span id="radiusTLValue">16</span>px
+    <input type="range" id="radiusTL" min="0" max="100" value="16">
+  </label>
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+    Top-right: <span id="radiusTRValue">16</span>px
+    <input type="range" id="radiusTR" min="0" max="100" value="16">
+  </label>
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+    Bottom-right: <span id="radiusBRValue">16</span>px
+    <input type="range" id="radiusBR" min="0" max="100" value="16">
+  </label>
+  <label style="display:flex;flex-direction:column;font-size:0.8rem;color:var(--text-muted);gap:0.3rem;">
+    Bottom-left: <span id="radiusBLValue">16</span>px
+    <input type="range" id="radiusBL" min="0" max="100" value="16">
+  </label>
+</div>
+<div style="padding:2rem;display:flex;justify-content:center;">
+  <div id="radiusPreview" style="width:150px;height:100px;background:var(--accent);"></div>
+</div>
+<div style="display:flex;gap:0.5rem;align-items:flex-start;">
+  <div id="radiusOutput" class="tool-output" style="flex:1;margin-top:0;"></div>
+  <button class="btn btn-outline copy-btn" type="button" data-target="radiusOutput" style="flex-shrink:0;">Copy</button>
+</div>
+
+<script>
+(function () {
+  function hexToRgb(hex) {
+    var num = parseInt(hex.replace('#', ''), 16);
+    return { r: (num >> 16) & 255, g: (num >> 8) & 255, b: num & 255 };
+  }
+
+  document.body.addEventListener('click', function (e) {
+    var btn = e.target.closest('.copy-btn');
+    if (!btn) return;
+    var target = document.getElementById(btn.getAttribute('data-target'));
+    if (!target.textContent) return;
+    navigator.clipboard.writeText(target.textContent).then(function () {
+      var original = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(function () { btn.textContent = original; }, 2000);
+    });
+  });
+
+  // ---------- gradient ----------
+  var gradAngle = document.getElementById('gradAngle');
+  var gradAngleValue = document.getElementById('gradAngleValue');
+  var gradColor1 = document.getElementById('gradColor1');
+  var gradColor2 = document.getElementById('gradColor2');
+  var gradPreview = document.getElementById('gradPreview');
+  var gradOutput = document.getElementById('gradOutput');
+
+  function updateGradient() {
+    gradAngleValue.textContent = gradAngle.value;
+    var css = 'background: linear-gradient(' + gradAngle.value + 'deg, ' + gradColor1.value + ', ' + gradColor2.value + ');';
+    gradPreview.style.background = 'linear-gradient(' + gradAngle.value + 'deg, ' + gradColor1.value + ', ' + gradColor2.value + ')';
+    gradOutput.textContent = css;
+  }
+  [gradAngle, gradColor1, gradColor2].forEach(function (el) { el.addEventListener('input', updateGradient); });
+
+  // ---------- box shadow ----------
+  var shadowX = document.getElementById('shadowX');
+  var shadowY = document.getElementById('shadowY');
+  var shadowBlur = document.getElementById('shadowBlur');
+  var shadowSpread = document.getElementById('shadowSpread');
+  var shadowColor = document.getElementById('shadowColor');
+  var shadowOpacity = document.getElementById('shadowOpacity');
+  var shadowInset = document.getElementById('shadowInset');
+  var shadowPreview = document.getElementById('shadowPreview');
+  var shadowOutput = document.getElementById('shadowOutput');
+
+  function updateShadow() {
+    document.getElementById('shadowXValue').textContent = shadowX.value;
+    document.getElementById('shadowYValue').textContent = shadowY.value;
+    document.getElementById('shadowBlurValue').textContent = shadowBlur.value;
+    document.getElementById('shadowSpreadValue').textContent = shadowSpread.value;
+    document.getElementById('shadowOpacityValue').textContent = shadowOpacity.value;
+
+    var rgb = hexToRgb(shadowColor.value);
+    var colorStr = 'rgba(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ', ' + shadowOpacity.value + ')';
+    var value = (shadowInset.checked ? 'inset ' : '') + shadowX.value + 'px ' + shadowY.value + 'px ' + shadowBlur.value + 'px ' + shadowSpread.value + 'px ' + colorStr;
+    shadowPreview.style.boxShadow = value;
+    shadowOutput.textContent = 'box-shadow: ' + value + ';';
+  }
+  [shadowX, shadowY, shadowBlur, shadowSpread, shadowColor, shadowOpacity, shadowInset].forEach(function (el) {
+    el.addEventListener('input', updateShadow);
+  });
+
+  // ---------- border radius ----------
+  var radiusTL = document.getElementById('radiusTL');
+  var radiusTR = document.getElementById('radiusTR');
+  var radiusBR = document.getElementById('radiusBR');
+  var radiusBL = document.getElementById('radiusBL');
+  var radiusPreview = document.getElementById('radiusPreview');
+  var radiusOutput = document.getElementById('radiusOutput');
+
+  function updateRadius() {
+    document.getElementById('radiusTLValue').textContent = radiusTL.value;
+    document.getElementById('radiusTRValue').textContent = radiusTR.value;
+    document.getElementById('radiusBRValue').textContent = radiusBR.value;
+    document.getElementById('radiusBLValue').textContent = radiusBL.value;
+
+    var value = radiusTL.value + 'px ' + radiusTR.value + 'px ' + radiusBR.value + 'px ' + radiusBL.value + 'px';
+    radiusPreview.style.borderRadius = value;
+    radiusOutput.textContent = 'border-radius: ' + value + ';';
+  }
+  [radiusTL, radiusTR, radiusBR, radiusBL].forEach(function (el) { el.addEventListener('input', updateRadius); });
+
+  updateGradient();
+  updateShadow();
+  updateRadius();
+})();
+</script>

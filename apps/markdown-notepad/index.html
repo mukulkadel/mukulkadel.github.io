@@ -1,0 +1,204 @@
+---
+layout: app
+title: Markdown Notepad
+permalink: /apps/markdown-notepad/
+description: A simple Markdown notepad with live preview that auto-saves to your browser's local storage.
+---
+
+<p style="color:var(--text-muted);margin-bottom:1rem;">
+  Write Markdown notes with a live preview. Your note auto-saves to this browser's local storage as you type — it never
+  leaves your device, and won't sync across browsers or computers.
+</p>
+
+<div style="display:flex;gap:0.5rem;align-items:center;margin-bottom:1rem;flex-wrap:wrap;">
+  <span id="saveStatus" style="color:var(--text-muted);font-size:0.8rem;"></span>
+  <button class="btn btn-outline" id="downloadBtn" type="button" style="margin-left:auto;">Download .md</button>
+  <button class="btn btn-outline" id="clearBtn" type="button">Clear</button>
+</div>
+
+<div style="display:flex;gap:1rem;flex-wrap:wrap;">
+  <div style="flex:1;min-width:280px;">
+    <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.3rem;">Markdown</p>
+    <textarea id="input" class="tool-output" style="width:100%;min-height:420px;resize:vertical;font-size:0.9rem;" placeholder="# My notes&#10;&#10;Start typing..."></textarea>
+  </div>
+  <div style="flex:1;min-width:280px;">
+    <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.3rem;">Preview</p>
+    <div id="preview" style="border:1px solid var(--border);border-radius:var(--radius);padding:1rem;min-height:420px;overflow:auto;"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var STORAGE_KEY = 'markdown-notepad-content';
+
+  function escapeHtml(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function sanitizeUrl(url) {
+    return /^\s*(javascript|data|vbscript):/i.test(url) ? '#' : url;
+  }
+
+  function renderInline(text) {
+    var codeSpans = [];
+    text = text.replace(/`([^`]+)`/g, function (m, code) {
+      codeSpans.push(escapeHtml(code));
+      return ' CODE' + (codeSpans.length - 1) + ' ';
+    });
+
+    text = escapeHtml(text);
+
+    text = text.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, function (m, alt, url) {
+      return '<img src="' + sanitizeUrl(url) + '" alt="' + alt + '">';
+    });
+    text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function (m, label, url) {
+      return '<a href="' + sanitizeUrl(url) + '">' + label + '</a>';
+    });
+    text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    text = text.replace(/__([^_]+)__/g, '<strong>$1</strong>');
+    text = text.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+    text = text.replace(/(^|[^\w])_([^_]+)_($|[^\w])/g, '$1<em>$2</em>$3');
+    text = text.replace(/  $/, '<br>');
+
+    text = text.replace(/ CODE(\d+) /g, function (m, i) {
+      return '<code>' + codeSpans[parseInt(i, 10)] + '</code>';
+    });
+
+    return text;
+  }
+
+  function renderMarkdown(md) {
+    var lines = md.replace(/\r\n/g, '\n').split('\n');
+    var html = [];
+    var i = 0;
+
+    while (i < lines.length) {
+      var line = lines[i];
+
+      var fenceMatch = line.match(/^```(\w*)\s*$/);
+      if (fenceMatch) {
+        var codeLines = [];
+        i++;
+        while (i < lines.length && !/^```\s*$/.test(lines[i])) {
+          codeLines.push(lines[i]);
+          i++;
+        }
+        i++;
+        var lang = fenceMatch[1];
+        html.push('<pre><code' + (lang ? ' class="language-' + lang + '"' : '') + '>' +
+          escapeHtml(codeLines.join('\n')) + '</code></pre>');
+        continue;
+      }
+
+      if (/^\s*$/.test(line)) { i++; continue; }
+
+      if (/^(---+|\*\*\*+|___+)\s*$/.test(line)) {
+        html.push('<hr>');
+        i++;
+        continue;
+      }
+
+      var headingMatch = line.match(/^(#{1,6})\s+(.*)$/);
+      if (headingMatch) {
+        var level = headingMatch[1].length;
+        html.push('<h' + level + '>' + renderInline(headingMatch[2].trim()) + '</h' + level + '>');
+        i++;
+        continue;
+      }
+
+      if (/^>\s?/.test(line)) {
+        var quoteLines = [];
+        while (i < lines.length && /^>\s?/.test(lines[i])) {
+          quoteLines.push(lines[i].replace(/^>\s?/, ''));
+          i++;
+        }
+        html.push('<blockquote>' + renderMarkdown(quoteLines.join('\n')) + '</blockquote>');
+        continue;
+      }
+
+      if (/^[-*+]\s+/.test(line)) {
+        var items = [];
+        while (i < lines.length && /^[-*+]\s+/.test(lines[i])) {
+          items.push(renderInline(lines[i].replace(/^[-*+]\s+/, '')));
+          i++;
+        }
+        html.push('<ul>' + items.map(function (it) { return '<li>' + it + '</li>'; }).join('') + '</ul>');
+        continue;
+      }
+
+      if (/^\d+\.\s+/.test(line)) {
+        var oitems = [];
+        while (i < lines.length && /^\d+\.\s+/.test(lines[i])) {
+          oitems.push(renderInline(lines[i].replace(/^\d+\.\s+/, '')));
+          i++;
+        }
+        html.push('<ol>' + oitems.map(function (it) { return '<li>' + it + '</li>'; }).join('') + '</ol>');
+        continue;
+      }
+
+      var paraLines = [];
+      while (i < lines.length && !/^\s*$/.test(lines[i]) &&
+        !/^```/.test(lines[i]) && !/^#{1,6}\s/.test(lines[i]) &&
+        !/^>\s?/.test(lines[i]) && !/^[-*+]\s+/.test(lines[i]) && !/^\d+\.\s+/.test(lines[i]) &&
+        !/^(---+|\*\*\*+|___+)\s*$/.test(lines[i])) {
+        paraLines.push(lines[i]);
+        i++;
+      }
+      html.push('<p>' + renderInline(paraLines.join(' ')) + '</p>');
+    }
+
+    return html.join('\n');
+  }
+
+  var input = document.getElementById('input');
+  var preview = document.getElementById('preview');
+  var saveStatus = document.getElementById('saveStatus');
+  var downloadBtn = document.getElementById('downloadBtn');
+  var clearBtn = document.getElementById('clearBtn');
+  var saveTimer = null;
+
+  function updatePreview() {
+    preview.innerHTML = renderMarkdown(input.value);
+  }
+
+  function saveNow() {
+    try {
+      localStorage.setItem(STORAGE_KEY, input.value);
+      saveStatus.textContent = 'Saved to this browser at ' + new Date().toLocaleTimeString();
+    } catch (e) {
+      saveStatus.textContent = 'Could not save (storage unavailable or full)';
+    }
+  }
+
+  input.addEventListener('input', function () {
+    updatePreview();
+    clearTimeout(saveTimer);
+    saveStatus.textContent = 'Saving…';
+    saveTimer = setTimeout(saveNow, 500);
+  });
+
+  downloadBtn.addEventListener('click', function () {
+    var blob = new Blob([input.value], { type: 'text/markdown' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'notes.md';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+
+  clearBtn.addEventListener('click', function () {
+    if (!input.value.trim()) return;
+    if (!confirm('Clear all notes? This cannot be undone.')) return;
+    input.value = '';
+    updatePreview();
+    try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+    saveStatus.textContent = 'Cleared';
+  });
+
+  var saved = '';
+  try { saved = localStorage.getItem(STORAGE_KEY) || ''; } catch (e) {}
+  input.value = saved || '# My notes\n\nStart typing — this saves automatically as you go.';
+  updatePreview();
+  saveStatus.textContent = saved ? 'Loaded from this browser' : '';
+})();
+</script>

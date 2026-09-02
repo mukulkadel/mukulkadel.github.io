@@ -141,6 +141,11 @@ description: Web tools and mini-apps I've built.
     <h2 class="app-card-title">Pomodoro Timer</h2>
     <p class="app-card-desc">A configurable work/break cycle timer that auto-advances.</p>
   </a>
+  <a class="app-card" href="{{ '/apps/markdown-notepad/' | relative_url }}">
+    <div class="app-card-icon">🗒️</div>
+    <h2 class="app-card-title">Markdown Notepad</h2>
+    <p class="app-card-desc">A Markdown notepad with live preview that auto-saves locally.</p>
+  </a>
 </div>
 
 <hr style="margin:3rem 0;">

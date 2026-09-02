@@ -1,0 +1,118 @@
+---
+layout: app
+title: Diff Checker
+permalink: /apps/diff-checker/
+description: Compare two blocks of text line by line and see additions and removals highlighted, entirely in your browser.
+---
+
+<p style="color:var(--text-muted);margin-bottom:1.5rem;">
+  Paste original and changed text below to see a line-by-line diff. Everything runs locally in your browser (limited to
+  1,500 lines per side to keep comparison instant).
+</p>
+
+<div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1rem;">
+  <div style="flex:1;min-width:260px;">
+    <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.3rem;">Original</p>
+    <textarea id="inputA" class="tool-output" style="width:100%;min-height:220px;resize:vertical;font-size:0.85rem;"></textarea>
+  </div>
+  <div style="flex:1;min-width:260px;">
+    <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.3rem;">Changed</p>
+    <textarea id="inputB" class="tool-output" style="width:100%;min-height:220px;resize:vertical;font-size:0.85rem;"></textarea>
+  </div>
+</div>
+
+<div style="display:flex;gap:0.5rem;margin-bottom:1rem;">
+  <button class="btn" id="diffBtn" type="button">Compare</button>
+</div>
+
+<p id="errorMsg" style="color:#e5484d;font-size:0.9rem;display:none;"></p>
+<p id="summary" style="color:var(--text-muted);font-size:0.85rem;margin-bottom:0.5rem;"></p>
+
+<div id="diffOutput" style="border:1px solid var(--border);border-radius:var(--radius);overflow:auto;max-height:500px;font-family:var(--font-mono);font-size:0.85rem;"></div>
+
+<script>
+(function () {
+  var inputA = document.getElementById('inputA');
+  var inputB = document.getElementById('inputB');
+  var diffBtn = document.getElementById('diffBtn');
+  var errorMsg = document.getElementById('errorMsg');
+  var summary = document.getElementById('summary');
+  var diffOutput = document.getElementById('diffOutput');
+
+  var LINE_LIMIT = 1500;
+
+  function diffLines(a, b) {
+    var linesA = a.split('\n');
+    var linesB = b.split('\n');
+    var n = linesA.length, m = linesB.length;
+
+    var dp = new Array(n + 1);
+    for (var i = 0; i <= n; i++) dp[i] = new Uint32Array(m + 1);
+
+    for (i = n - 1; i >= 0; i--) {
+      for (var j = m - 1; j >= 0; j--) {
+        dp[i][j] = linesA[i] === linesB[j] ? dp[i + 1][j + 1] + 1 : Math.max(dp[i + 1][j], dp[i][j + 1]);
+      }
+    }
+
+    var result = [];
+    i = 0; var j = 0;
+    while (i < n && j < m) {
+      if (linesA[i] === linesB[j]) {
+        result.push({ type: 'equal', line: linesA[i] });
+        i++; j++;
+      } else if (dp[i + 1][j] >= dp[i][j + 1]) {
+        result.push({ type: 'remove', line: linesA[i] });
+        i++;
+      } else {
+        result.push({ type: 'add', line: linesB[j] });
+        j++;
+      }
+    }
+    while (i < n) { result.push({ type: 'remove', line: linesA[i] }); i++; }
+    while (j < m) { result.push({ type: 'add', line: linesB[j] }); j++; }
+
+    return result;
+  }
+
+  function escapeHtml(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function compare() {
+    errorMsg.style.display = 'none';
+    var a = inputA.value;
+    var b = inputB.value;
+
+    if (a.split('\n').length > LINE_LIMIT || b.split('\n').length > LINE_LIMIT) {
+      errorMsg.textContent = 'Each side is limited to ' + LINE_LIMIT + ' lines.';
+      errorMsg.style.display = 'block';
+      diffOutput.innerHTML = '';
+      summary.textContent = '';
+      return;
+    }
+
+    var result = diffLines(a, b);
+    var added = 0, removed = 0;
+    var rows = result.map(function (r) {
+      if (r.type === 'add') added++;
+      if (r.type === 'remove') removed++;
+      var bg = r.type === 'add' ? 'rgba(46, 158, 68, 0.15)' : r.type === 'remove' ? 'rgba(229, 72, 77, 0.15)' : 'transparent';
+      var marker = r.type === 'add' ? '+' : r.type === 'remove' ? '-' : ' ';
+      var color = r.type === 'add' ? '#2e9e44' : r.type === 'remove' ? '#e5484d' : 'var(--text-muted)';
+      return '<div style="background:' + bg + ';padding:0.1rem 0.75rem;white-space:pre-wrap;word-break:break-word;">' +
+        '<span style="color:' + color + ';user-select:none;">' + marker + ' </span>' +
+        escapeHtml(r.line) + '</div>';
+    });
+
+    diffOutput.innerHTML = rows.join('');
+    summary.textContent = added + ' added, ' + removed + ' removed';
+  }
+
+  diffBtn.addEventListener('click', compare);
+
+  inputA.value = 'function greet(name) {\n  console.log("Hello " + name);\n}\n\ngreet("world");';
+  inputB.value = 'function greet(name) {\n  console.log(`Hello, ${name}!`);\n}\n\ngreet("world");\ngreet("there");';
+  compare();
+})();
+</script>
